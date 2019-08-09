@@ -1,0 +1,34 @@
+
+@import '~sass-rem';
+
+$navbar-padding-tb: rem(8px);
+$navbar-padding-lr: rem(12px);
+
+$navbar-item-hover-background-color: transparent;
+
+.navbar {
+  a.navbar-item,
+  .navbar-item {
+    font-size: rem(16px);
+    text-transform: uppercase;
+    padding: $navbar-padding-tb $navbar-padding-lr;
+    margin: 0 rem(10px);
+  }
+
+  a.navbar-item:not(.logo) {
+    cursor: pointer;
+
+    &.nuxt-link-active {
+      position: relative;
+
+      &:after {
+        position: absolute;
+        border-bottom: rem(2px) solid $grey-darker;
+        content: '';
+        width: calc(100% - (#{$navbar-padding-lr} * 2));
+        height: rem(2px);
+        bottom: calc(0% - (-#{$navbar-padding-tb}));
+      }
+    }
+  }
+}

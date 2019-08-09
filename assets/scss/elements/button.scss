@@ -1,0 +1,12 @@
+.button {
+  border-radius: 0;
+  border: 0;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &.is-large {
+    font-size: rem(14px);
+    padding: rem(18px) rem(34px);
+    height: rem(50px);
+  }
+}
