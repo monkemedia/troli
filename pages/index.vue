@@ -1,17 +1,17 @@
 <template>
-  <div id="app">
-    <navbar />
+  <div id="homepage">
     <hero :items="items" />
   </div>
 </template>
 
 <script>
-import Navbar from '~/components/Navbar.vue'
+
 import Hero from '~/components/Hero'
 
 export default {
+  name: 'Homepage',
+
   components: {
-    Navbar,
     Hero
   },
 
@@ -56,6 +56,16 @@ export default {
         }
       ]
     }
+  },
+
+  async mounted () {
+    // const response = await this.$moltin.createCustomer({
+    //   name: 'Ron Swanson',
+    //   email: 'ron@swanson.com',
+    //   password: 'mysecretpassword'
+    // })
+
+    // console.log(response)
   }
 }
 </script>

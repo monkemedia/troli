@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar has-shadow is-spaced"
+    class="navbar has-shadow"
     role="navigation"
     aria-label="main navigation">
     <div class="container">
@@ -30,6 +30,7 @@
         class="navbar-menu">
         <div class="navbar-end">
           <div class="group-links is-flex">
+
             <nuxt-link
               v-for="nav in navigation"
               :key="nav.name"
@@ -40,6 +41,7 @@
           </div>
 
           <div class="icon-group is-flex">
+            <my-account />
             <nuxt-link
               v-for="icon in icons"
               :key="icon.name"
@@ -69,8 +71,14 @@
 </template>
 
 <script>
+import MyAccount from '~/components/MyAccount'
+
 export default {
   name: 'Navbar',
+
+  components: {
+    MyAccount
+  },
 
   data () {
     return {
@@ -89,6 +97,12 @@ export default {
         }
       ],
       icons: [
+        {
+          name: 'My account',
+          path: '/my-account',
+          class: 'fa-user',
+          meta: null
+        },
         {
           name: 'Wishlist',
           path: '/wishlist',
@@ -129,8 +143,8 @@ export default {
         margin: 0;
 
         img {
-          width: rem(80px);
-          height: rem(80px);
+          width: rem(50px);
+          height: rem(50px);
           max-height: 100%;
 
         }
@@ -138,9 +152,19 @@ export default {
     }
   }
 
+  .group-links {
+    @include mq($from: $desktop) {
+      padding-top: rem(3px);
+    }
+  }
+
   .icon-group {
     .fa {
-      font-size: rem(18px);
+      font-size: rem(22px);
+    }
+
+    .navbar-item {
+      height: 100%;
     }
 
     .is-bag {

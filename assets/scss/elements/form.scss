@@ -1,0 +1,25 @@
+$form-font-size: rem(14px);
+
+.label {
+  // text-transform: uppercase;
+  font-size: $form-font-size;
+  font-weight: 400;
+}
+
+.input,
+.input:-webkit-autofill {
+  height: rem(60px);
+  border-radius: 0;
+  border-color: $grey-light;
+  box-shadow: none;
+  font-size: $form-font-size;
+  padding-left: rem(30px);
+  padding-right: rem(30px);
+  font-weight: 400;
+  color: $grey;
+  -webkit-text-fill-color: $grey;
+
+  &:active, &:focus {
+    box-shadow: none;
+  }
+}

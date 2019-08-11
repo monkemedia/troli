@@ -35,6 +35,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
+    '~/plugins/moltin.js'
     // {
     //   src: '~/plugins/storyBlok',
     //   ssr: false
@@ -74,6 +75,8 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend (config, ctx) {}
+    extend (config, ctx) {
+      config.node = { fs: 'empty' }
+    }
   }
 }

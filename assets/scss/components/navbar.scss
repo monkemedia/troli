@@ -13,6 +13,7 @@ $navbar-item-hover-background-color: transparent;
     text-transform: uppercase;
     padding: $navbar-padding-tb $navbar-padding-lr;
     margin: 0 rem(10px);
+    cursor: pointer;
   }
 
   a.navbar-item:not(.logo) {
@@ -29,6 +30,16 @@ $navbar-item-hover-background-color: transparent;
         height: rem(2px);
         bottom: calc(0% - (-#{$navbar-padding-tb}));
       }
+    }
+  }
+
+  .icon-group {
+    .fa {
+      font-size: rem(22px);
+    }
+
+    .navbar-item {
+      height: 100%;
     }
   }
 }

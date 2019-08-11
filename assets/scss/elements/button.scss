@@ -8,5 +8,10 @@
     font-size: rem(14px);
     padding: rem(18px) rem(34px);
     height: rem(50px);
+    line-height: 1.2;
+  }
+
+  &:focus {
+    box-shadow: none !important;
   }
 }
