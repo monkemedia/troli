@@ -30,6 +30,7 @@
         class="navbar-menu">
         <div class="navbar-end">
           <div class="group-links is-flex">
+
             <nuxt-link
               v-for="nav in navigation"
               :key="nav.name"
@@ -96,6 +97,12 @@ export default {
         }
       ],
       icons: [
+        {
+          name: 'My account',
+          path: '/my-account',
+          class: 'fa-user',
+          meta: null
+        },
         {
           name: 'Wishlist',
           path: '/wishlist',

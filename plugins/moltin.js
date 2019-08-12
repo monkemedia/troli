@@ -1,8 +1,8 @@
 import { gateway as MoltinGateway } from '@moltin/sdk'
 
 const Moltin = MoltinGateway({
-  client_id: process.env.CLIENT_ID,
-  client_secret: process.env.CLIENT_SECRET
+  client_id: 'hpSDCOhjEVdWv4PsatUlN55RDMwdL17O9NfRu8AYNA',
+  client_secret: '2rPVg6LrpeyihsAJZq8N7W3Q9qIHiJBSHjvEKfoVmg'
 })
 
 const errorHandler = (err) => {

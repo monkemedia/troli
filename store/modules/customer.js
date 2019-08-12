@@ -60,7 +60,7 @@ const actions = {
       customerId = localStorage.getItem('customer_id')
     }
     if (!token) {
-      dispatch('signout')
+      dispatch('logout')
       return
     }
 
@@ -138,7 +138,7 @@ const actions = {
   //     })
   // },
 
-  signOut ({ dispatch, commit }, req) {
+  logout ({ dispatch, commit }, req) {
     commit('CLEAR_TOKEN')
     commit('CLEAR_ID')
     commit('CLEAR_DETAILS')
