@@ -11,12 +11,42 @@
     </button>
     <div id="myaccount-dropdown">
       <div class="dropdown">
-        <header class="dropdown__header">
+        <header
+          v-if="isAuthenticated"
+          class="dropdown__header">
           <span>Hi {{ customerDetails.name }}</span>
-          <a href="" class="sign-out">Sign out</a>
+          <a
+            href=""
+            class="sign-out"
+            @click.prevent="signOut">Sign out</a>
         </header>
-        <ul>
-          <li>test</li>
+        <header
+          v-else
+          class="dropdown__header">
+          <span>
+            <nuxt-link to="login">
+              Sign in
+            </nuxt-link>
+            <span class="divider">|</span>
+            <nuxt-link to="/">
+              Register
+            </nuxt-link>
+          </span>
+        </header>
+        <ul class="dropdown__list">
+          <li>
+            <nuxt-link
+              v-for="(item, index) in items"
+              :key="index"
+              :to="item.path">
+              <span class="icon">
+                <i :class="item.classes" />
+              </span>
+              <span class="dropdown__list__name">
+                {{ item.name }}
+              </span>
+            </nuxt-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -29,13 +59,35 @@ export default {
 
   data () {
     return {
-      isActive: true
+      isActive: true,
+      items: [
+        {
+          name: 'My account',
+          path: '/',
+          classes: 'fas fa-user'
+        },
+        {
+          name: 'My orders',
+          path: '/',
+          classes: 'fas fa-clipboard-list'
+        }
+      ]
     }
   },
 
   computed: {
     customerDetails () {
       return this.$store.getters['auth/getDetails']
+    },
+
+    isAuthenticated () {
+      return this.$store.getters['auth/isAuthenticated']
+    }
+  },
+
+  methods: {
+    signOut () {
+      this.$store.dispatch('auth/signOut')
     }
   }
 }
@@ -76,18 +128,16 @@ export default {
         left: rem(4px);
         opacity: 0;
         transition: opacity .6s;
-        transition-delay: .25s;
         z-index: 1;
       }
     }
   }
 
   #myaccount-dropdown {
-    left: 0;
     margin-bottom: 10px;
     overflow: hidden;
     position: absolute;
-    right: 0;
+    left: rem(-50px);
     width: 325px;
   }
 
@@ -114,6 +164,45 @@ export default {
         text-decoration: underline;
         cursor: pointer;
         font-size: rem(12px);
+      }
+
+      a {
+        &:hover {
+          color: $primary;
+        }
+      }
+
+      .divider {
+        margin: 0 rem(10px);
+      }
+    }
+
+    &__list {
+      padding: 0 rem(15px);
+
+      li {
+        a {
+          padding: rem(15px);
+          width: 100%;
+          display: flex;
+          color: $grey;
+          font-size: rem(15px);
+          cursor: pointer;
+          align-items: center;
+          border-bottom: 1px solid $grey-light;
+
+          &:hover {
+            color: $primary;
+          }
+
+          .icon {
+            margin-right: rem(10px);
+          }
+
+          .dropdown__list__name {
+            line-height: 1;
+          }
+        }
       }
     }
   }
