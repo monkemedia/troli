@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 export default {
   mode: 'universal',
   /*
@@ -19,6 +21,10 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins&display=swap' }
     ]
   },
+  env: {
+    CLIENT_ID: process.env.CLIENT_ID,
+    CLIENT_SECRET: process.env.CLIENT_SECRET
+  },
   /*
    ** Customize the progress-bar color
    */
@@ -29,6 +35,7 @@ export default {
   css: [
     'bulma',
     // CSS file in the project
+    '@fortawesome/fontawesome-free/css/all.css',
     '@/assets/scss/main.scss'
   ],
   /*
@@ -53,8 +60,7 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/font-awesome'
+    '@nuxtjs/axios'
   ],
   /*
    ** Axios module configuration

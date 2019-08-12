@@ -5,8 +5,20 @@
     <section id="register" class="section">
       <div class="container">
         <div class="columns">
-          <div class="column is-6">
+          <div class="column">
+            <h1 class="title">
+              My account login
+            </h1>
+            <hr>
+          </div>
+        </div>
+        <div class="columns is-variable is-8">
+          <div class="column is-5">
             <form @submit.prevent="login">
+              <h2 class="subtitle">
+                Returning customer
+              </h2>
+              <p>If you are a registered user, please enter your email and password.</p>
               <div class="field">
                 <label class="label">Username or email address <sup>*</sup></label>
                 <div class="control">
@@ -36,6 +48,19 @@
                 </div>
               </div>
             </form>
+          </div>
+          <div class="column is-5">
+            <div class="create-account">
+              <h2 class="subtitle">
+                New customers
+              </h2>
+              <p>
+                Don’t have an account? Let’s create one now.
+              </p>
+              <button class="button is-large is-black">
+                Create account now
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -73,6 +98,13 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+  @import '~sass-rem';
+  @import '~sass-mq';
+  @import '~assets/scss/utilities/variables';
+
+  p {
+    color: $grey;
+  }
 
 </style>
