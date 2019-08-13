@@ -7,28 +7,28 @@ const state = () => ({
 })
 
 const mutations = {
-  SET_TOKEN (store, data) {
-    store.token = data
+  SET_TOKEN (state, data) {
+    state.token = data
   },
 
-  SET_ID (store, data) {
-    store.id = data
+  SET_ID (state, data) {
+    state.id = data
   },
 
-  SET_DETAILS (store, data) {
-    store.details = data
+  SET_DETAILS (state, data) {
+    state.details = data
   },
 
-  CLEAR_TOKEN (store) {
-    store.token = null
+  CLEAR_TOKEN (state) {
+    state.token = null
   },
 
-  CLEAR_ID (store) {
-    store.id = null
+  CLEAR_ID (state) {
+    state.id = null
   },
 
-  CLEAR_DETAILS (store) {
-    store.details = null
+  CLEAR_DETAILS (state) {
+    state.details = null
   }
 }
 

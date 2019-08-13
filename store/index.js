@@ -1,10 +1,12 @@
 import Vuex from 'vuex'
 import auth from './modules/customer.js'
+import locales from './modules/locales.js'
 
 export default () => {
   return new Vuex.Store({
     modules: {
-      auth
+      auth,
+      locales
     },
     actions: {
       async nuxtServerInit ({ dispatch }, context) {
