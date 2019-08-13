@@ -1,7 +1,17 @@
 {
   "navigation": {
-    "home": "NL-Home",
-    "pages": "NL-Pages",
-    "shop": "NL-Shop"
+    "home": "Huis",
+    "pages": "Pages",
+    "shop": "Winkel"
+  },
+  "myAccountDropdown": {
+    "hi": "Hoi",
+    "signIn": "Aanmelden",
+    "register": "Registreren",
+    "signOut": "Afmelden",
+    "links": {
+      "myAccount": "Mijn rekening",
+      "myOrders": "Mijn bestellingen"
+    }
   }
 }

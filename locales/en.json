@@ -3,6 +3,16 @@
     "home": "Home",
     "pages": "Pages",
     "shop": "Shop"
+  },
+  "myAccountDropdown": {
+    "hi": "Hi",
+    "signIn": "Sign in",
+    "register": "Register",
+    "signOut": "Sign out",
+    "links": {
+      "myAccount": "My account",
+      "myOrders": "My orders"
+    }
   }
   
 }

@@ -38,11 +38,15 @@ export default {
     '@fortawesome/fontawesome-free/css/all.css',
     '@/assets/scss/main.scss'
   ],
+  router: {
+    middleware: 'i18n'
+  },
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/moltin.js'
+    '~/plugins/moltin.js',
+    '~/plugins/i18n.js'
     // {
     //   src: '~/plugins/storyBlok',
     //   ssr: false
@@ -71,6 +75,7 @@ export default {
    ** Build configuration
    */
   build: {
+    vendor: ['vue-i18n'],
     postcss: {
       preset: {
         features: {

@@ -14,22 +14,24 @@
         <header
           v-if="isAuthenticated"
           class="dropdown__header">
-          <span>Hi {{ customerDetails.name }}</span>
+          <span>{{ hi }} {{ customerDetails.name }}</span>
           <a
             href=""
             class="sign-out"
-            @click.prevent="signOut">Sign out</a>
+            @click.prevent="signOutHandler">
+            {{ signOut }}
+          </a>
         </header>
         <header
           v-else
           class="dropdown__header">
           <span>
             <nuxt-link to="login">
-              Sign in
+              {{ signIn }}
             </nuxt-link>
             <span class="divider">|</span>
             <nuxt-link to="/">
-              Register
+              {{ register }}
             </nuxt-link>
           </span>
         </header>
@@ -60,14 +62,18 @@ export default {
   data () {
     return {
       isActive: true,
+      hi: this.$t('myAccountDropdown.hi'),
+      signIn: this.$t('myAccountDropdown.signIn'),
+      register: this.$t('myAccountDropdown.register'),
+      signOut: this.$t('myAccountDropdown.signOut'),
       items: [
         {
-          name: 'My account',
+          name: this.$t('myAccountDropdown.links.myAccount'),
           path: '/',
           classes: 'fas fa-user'
         },
         {
-          name: 'My orders',
+          name: this.$t('myAccountDropdown.links.myOrders'),
           path: '/',
           classes: 'fas fa-clipboard-list'
         }
@@ -86,7 +92,7 @@ export default {
   },
 
   methods: {
-    signOut () {
+    signOutHandler () {
       this.$store.dispatch('auth/signOut')
     }
   }
