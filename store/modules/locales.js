@@ -9,7 +9,7 @@ const state = () => ({
       name: 'NL'
     }
   ],
-  locale: 'nl'
+  locale: 'en'
 })
 
 const mutations = {
