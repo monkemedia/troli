@@ -25,6 +25,7 @@
                   <input
                     v-model="form.email"
                     class="input"
+                    date-name="username"
                     type="text">
                 </div>
               </div>
@@ -34,6 +35,7 @@
                   <input
                     v-model="form.password"
                     class="input"
+                    date-name="password"
                     type="password">
                 </div>
               </div>
@@ -42,6 +44,7 @@
                   <button
                     :class="{ 'is-loading' : isLoading }"
                     class="button is-large is-black"
+                    date-name="login-button"
                     type="submit">
                     Login
                   </button>
