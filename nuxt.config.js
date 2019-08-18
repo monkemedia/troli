@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-export default {
+module.exports = {
   mode: 'universal',
   /*
    ** Headers of the page
@@ -25,6 +25,8 @@ export default {
     CLIENT_ID: process.env.CLIENT_ID,
     CLIENT_SECRET: process.env.CLIENT_SECRET
   },
+
+  serverMiddleware: ['~server/index.js'],
   /*
    ** Customize the progress-bar color
    */
