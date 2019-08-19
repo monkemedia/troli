@@ -1,8 +1,15 @@
+@import '~sass-mq';
+
 .button {
   border-radius: 0;
   border: 0;
   text-transform: uppercase;
   cursor: pointer;
+  width: 100%;
+
+  @include mq($from: tablet) {
+    width: auto;
+  }
 
   &.is-large {
     font-size: rem(14px);

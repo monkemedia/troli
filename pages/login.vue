@@ -38,19 +38,27 @@
                 </div>
               </div>
               <div class="field">
-                <div class="control">
+                <div class="control buttons">
                   <button
                     :class="{ 'is-loading' : isLoading }"
-                    class="button is-large is-black"
+                    class="button is-large is-black login-button"
                     type="submit">
                     {{ $t('pages.login.returning_customer.button') }}
                   </button>
+                  <div class="forgotten-password">
+                    <nuxt-link
+                      to="/forgoteen-password"
+                      class="is-link">
+                      Forgotten password?
+                    </nuxt-link>
+                  </div>
                 </div>
               </div>
             </form>
           </div>
           <div class="column is-5">
             <div class="create-account">
+              <hr class="account-hr">
               <h2 class="subtitle">
                 {{ $t('pages.login.new_customer.title') }}
               </h2>
@@ -102,5 +110,32 @@ export default {
   @import '~sass-rem';
   @import '~sass-mq';
   @import '~assets/scss/utilities/variables';
+
+  .login-button {
+    margin-bottom: 0;
+  }
+
+  .forgotten-password {
+    justify-content: center;
+    padding: rem(20px);
+    display: flex;
+    width: 100%;
+
+    @include mq($from: tablet) {
+      width: auto;
+    }
+
+    a {
+      font-size: rem(14px);
+    }
+  }
+
+  .account-hr {
+    margin: rem(20px) 0 rem(60px);
+
+    @include mq($from: tablet) {
+      display: none;
+    }
+  }
 
 </style>
