@@ -1,5 +1,7 @@
 require('dotenv').config()
 const MoltinGateway = require('@moltin/sdk').gateway
+// const postmark = require('postmark')
+// const postmarkClient = new postmark.ServerClient(process.env.POSTMARK_ID)
 const { Router } = require('express')
 
 const router = Router()
@@ -26,7 +28,6 @@ router.post('/sign-in', async (req, res) => {
 })
 
 router.post('/get-customer', async (req, res) => {
-  console.log('cutomerId', req.body.customer_id)
   try {
     const response = await Moltin.Customers.Get(req.body.customer_id)
     return res.status(200).send(response.data)

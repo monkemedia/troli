@@ -1,0 +1,34 @@
+{
+    "navigation": {
+        "home": "Home",
+        "pages": "Pages",
+        "shop": "Winkel"
+    },
+    "my_account_dropdown": {
+        "hi": "Hoi",
+        "sign_in": "Aanmelden",
+        "register": "Registreren",
+        "sign_out": "Afmelden",
+        "links": {
+            "my_account": "Mijn account",
+            "my_orders": "Mijn bestellingen"
+        }
+    },
+    "pages": {
+        "login": {
+            "title": "Mijn account login",
+            "returning_customer": {
+                "title": "Terugkomende klant",
+                "paragraph": "Als u een geregistreerde gebruiker bent, voert u uw e-mailadres en wachtwoord in.",
+                "label": "E-mailadres",
+                "password": "Wachtwoord",
+                "button": "Log in"
+            },
+            "new_customer": {
+                "title": "Nieuwe klant",
+                "paragraph": "Heb je geen account? Laten we er nu een maken.",
+                "button": "Maak nu een account aan"
+            }
+        }
+    }
+}

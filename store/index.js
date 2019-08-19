@@ -10,8 +10,8 @@ export default () => {
     },
     actions: {
       async nuxtServerInit ({ dispatch }, context) {
-        await dispatch('auth/initCustomerToken', context.req)
-        await dispatch('auth/initCustomerDetails', context.req)
+        // await dispatch('auth/initCustomerToken', context.req)
+        // await dispatch('auth/initCustomerDetails', context.req)
       }
     }
   })

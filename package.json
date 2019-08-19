@@ -5,7 +5,7 @@
   "author": "monkemedia",
   "private": true,
   "scripts": {
-    "dev": "nodemon server/index.js --watch server",
+    "dev": "nodemon NODE_ENV=dev server/index.js --watch server",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -32,6 +32,7 @@
     "body-parser": "^1.19.0",
     "chromedriver": "^76.0.0",
     "cross-env": "^5.2.0",
+    "crypto": "^1.0.1",
     "cucumber": "^5.1.0",
     "cucumber-html-reporter": "^5.0.0",
     "cucumber-pretty": "^1.5.2",
@@ -48,6 +49,7 @@
     "nightwatch-api": "^2.3.0",
     "nodemon": "^1.19.1",
     "nuxt-i18n": "^6.0.1",
+    "postmark": "^2.2.9",
     "prettier": "^1.16.4",
     "sass-mq": "^5.0.1",
     "vue-jest": "^4.0.0-0"

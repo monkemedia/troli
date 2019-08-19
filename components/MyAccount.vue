@@ -14,24 +14,24 @@
         <header
           v-if="isAuthenticated"
           class="dropdown__header">
-          <span>{{ hi }} {{ customerDetails.name }}</span>
+          <span>{{ $t('my_account_dropdown.hi') }} {{ customerDetails.name }}</span>
           <a
             href=""
             class="sign-out"
             @click.prevent="signOutHandler">
-            {{ signOut }}
+            {{ $t('my_account_dropdown.sign_out') }}
           </a>
         </header>
         <header
           v-else
           class="dropdown__header">
           <span>
-            <nuxt-link to="login">
-              {{ signIn }}
+            <nuxt-link to="/login">
+              {{ $t('my_account_dropdown.sign_in') }}
             </nuxt-link>
             <span class="divider">|</span>
-            <nuxt-link to="/">
-              {{ register }}
+            <nuxt-link to="/register">
+              {{ $t('my_account_dropdown.register') }}
             </nuxt-link>
           </span>
         </header>
@@ -61,19 +61,15 @@ export default {
 
   data () {
     return {
-      isActive: true,
-      hi: this.$t('myAccountDropdown.hi'),
-      signIn: this.$t('myAccountDropdown.signIn'),
-      register: this.$t('myAccountDropdown.register'),
-      signOut: this.$t('myAccountDropdown.signOut'),
+      isActive: false,
       items: [
         {
-          name: this.$t('myAccountDropdown.links.myAccount'),
+          name: this.$t('my_account_dropdown.links.my_account'),
           path: '/',
           classes: 'fas fa-user'
         },
         {
-          name: this.$t('myAccountDropdown.links.myOrders'),
+          name: this.$t('my_account_dropdown.links.my_orders'),
           path: '/',
           classes: 'fas fa-clipboard-list'
         }

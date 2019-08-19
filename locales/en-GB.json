@@ -1,0 +1,34 @@
+{
+    "navigation": {
+        "home": "Home",
+        "pages": "Pages",
+        "shop": "Shop"
+    },
+    "my_account_dropdown": {
+        "hi": "Hi",
+        "sign_in": "Sign in",
+        "register": "Register",
+        "sign_out": "Sign out",
+        "links": {
+            "my_account": "My account",
+            "my_orders": "My orders"
+        }
+    },
+    "pages": {
+        "login": {
+            "title": "My account login",
+            "returning_customer": {
+                "title": "Returning customer",
+                "paragraph": "If you are a registered user, please enter your email and password.",
+                "label": "Email address",
+                "password": "Password",
+                "button": "Login"
+            },
+            "new_customer": {
+                "title": "New customer",
+                "paragraph": "Don’t have an account? Let’s create one now.",
+                "button": "Create account now"
+            }
+        }
+    }
+}

@@ -7,7 +7,7 @@
         <div class="columns">
           <div class="column">
             <h1 class="title">
-              My account login
+              {{ $t('pages.login.title') }}
             </h1>
             <hr>
           </div>
@@ -16,26 +16,24 @@
           <div class="column is-5">
             <form @submit.prevent="login">
               <h2 class="subtitle">
-                Returning customer
+                {{ $t('pages.login.returning_customer.title') }}
               </h2>
-              <p>If you are a registered user, please enter your email and password.</p>
+              <p>{{ $t('pages.login.returning_customer.paragraph') }}</p>
               <div class="field">
-                <label class="label">Username or email address <sup>*</sup></label>
+                <label class="label">{{ $t('pages.login.returning_customer.label') }}<sup>*</sup></label>
                 <div class="control">
                   <input
                     v-model="form.email"
                     class="input"
-                    date-name="username"
                     type="text">
                 </div>
               </div>
               <div class="field">
-                <label class="label">Password <sup>*</sup></label>
+                <label class="label">{{ $t('pages.login.returning_customer.password') }}<sup>*</sup></label>
                 <div class="control">
                   <input
                     v-model="form.password"
                     class="input"
-                    date-name="password"
                     type="password">
                 </div>
               </div>
@@ -44,9 +42,8 @@
                   <button
                     :class="{ 'is-loading' : isLoading }"
                     class="button is-large is-black"
-                    date-name="login-button"
                     type="submit">
-                    Login
+                    {{ $t('pages.login.returning_customer.button') }}
                   </button>
                 </div>
               </div>
@@ -55,14 +52,14 @@
           <div class="column is-5">
             <div class="create-account">
               <h2 class="subtitle">
-                New customers
+                {{ $t('pages.login.new_customer.title') }}
               </h2>
               <p>
-                Don’t have an account? Let’s create one now.
+                {{ $t('pages.login.new_customer.paragraph') }}
               </p>
-              <button class="button is-large is-black">
-                Create account now
-              </button>
+              <nuxt-link to="/register" class="button is-large is-black">
+                {{ $t('pages.login.new_customer.button') }}
+              </nuxt-link>
             </div>
           </div>
         </div>
