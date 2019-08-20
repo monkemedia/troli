@@ -1,76 +1,80 @@
 <template>
-  <nav
-    class="navbar has-shadow"
-    role="navigation"
-    aria-label="main navigation">
-    <div class="container">
-      <div class="navbar-brand">
-        <lang-navigation />
-        <nuxt-link
-          to="/"
-          class="navbar-item logo">
-          <img src="~assets/images/logo.png" alt="">
-        </nuxt-link>
+  <header>
+    <topbar />
+    <nav
+      class="navbar has-shadow"
+      role="navigation"
+      aria-label="main navigation">
+      <div class="container">
+        <div class="navbar-brand">
+          <lang-navigation />
+          <nuxt-link
+            to="/"
+            class="navbar-item logo">
+            <img src="~assets/images/logo.png" alt="">
+          </nuxt-link>
 
-        <a
-          role="button"
-          class="navbar-burger burger"
+          <a
+            role="button"
+            class="navbar-burger burger"
+            :class="{ 'is-active' : toggleMobileMenu }"
+            aria-label="menu"
+            :aria-expanded="toggleMobileMenu ? 'true' : 'false'"
+            @click="toggleMobileMenu = !toggleMobileMenu">
+            <span
+              v-for="span in 3"
+              :key="span"
+              aria-hidden="false" />
+          </a>
+        </div>
+
+        <div
           :class="{ 'is-active' : toggleMobileMenu }"
-          aria-label="menu"
-          :aria-expanded="toggleMobileMenu ? 'true' : 'false'"
-          @click="toggleMobileMenu = !toggleMobileMenu">
-          <span
-            v-for="span in 3"
-            :key="span"
-            aria-hidden="false" />
-        </a>
-      </div>
+          class="navbar-menu">
+          <div class="navbar-end">
+            <div class="group-links is-flex">
+              <nuxt-link
+                v-for="nav in navigation"
+                :key="nav.name"
+                class="navbar-item"
+                :to="nav.path">
+                {{ nav.name }}
+              </nuxt-link>
+            </div>
 
-      <div
-        :class="{ 'is-active' : toggleMobileMenu }"
-        class="navbar-menu">
-        <div class="navbar-end">
-          <div class="group-links is-flex">
-            <nuxt-link
-              v-for="nav in navigation"
-              :key="nav.name"
-              class="navbar-item"
-              :to="nav.path">
-              {{ nav.name }}
-            </nuxt-link>
-          </div>
-
-          <div class="icon-group is-flex">
-            <my-account />
-            <nuxt-link
-              v-for="icon in icons"
-              :key="icon.name"
-              class="navbar-item"
-              :class="{ 'is-cart' : icon.meta === 'is-cart' }"
-              :aria-label="icon.name"
-              :to="icon.path">
-              <span
-                class="icon"
-                :class="{ 'is-bag' : icon.meta === 'is-cart' }">
-                <i
-                  :class="icon.class"
-                  class="fa" />
-
+            <div class="icon-group is-flex">
+              <my-account />
+              <nuxt-link
+                v-for="icon in icons"
+                :key="icon.name"
+                class="navbar-item"
+                :class="{ 'is-cart' : icon.meta === 'is-cart' }"
+                :aria-label="icon.name"
+                :to="icon.path">
                 <span
-                  v-if="icon.meta === 'is-cart'"
-                  class="cart-quantity">
-                  0
+                  class="icon"
+                  :class="{ 'is-bag' : icon.meta === 'is-cart' }">
+                  <i
+                    :class="icon.class"
+                    class="fa" />
+
+                  <span
+                    v-if="icon.meta === 'is-cart'"
+                    class="cart-quantity">
+                    0
+                  </span>
                 </span>
-              </span>
-            </nuxt-link>
+              </nuxt-link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 </template>
 
 <script>
+import Topbar from '~/components/Topbar'
 import MyAccount from '~/components/MyAccount'
 import LangNavigation from '~/components/LangNavigation'
 
@@ -78,6 +82,7 @@ export default {
   name: 'Navbar',
 
   components: {
+    Topbar,
     MyAccount,
     LangNavigation
   },

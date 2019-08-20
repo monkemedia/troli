@@ -9,12 +9,15 @@
             <h1 class="title">
               {{ $t('pages.login.title') }}
             </h1>
-            <hr>
+            <hr class="mb-0">
           </div>
         </div>
         <div class="columns is-variable is-8">
           <div class="column is-5">
             <form @submit.prevent="login">
+              <error-message
+                v-if="errors"
+                :errors="errors" />
               <h2 class="subtitle">
                 {{ $t('pages.login.returning_customer.title') }}
               </h2>
@@ -47,9 +50,9 @@
                   </button>
                   <div class="forgotten-password">
                     <nuxt-link
-                      to="/forgoteen-password"
+                      to="/forgotten-password"
                       class="is-link">
-                      Forgotten password?
+                      {{ $t('pages.login.returning_customer.forgotten_password') }}
                     </nuxt-link>
                   </div>
                 </div>
@@ -77,8 +80,14 @@
 </template>
 
 <script>
+import ErrorMessage from '~/components/ErrorMessage'
+
 export default {
   name: 'Login',
+
+  components: {
+    ErrorMessage
+  },
 
   data () {
     return {
@@ -86,7 +95,8 @@ export default {
         email: '',
         password: ''
       },
-      isLoading: false
+      isLoading: false,
+      errors: null
     }
   },
 
@@ -98,7 +108,7 @@ export default {
         await this.$store.dispatch('auth/login', this.form)
         this.isLoading = false
       } catch (err) {
-        console.log(err)
+        this.errors = err.response.data
         this.isLoading = false
       }
     }
