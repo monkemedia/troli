@@ -7,7 +7,6 @@
       aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand">
-          <lang-navigation />
           <nuxt-link
             to="/"
             class="navbar-item logo">
@@ -76,15 +75,13 @@
 <script>
 import Topbar from '~/components/Topbar'
 import MyAccount from '~/components/MyAccount'
-import LangNavigation from '~/components/LangNavigation'
 
 export default {
   name: 'Navbar',
 
   components: {
     Topbar,
-    MyAccount,
-    LangNavigation
+    MyAccount
   },
 
   data () {
