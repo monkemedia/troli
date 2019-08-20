@@ -1,8 +1,9 @@
 require('dotenv').config()
 const MoltinGateway = require('@moltin/sdk').gateway
+const { Router } = require('express')
+const errorHandler = require('../utils/errorHandler')
 // const postmark = require('postmark')
 // const postmarkClient = new postmark.ServerClient(process.env.POSTMARK_ID)
-const { Router } = require('express')
 
 const router = Router()
 
@@ -11,16 +12,50 @@ const Moltin = MoltinGateway({
   client_secret: process.env.CLIENT_SECRET
 })
 
-const errorHandler = (res, err) => {
-  const error = err.errors[0]
-
-  return res.status(error.status).send(error)
-}
-
 /* Sign user in. */
 router.post('/sign-in', async (req, res) => {
+  const email = req.body.email
+  const password = req.body.password
+
+  if (!email && !password) {
+    return errorHandler(res, {
+      errors: [
+        {
+          status: 401,
+          message: 'Email address is required.'
+        },
+        {
+          status: 401,
+          message: 'Password is required.'
+        }
+      ]
+    })
+  }
+
+  if (!email) {
+    return errorHandler(res, {
+      errors: [
+        {
+          status: 401,
+          message: 'Email address is required.'
+        }
+      ]
+    })
+  }
+
+  if (!password) {
+    return errorHandler(res, {
+      errors: [
+        {
+          status: 401,
+          message: 'Password is required.'
+        }
+      ]
+    })
+  }
+
   try {
-    const response = await Moltin.Customers.Token(req.body.email, req.body.password)
+    const response = await Moltin.Customers.Token(email, password)
     return res.status(200).send(response.data)
   } catch (err) {
     return errorHandler(res, err)

@@ -5,40 +5,21 @@ const Moltin = MoltinGateway({
   client_id: process.env.CLIENT_ID
 })
 
-const errorHandler = (err) => {
-  return err.errors[0]
-}
-
 const API_URL = 'api/v1'
 
 const $moltin = {
   async createCustomer (customer) {
-    try {
-      const response = await Moltin.Customers.Create(customer)
-      return response
-    } catch (err) {
-      errorHandler(err)
-    }
+    await Moltin.Customers.Create(customer)
   },
 
   async customerToken (credentials) {
-    try {
-      const response = await axios.post(`${API_URL}/sign-in`, credentials)
-      return response
-    } catch (err) {
-      errorHandler(err)
-    }
+    await axios.post(`${API_URL}/sign-in`, credentials)
   },
 
   async getCustomer (customerId) {
-    try {
-      const response = await axios.post(`${API_URL}/get-customer`, {
-        customer_id: customerId
-      })
-      return response
-    } catch (err) {
-      errorHandler(err)
-    }
+    await axios.post(`${API_URL}/get-customer`, {
+      customer_id: customerId
+    })
   }
 }
 

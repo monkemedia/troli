@@ -4,6 +4,7 @@ const MoltinGateway = require('@moltin/sdk').gateway
 const postmark = require('postmark')
 const postmarkClient = new postmark.ServerClient(process.env.POSTMARK_ID)
 const { Router } = require('express')
+const errorHandler = require('../utils/errorHandler')
 
 const router = Router()
 
@@ -11,12 +12,6 @@ const Moltin = MoltinGateway({
   client_id: process.env.CLIENT_ID,
   client_secret: process.env.CLIENT_SECRET
 })
-
-const errorHandler = (res, err) => {
-  const error = err.errors[0]
-
-  return res.status(error.status).send(error)
-}
 
 const generateResetToken = () => {
   return crypto.randomBytes(20).toString('hex')
@@ -40,8 +35,13 @@ router.post('/forgotten-password', async (req, res) => {
   const email = req.body.email
 
   if (!email) {
-    return res.status(401).send({
-      message: 'No email address has been submitted'
+    return errorHandler(res, {
+      errors: [
+        {
+          status: 401,
+          message: 'Email address is required.'
+        }
+      ]
     })
   }
 
@@ -85,8 +85,13 @@ router.post('/forgotten-password/update-password', async (req, res) => {
   const customerId = findCustomer.data[0].id
 
   if (!customerId) {
-    return res.status(401).send({
-      message: 'Customer not found.'
+    return errorHandler(res, {
+      errors: [
+        {
+          status: 401,
+          message: 'Customer not found.'
+        }
+      ]
     })
   }
 
@@ -97,27 +102,73 @@ router.post('/forgotten-password/update-password', async (req, res) => {
   const confirmPassword = req.body.confirm_password
 
   // Validate passwords
-  if (!password || !confirmPassword) {
-    return res.status(401).send({
-      message: 'No Password has not been submitted'
+  if (!password && !confirmPassword) {
+    return errorHandler(res, {
+      errors: [
+        {
+          status: 401,
+          message: 'Password has not been submitted'
+        },
+        {
+          status: 401,
+          message: 'Confirm password has not been submitted'
+        }
+      ]
+    })
+  }
+
+  if (!password) {
+    return errorHandler(res, {
+      errors: [
+        {
+          status: 401,
+          message: 'Password has not been submitted'
+        }
+      ]
+    })
+  }
+
+  if (!confirmPassword) {
+    return errorHandler(res, {
+      errors: [
+        {
+          status: 401,
+          message: 'Confirm password has not been submitted'
+        }
+      ]
     })
   }
 
   if (password !== confirmPassword) {
-    return res.status(401).send({
-      message: 'Passwords do not match.'
+    return errorHandler(res, {
+      errors: [
+        {
+          status: 401,
+          message: 'Passwords do not match.'
+        }
+      ]
     })
   }
 
   if (storedExpiry <= currentTime) {
-    return res.status(401).send({
-      message: 'Token has expired.'
+    return errorHandler(res, {
+      errors: [
+        {
+          status: 401,
+          message: 'Token has expired.'
+        }
+      ]
     })
   }
 
   if (storedToken !== token) {
-    return res.status(401).send({
-      message: 'Token is invalid.'
+    return errorHandler(res, {
+      errors: [
+        {
+          status: 401,
+          message: 'Token is invalid.'
+        }
+      ]
     })
   }
 

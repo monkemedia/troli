@@ -7,17 +7,22 @@
         <div class="columns">
           <div class="column">
             <h1 class="title">
-              Forgotten Password
+              {{ $t('pages.forgotten_password.title') }}
             </h1>
-            <hr>
-            <p>Enter your email address below and we'll send you a link to reset your password.</p>
+            <hr class="mb-0">
           </div>
         </div>
         <div class="columns is-variable is-8">
           <div class="column is-5">
+            <p>
+              {{ $t('pages.forgotten_password.paragraph') }}
+            </p>
             <form @submit.prevent="submitEmail">
+              <error-message
+                v-if="errors"
+                :errors="errors" />
               <div v-if="!success" class="field">
-                <label class="label">Email address <sup>*</sup></label>
+                <label class="label">{{ $t('pages.forgotten_password.label') }}<sup>*</sup></label>
                 <div class="control">
                   <input
                     v-model="form.email"
@@ -32,13 +37,13 @@
                     :class="{ 'is-loading' : isLoading }"
                     class="button is-large is-black"
                     type="submit">
-                    send reset password email
+                    {{ $t('pages.forgotten_password.button') }}
                   </button>
                 </div>
               </div>
 
               <div v-if="success" class="notification is-success">
-                Please check your email and click on the provided link to reset your password.
+                {{ $t('pages.forgotten_password.success_message') }}
               </div>
             </form>
           </div>
@@ -49,8 +54,14 @@
 </template>
 
 <script>
+import ErrorMessage from '~/components/ErrorMessage'
+
 export default {
   name: 'ForgottenPassword',
+
+  components: {
+    ErrorMessage
+  },
 
   data () {
     return {
@@ -58,7 +69,8 @@ export default {
         email: ''
       },
       isLoading: false,
-      success: false
+      success: false,
+      errors: null
     }
   },
 
@@ -71,7 +83,7 @@ export default {
         this.isLoading = false
         this.success = true
       } catch (err) {
-        console.log(err)
+        this.errors = err.response.data
         this.isLoading = false
       }
     }
