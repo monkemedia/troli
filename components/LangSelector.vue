@@ -34,23 +34,22 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'LangSelector',
 
   data () {
     return {
-      isActive: true
+      isActive: false
     }
   },
 
   computed: {
-    locale () {
-      return this.$store.getters['locales/getLocale']
-    },
-
-    locales () {
-      return this.$store.getters['locales/getLocales']
-    },
+    ...mapGetters({
+      locale: 'locales/getLocale',
+      locales: 'locales/getLocales'
+    }),
 
     availableLocales () {
       return this.locales.filter((loc) => {
