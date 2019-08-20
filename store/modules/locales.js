@@ -2,11 +2,13 @@ const state = () => ({
   locales: [
     {
       code: 'en',
-      name: 'EN'
+      iso: 'en-GB',
+      name: 'English'
     },
     {
       code: 'nl',
-      name: 'NL'
+      iso: 'nl-NL',
+      name: 'Netherlands'
     }
   ],
   locale: 'en'

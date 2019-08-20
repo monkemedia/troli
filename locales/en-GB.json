@@ -22,12 +22,32 @@
                 "paragraph": "If you are a registered user, please enter your email and password.",
                 "label": "Email address",
                 "password": "Password",
-                "button": "Login"
+                "button": "Login",
+                "forgotten_password": "Forgotten password?"
             },
             "new_customer": {
                 "title": "New customer",
                 "paragraph": "Don’t have an account? Let’s create one now.",
                 "button": "Create account now"
+            }
+        },
+        "forgotten_password": {
+            "title": "Forgotten password",
+            "paragraph": "Enter your email address below and we'll send you a link to reset your password.",
+            "label": "Email address",
+            "button": "Send reset password email",
+            "success_message": "Please check your email and click on the provided link to reset your password."
+        },
+        "reset_password": {
+            "title": "Forgotten password",
+            "password": "Password",
+            "confirm_password": "Confirm password",
+            "button": "Reset password",
+            "success": {
+                "title": "Success password reset",
+                "paragraph": "You can now use your new password to log in to your account.",
+                "button": "Go to login page"
+
             }
         }
     }

@@ -7,16 +7,19 @@
         <div class="columns">
           <div class="column">
             <h1 class="title">
-              Reset password
+              {{ $t('pages.reset_password.title') }}
             </h1>
-            <hr>
+            <hr class="mb-0">
           </div>
         </div>
         <div class="columns is-variable is-8">
           <div class="column is-5">
             <form @submit.prevent="submitPassword">
+              <error-message
+                v-if="errors"
+                :errors="errors" />
               <div v-if="!success" class="field">
-                <label class="label">Password <sup>*</sup></label>
+                <label class="label">{{ $t('pages.reset_password.password') }}<sup>*</sup></label>
                 <div class="control">
                   <input
                     v-model="form.password"
@@ -25,7 +28,7 @@
                 </div>
               </div>
               <div v-if="!success" class="field">
-                <label class="label">Confirm password <sup>*</sup></label>
+                <label class="label">{{ $t('pages.reset_password.confirm_password') }}<sup>*</sup></label>
                 <div class="control">
                   <input
                     v-model="form.confirm_password"
@@ -40,18 +43,18 @@
                     class="button is-large is-black"
                     date-name="login-button"
                     type="submit">
-                    Reset password
+                    {{ $t('pages.reset_password.button') }}
                   </button>
                 </div>
               </div>
 
               <div v-if="success">
                 <h2 class="subtitle">
-                  Success password reset
+                  {{ $t('pages.reset_password.success.title') }}
                 </h2>
-                <p>You can now use your new password to log in to your account.</p>
+                <p>{{ $t('pages.reset_password.success.paragraph') }}</p>
                 <nuxt-link to="/login" class="button is-black is-large">
-                  Go to login page
+                  {{ $t('pages.reset_password.success.button') }}
                 </nuxt-link>
               </div>
             </form>
@@ -63,8 +66,14 @@
 </template>
 
 <script>
+import ErrorMessage from '~/components/ErrorMessage'
+
 export default {
   name: 'ForgottenPassword',
+
+  components: {
+    ErrorMessage
+  },
 
   data () {
     return {
@@ -73,7 +82,8 @@ export default {
         confirm_password: null
       },
       isLoading: false,
-      success: true
+      success: false,
+      errors: null
     }
   },
 
@@ -100,7 +110,7 @@ export default {
         this.isLoading = false
         this.success = true
       } catch (err) {
-        console.log(err)
+        this.errors = err.response.data
         this.isLoading = false
       }
     }

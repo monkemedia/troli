@@ -29,6 +29,13 @@
                 "paragraph": "Heb je geen account? Laten we er nu een maken.",
                 "button": "Maak nu een account aan"
             }
+        },
+        "forgotten_password": {
+            "title": "Wachtwoord vergeten",
+            "paragraph": "Heb je geen account? Laten we er nu een maken.",
+            "label": "E-mailadres",
+            "button": "Maak nu een account aan",
+            "success_message": "Please check your email and click on the provided link to reset your password."
         }
     }
 }
