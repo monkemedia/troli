@@ -87,10 +87,6 @@ export default {
     }
   },
 
-  mounted () {
-    console.log('this.$route', this.$route.params.token)
-  },
-
   methods: {
     async submitPassword () {
       const token = this.$route.params.token
