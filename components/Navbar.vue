@@ -9,7 +9,8 @@
         <div class="navbar-brand">
           <nuxt-link
             to="/"
-            class="navbar-item logo">
+            class="navbar-item logo"
+            data-qa="logo">
             <img src="~assets/images/logo.png" alt="">
           </nuxt-link>
 

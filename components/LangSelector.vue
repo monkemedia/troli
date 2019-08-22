@@ -64,7 +64,7 @@ export default {
     },
 
     getFlag () {
-      return `flags/${this.selectedLocale.code}.svg`
+      return `/flags/${this.selectedLocale.code}.svg`
     }
   },
 
