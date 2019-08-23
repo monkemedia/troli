@@ -54,41 +54,41 @@
 </template>
 
 <script>
-import ErrorMessage from '~/components/ErrorMessage'
+  import ErrorMessage from '~/components/ErrorMessage'
 
-export default {
-  name: 'ForgottenPassword',
+  export default {
+    name: 'ForgottenPassword',
 
-  components: {
-    ErrorMessage
-  },
+    components: {
+      ErrorMessage
+    },
 
-  data () {
-    return {
-      form: {
-        email: ''
-      },
-      isLoading: false,
-      success: false,
-      errors: null
-    }
-  },
+    data () {
+      return {
+        form: {
+          email: ''
+        },
+        isLoading: false,
+        success: false,
+        errors: null
+      }
+    },
 
-  methods: {
-    async submitEmail () {
-      this.isLoading = true
+    methods: {
+      async submitEmail () {
+        this.isLoading = true
 
-      try {
-        await this.$axios.$post('/api/v1/forgotten-password', this.form)
-        this.isLoading = false
-        this.success = true
-      } catch (err) {
-        this.errors = err.response.data
-        this.isLoading = false
+        try {
+          await this.$axios.$post('/api/v1/forgotten-password', this.form)
+          this.isLoading = false
+          this.success = true
+        } catch (err) {
+          this.errors = err.response.data
+          this.isLoading = false
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>

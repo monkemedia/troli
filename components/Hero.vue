@@ -54,58 +54,57 @@
 </template>
 
 <script>
-export default {
-  name: 'Hero',
+  export default {
+    name: 'Hero',
 
-  props: {
-    items: {
-      type: Array,
-      required: true
-    }
-  },
+    props: {
+      items: {
+        type: Array,
+        required: true
+      }
+    },
 
-  data () {
-    return {
-      activeImage: 0,
-      timer: null
-    }
-  },
+    data () {
+      return {
+        activeImage: 0,
+        timer: null
+      }
+    },
 
-  mounted () {
-    this.setActiveImage()
-  },
+    mounted () {
+      this.setActiveImage()
+    },
 
-  methods: {
-    setActiveImage () {
-      this.timer = setInterval(() => {
+    methods: {
+      setActiveImage () {
+        this.timer = setInterval(() => {
+          this.activeImage += 1
+
+          if (this.activeImage === this.items.length) {
+            this.activeImage = 0
+          }
+        }, 7000)
+      },
+
+      nextImage () {
+        clearInterval(this.timer)
         this.activeImage += 1
+        this.setActiveImage()
+      },
 
-        if (this.activeImage === this.items.length) {
-          this.activeImage = 0
-        }
-      }, 7000)
-    },
+      prevImage () {
+        clearInterval(this.timer)
+        this.activeImage -= 1
+        this.setActiveImage()
+      },
 
-    nextImage () {
-      clearInterval(this.timer)
-      this.activeImage += 1
-      this.setActiveImage()
-    },
-
-    prevImage () {
-      clearInterval(this.timer)
-      this.activeImage -= 1
-      this.setActiveImage()
-    },
-
-    goToImage (index) {
-      clearInterval(this.timer)
-      this.activeImage = index
-      this.setActiveImage()
+      goToImage (index) {
+        clearInterval(this.timer)
+        this.activeImage = index
+        this.setActiveImage()
+      }
     }
   }
-}
-
 </script>
 
 <style lang="scss" scoped>

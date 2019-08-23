@@ -80,40 +80,40 @@
 </template>
 
 <script>
-import ErrorMessage from '~/components/ErrorMessage'
+  import ErrorMessage from '~/components/ErrorMessage'
 
-export default {
-  name: 'Login',
+  export default {
+    name: 'Login',
 
-  components: {
-    ErrorMessage
-  },
+    components: {
+      ErrorMessage
+    },
 
-  data () {
-    return {
-      form: {
-        email: '',
-        password: ''
-      },
-      isLoading: false,
-      errors: null
-    }
-  },
+    data () {
+      return {
+        form: {
+          email: '',
+          password: ''
+        },
+        isLoading: false,
+        errors: null
+      }
+    },
 
-  methods: {
-    async login () {
-      this.isLoading = true
+    methods: {
+      async login () {
+        this.isLoading = true
 
-      try {
-        await this.$store.dispatch('auth/login', this.form)
-        this.isLoading = false
-      } catch (err) {
-        this.errors = err.response.data
-        this.isLoading = false
+        try {
+          await this.$store.dispatch('auth/login', this.form)
+          this.isLoading = false
+        } catch (err) {
+          this.errors = err.response.data
+          this.isLoading = false
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>

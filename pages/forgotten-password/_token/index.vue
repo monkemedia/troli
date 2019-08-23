@@ -66,52 +66,52 @@
 </template>
 
 <script>
-import ErrorMessage from '~/components/ErrorMessage'
+  import ErrorMessage from '~/components/ErrorMessage'
 
-export default {
-  name: 'ForgottenPassword',
+  export default {
+    name: 'ForgottenPassword',
 
-  components: {
-    ErrorMessage
-  },
+    components: {
+      ErrorMessage
+    },
 
-  data () {
-    return {
-      form: {
-        password: null,
-        confirm_password: null
-      },
-      isLoading: false,
-      success: false,
-      errors: null
-    }
-  },
-
-  methods: {
-    async submitPassword () {
-      const token = this.$route.params.token
-
-      if (!token) {
-        alert('A token is required to reset your password.')
-        return
+    data () {
+      return {
+        form: {
+          password: null,
+          confirm_password: null
+        },
+        isLoading: false,
+        success: false,
+        errors: null
       }
+    },
 
-      this.isLoading = true
+    methods: {
+      async submitPassword () {
+        const token = this.$route.params.token
 
-      try {
-        await this.$axios.$post('/api/v1/forgotten-password/update-password', {
-          ...this.form,
-          token
-        })
-        this.isLoading = false
-        this.success = true
-      } catch (err) {
-        this.errors = err.response.data
-        this.isLoading = false
+        if (!token) {
+          alert('A token is required to reset your password.')
+          return
+        }
+
+        this.isLoading = true
+
+        try {
+          await this.$axios.$post('/api/v1/forgotten-password/update-password', {
+            ...this.form,
+            token
+          })
+          this.isLoading = false
+          this.success = true
+        } catch (err) {
+          this.errors = err.response.data
+          this.isLoading = false
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>

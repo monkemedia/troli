@@ -9,15 +9,15 @@
 </template>
 
 <script>
-import LangSelector from '~/components/LangSelector'
+  import LangSelector from '~/components/LangSelector'
 
-export default {
-  name: 'Topbar',
+  export default {
+    name: 'Topbar',
 
-  components: {
-    LangSelector
+    components: {
+      LangSelector
+    }
   }
-}
 </script>
 
 <style lang="scss" scoped>

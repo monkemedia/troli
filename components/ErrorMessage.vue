@@ -14,16 +14,16 @@
 </template>
 
 <script>
-export default {
-  name: 'ErrorMessage',
+  export default {
+    name: 'ErrorMessage',
 
-  props: {
-    errors: {
-      type: Array,
-      required: true
+    props: {
+      errors: {
+        type: Array,
+        required: true
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>

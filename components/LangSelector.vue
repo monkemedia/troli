@@ -34,47 +34,47 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+  import { mapGetters } from 'vuex'
 
-export default {
-  name: 'LangSelector',
+  export default {
+    name: 'LangSelector',
 
-  data () {
-    return {
-      isActive: false
-    }
-  },
-
-  computed: {
-    ...mapGetters({
-      locale: 'locales/getLocale',
-      locales: 'locales/getLocales'
-    }),
-
-    availableLocales () {
-      return this.locales.filter((loc) => {
-        return loc.code !== this.locale
-      })
+    data () {
+      return {
+        isActive: false
+      }
     },
 
-    selectedLocale () {
-      return this.locales.filter((obj) => {
-        return obj.code === this.locale
-      })[0]
+    computed: {
+      ...mapGetters({
+        locale: 'locales/getLocale',
+        locales: 'locales/getLocales'
+      }),
+
+      availableLocales () {
+        return this.locales.filter((loc) => {
+          return loc.code !== this.locale
+        })
+      },
+
+      selectedLocale () {
+        return this.locales.filter((obj) => {
+          return obj.code === this.locale
+        })[0]
+      },
+
+      getFlag () {
+        return `/flags/${this.selectedLocale.code}.svg`
+      }
     },
 
-    getFlag () {
-      return `/flags/${this.selectedLocale.code}.svg`
-    }
-  },
-
-  methods: {
-    switchLanguage (localeCode) {
-      document.cookie = `locale=${localeCode}`
-      location.reload()
+    methods: {
+      switchLanguage (localeCode) {
+        document.cookie = `locale=${localeCode}`
+        location.reload()
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>

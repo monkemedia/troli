@@ -56,43 +56,43 @@
 </template>
 
 <script>
-export default {
-  name: 'MyAccount',
+  export default {
+    name: 'MyAccount',
 
-  data () {
-    return {
-      isActive: false,
-      items: [
-        {
-          name: this.$t('my_account_dropdown.links.my_account'),
-          path: '/',
-          classes: 'fas fa-user'
-        },
-        {
-          name: this.$t('my_account_dropdown.links.my_orders'),
-          path: '/',
-          classes: 'fas fa-clipboard-list'
-        }
-      ]
-    }
-  },
-
-  computed: {
-    customerDetails () {
-      return this.$store.getters['auth/getDetails']
+    data () {
+      return {
+        isActive: false,
+        items: [
+          {
+            name: this.$t('my_account_dropdown.links.my_account'),
+            path: '/',
+            classes: 'fas fa-user'
+          },
+          {
+            name: this.$t('my_account_dropdown.links.my_orders'),
+            path: '/',
+            classes: 'fas fa-clipboard-list'
+          }
+        ]
+      }
     },
 
-    isAuthenticated () {
-      return this.$store.getters['auth/isAuthenticated']
-    }
-  },
+    computed: {
+      customerDetails () {
+        return this.$store.getters['auth/getDetails']
+      },
 
-  methods: {
-    signOutHandler () {
-      this.$store.dispatch('auth/signOut')
+      isAuthenticated () {
+        return this.$store.getters['auth/isAuthenticated']
+      }
+    },
+
+    methods: {
+      signOutHandler () {
+        this.$store.dispatch('auth/signOut')
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
