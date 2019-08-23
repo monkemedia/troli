@@ -1,6 +1,6 @@
 <template>
   <div id="homepage">
-    <hero :items="items" />
+    <hero :slides="slides" />
   </div>
 </template>
 
@@ -23,7 +23,7 @@
     // }
     data () {
       return {
-        items: [
+        slides: [
           {
             id: 1,
             image: 'https://cdn.pixabay.com/photo/2016/11/21/11/16/beautiful-1844724_960_720.jpg',

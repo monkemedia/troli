@@ -2,45 +2,49 @@
   <section
     class="hero">
     <div
-      v-for="(item, index) in items"
-      :key="item.id"
+      v-for="(slide, index) in slides"
+      :key="slide.id"
       class="carousel-item"
       :class="{ 'carousel-item--active' : activeImage === index }"
-      :style="`background-image: url(${item.image});`">
+      :style="`background-image: url(${slide.image});`"
+      data-qa="hero slide">
       <div class="carousel-caption hero-body">
         <div class="container">
           <p class="tagline">
-            {{ item.content.tagline }}
+            {{ slide.content.tagline }}
           </p>
           <h1 class="title">
-            {{ item.content.title }}
+            {{ slide.content.title }}
           </h1>
-          <!-- <nuxt-link
-            v-if="item.link"
-            :to="item.link.path"
-            :class="item.link.classes">
-            {{ item.link.name }}
-          </nuxt-link> -->
+          <nuxt-link
+            v-if="slide.link"
+            :to="slide.link.path"
+            :class="slide.link.classes">
+            {{ slide.link.name }}
+          </nuxt-link>
         </div>
       </div>
     </div>
-    <div
-      class="carousel-control-prev is-hidden-mobile"
-      :class="{ 'is-active' : activeImage > 0 }">
-      <button @click="prevImage()">
+    <div class="carousel-control-prev is-hidden-mobile">
+      <button
+        :class="{ 'is-active' : activeImage > 0 }"
+        class="test"
+        data-qa="hero previous button"
+        @click="prevImage()">
         Prev
       </button>
     </div>
-    <div
-      class="carousel-control-next is-hidden-mobile"
-      :class="{ 'is-active' : activeImage + 1 < items.length }">
-      <button @click="nextImage()">
+    <div class="carousel-control-next is-hidden-mobile">
+      <button
+        :class="{ 'is-active' : activeImage + 1 < slides.length }"
+        data-qa="hero next button"
+        @click="nextImage()">
         Next
       </button>
     </div>
     <ol class="carousel-indicators">
       <li
-        v-for="(item, index) in items.length"
+        v-for="(slide, index) in slides.length"
         :key="index"
         :data-slide-to="index">
         <button
@@ -58,7 +62,7 @@
     name: 'Hero',
 
     props: {
-      items: {
+      slides: {
         type: Array,
         required: true
       }
@@ -88,12 +92,18 @@
 
       nextImage () {
         clearInterval(this.timer)
+        if (this.activeImage + 1 === this.slides.length) {
+          return
+        }
         this.activeImage += 1
         this.setActiveImage()
       },
 
       prevImage () {
         clearInterval(this.timer)
+        if (this.activeImage === 0) {
+          return
+        }
         this.activeImage -= 1
         this.setActiveImage()
       },
@@ -152,10 +162,8 @@
       width: rem(64px);
       cursor: pointer;
       pointer-events: none;
-    }
 
-    &.is-active {
-      button {
+      &.is-active {
         background: $white;
         color: $grey-darker;
         pointer-events: auto;
