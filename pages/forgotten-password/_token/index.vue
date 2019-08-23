@@ -15,9 +15,9 @@
         <div class="columns is-variable is-8">
           <div class="column is-5">
             <form @submit.prevent="submitPassword">
-              <error-message
+              <alert-notification
                 v-if="errors"
-                :errors="errors" />
+                :alerts="errors" />
               <div v-if="!success" class="field">
                 <label class="label">{{ $t('pages.reset_password.password') }}<sup>*</sup></label>
                 <div class="control">
@@ -66,13 +66,13 @@
 </template>
 
 <script>
-  import ErrorMessage from '~/components/ErrorMessage'
+  import AlertNotification from '~/components/AlertNotification'
 
   export default {
     name: 'ForgottenPassword',
 
     components: {
-      ErrorMessage
+      AlertNotification
     },
 
     data () {

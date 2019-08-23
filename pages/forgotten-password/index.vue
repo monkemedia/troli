@@ -18,9 +18,9 @@
               {{ $t('pages.forgotten_password.paragraph') }}
             </p>
             <form @submit.prevent="submitEmail">
-              <error-message
+              <alert-notification
                 v-if="errors"
-                :errors="errors" />
+                :alerts="errors" />
               <div v-if="!success" class="field">
                 <label class="label">{{ $t('pages.forgotten_password.label') }}<sup>*</sup></label>
                 <div class="control">
@@ -54,13 +54,13 @@
 </template>
 
 <script>
-  import ErrorMessage from '~/components/ErrorMessage'
+  import AlertNotification from '~/components/AlertNotification'
 
   export default {
     name: 'ForgottenPassword',
 
     components: {
-      ErrorMessage
+      AlertNotification
     },
 
     data () {

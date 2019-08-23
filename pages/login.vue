@@ -15,9 +15,9 @@
         <div class="columns is-variable is-8">
           <div class="column is-5">
             <form @submit.prevent="login">
-              <error-message
+              <alert-notification
                 v-if="errors"
-                :errors="errors" />
+                :alerts="errors" />
               <h2 class="subtitle">
                 {{ $t('pages.login.returning_customer.title') }}
               </h2>
@@ -80,13 +80,13 @@
 </template>
 
 <script>
-  import ErrorMessage from '~/components/ErrorMessage'
+  import AlertNotification from '~/components/AlertNotification'
 
   export default {
     name: 'Login',
 
     components: {
-      ErrorMessage
+      AlertNotification
     },
 
     data () {
@@ -105,7 +105,7 @@
         this.isLoading = true
 
         try {
-          await this.$store.dispatch('auth/login', this.form)
+          await this.$store.dispatch('customer/login', this.form)
           this.isLoading = false
         } catch (err) {
           this.errors = err.response.data

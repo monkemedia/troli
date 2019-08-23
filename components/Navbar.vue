@@ -1,6 +1,6 @@
 <template>
   <header>
-    <topbar />
+    <topbar data-qa="topbar navigation" />
     <nav
       class="navbar has-shadow"
       role="navigation"
@@ -14,25 +14,18 @@
             <img src="~assets/images/logo.png" alt="">
           </nuxt-link>
 
-          <a
-            role="button"
-            class="navbar-burger burger"
-            :class="{ 'is-active' : toggleMobileMenu }"
-            aria-label="menu"
-            :aria-expanded="toggleMobileMenu ? 'true' : 'false'"
-            @click="toggleMobileMenu = !toggleMobileMenu">
-            <span
-              v-for="span in 3"
-              :key="span"
-              aria-hidden="false" />
-          </a>
+          <burger-button
+            data-qa="mobile burger button"
+            @toggle="toggleMobileMenuHandler" />
         </div>
 
         <div
           :class="{ 'is-active' : toggleMobileMenu }"
           class="navbar-menu">
           <div class="navbar-end">
-            <div class="group-links is-flex">
+            <div
+              class="group-links is-flex"
+              data-qa="main navigation">
               <nuxt-link
                 v-for="nav in navigation"
                 :key="nav.name"
@@ -42,30 +35,9 @@
               </nuxt-link>
             </div>
 
-            <div class="icon-group is-flex">
-              <my-account />
-              <nuxt-link
-                v-for="icon in icons"
-                :key="icon.name"
-                class="navbar-item"
-                :class="{ 'is-cart' : icon.meta === 'is-cart' }"
-                :aria-label="icon.name"
-                :to="icon.path">
-                <span
-                  class="icon"
-                  :class="{ 'is-bag' : icon.meta === 'is-cart' }">
-                  <i
-                    :class="icon.class"
-                    class="fa" />
-
-                  <span
-                    v-if="icon.meta === 'is-cart'"
-                    class="cart-quantity">
-                    0
-                  </span>
-                </span>
-              </nuxt-link>
-            </div>
+            <icon-menu
+              :icons="icons"
+              data-qa="icon menu" />
           </div>
         </div>
       </div>
@@ -74,56 +46,64 @@
 </template>
 
 <script>
-import Topbar from '~/components/Topbar'
-import MyAccount from '~/components/MyAccount'
+  import Topbar from '~/components/Topbar'
+  import BurgerButton from '~/components/BurgerButton'
+  import IconMenu from '~/components/IconMenu'
 
-export default {
-  name: 'Navbar',
+  export default {
+    name: 'Navbar',
 
-  components: {
-    Topbar,
-    MyAccount
-  },
+    components: {
+      Topbar,
+      BurgerButton,
+      IconMenu
+    },
 
-  data () {
-    return {
-      navigation: [
-        {
-          name: this.$t('navigation.home'),
-          path: '/'
-        },
-        {
-          name: this.$t('navigation.pages'),
-          path: '/pages'
-        },
-        {
-          name: this.$t('navigation.shop'),
-          path: '/shop'
-        }
-      ],
-      icons: [
-        {
-          name: 'Wishlist',
-          path: '/wishlist',
-          class: 'fa-heart',
-          meta: null
-        },
-        {
-          name: 'Cart',
-          path: '/cart',
-          class: 'fa-shopping-bag',
-          meta: 'is-cart'
-        },
-        {
-          name: 'Search',
-          path: '/search',
-          class: 'fa-search'
-        }
-      ],
-      toggleMobileMenu: false
+    data () {
+      return {
+        navigation: [
+          {
+            name: this.$t('navigation.home'),
+            path: '/'
+          },
+          {
+            name: this.$t('navigation.pages'),
+            path: '/pages'
+          },
+          {
+            name: this.$t('navigation.shop'),
+            path: '/shop'
+          }
+        ],
+        icons: [
+          {
+            name: 'Wishlist',
+            path: '/wishlist',
+            class: 'fa-heart',
+            meta: null
+          },
+          {
+            name: 'Cart',
+            path: '/cart',
+            class: 'fa-shopping-bag',
+            meta: 'is-cart'
+          },
+          {
+            name: 'Search',
+            path: '/search',
+            class: 'fa-search'
+          }
+        ],
+        toggleMobileMenu: false
+      }
+    },
+
+    methods: {
+      toggleMobileMenuHandler (toggle) {
+        this.toggleMobileMenu = toggle
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
@@ -154,35 +134,6 @@ export default {
   .group-links {
     @include mq($from: $desktop) {
       padding-top: rem(3px);
-    }
-  }
-
-  .icon-group {
-    .fa {
-      font-size: rem(22px);
-    }
-
-    .navbar-item {
-      height: 100%;
-    }
-
-    .is-bag {
-      position: relative;
-    }
-
-    .cart-quantity {
-      border-radius: 50%;
-      background: $primary;
-      width: rem(15px);
-      height: rem(15px);
-      color: $white;
-      font-size: rem(11px);
-      font-family: $family-secondary;
-      display: flex;
-      justify-content: center;
-      position: absolute;
-      right: rem(-2px);
-      bottom: rem(-2px);
     }
   }
 </style>
