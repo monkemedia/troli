@@ -35,9 +35,7 @@
               </nuxt-link>
             </div>
 
-            <icon-menu
-              :icons="icons"
-              data-qa="icon menu" />
+            <icon-menu data-qa="icon menu" />
           </div>
         </div>
       </div>
@@ -73,25 +71,6 @@
           {
             name: this.$t('navigation.shop'),
             path: '/shop'
-          }
-        ],
-        icons: [
-          {
-            name: 'Wishlist',
-            path: '/wishlist',
-            class: 'fa-heart',
-            meta: null
-          },
-          {
-            name: 'Cart',
-            path: '/cart',
-            class: 'fa-shopping-bag',
-            meta: 'is-cart'
-          },
-          {
-            name: 'Search',
-            path: '/search',
-            class: 'fa-search'
           }
         ],
         toggleMobileMenu: false

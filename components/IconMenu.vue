@@ -7,7 +7,8 @@
       class="navbar-item"
       :class="{ 'is-cart' : icon.meta === 'is-cart' }"
       :aria-label="icon.name"
-      :to="icon.path">
+      :to="icon.path"
+      data-qa="icon">
       <span
         class="icon"
         :class="{ 'is-bag' : icon.meta === 'is-cart' }">
@@ -35,10 +36,27 @@
       MyAccount
     },
 
-    props: {
-      icons: {
-        type: Array,
-        required: true
+    data () {
+      return {
+        icons: [
+          {
+            name: 'Wishlist',
+            path: '/wishlist',
+            class: 'fa-heart',
+            meta: null
+          },
+          {
+            name: 'Cart',
+            path: '/cart',
+            class: 'fa-shopping-bag',
+            meta: 'is-cart'
+          },
+          {
+            name: 'Search',
+            path: '/search',
+            class: 'fa-search'
+          }
+        ]
       }
     }
   }
