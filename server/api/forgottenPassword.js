@@ -39,7 +39,7 @@ router.post('/forgotten-password', async (req, res) => {
       errors: [
         {
           status: 401,
-          message: 'Email address is required.'
+          detail: 'Email address is required.'
         }
       ]
     })
@@ -89,7 +89,7 @@ router.post('/forgotten-password/update-password', async (req, res) => {
       errors: [
         {
           status: 401,
-          message: 'Customer not found.'
+          detail: 'Customer not found.'
         }
       ]
     })
@@ -107,11 +107,11 @@ router.post('/forgotten-password/update-password', async (req, res) => {
       errors: [
         {
           status: 401,
-          message: 'Password has not been submitted'
+          detail: 'Password has not been submitted'
         },
         {
           status: 401,
-          message: 'Confirm password has not been submitted'
+          detail: 'Confirm password has not been submitted'
         }
       ]
     })
@@ -122,7 +122,7 @@ router.post('/forgotten-password/update-password', async (req, res) => {
       errors: [
         {
           status: 401,
-          message: 'Password has not been submitted'
+          detail: 'Password has not been submitted'
         }
       ]
     })
@@ -133,7 +133,7 @@ router.post('/forgotten-password/update-password', async (req, res) => {
       errors: [
         {
           status: 401,
-          message: 'Confirm password has not been submitted'
+          detail: 'Confirm password has not been submitted'
         }
       ]
     })
@@ -144,7 +144,7 @@ router.post('/forgotten-password/update-password', async (req, res) => {
       errors: [
         {
           status: 401,
-          message: 'Passwords do not match.'
+          detail: 'Passwords do not match.'
         }
       ]
     })
@@ -155,7 +155,7 @@ router.post('/forgotten-password/update-password', async (req, res) => {
       errors: [
         {
           status: 401,
-          message: 'Token has expired.'
+          detail: 'Token has expired.'
         }
       ]
     })
@@ -166,7 +166,7 @@ router.post('/forgotten-password/update-password', async (req, res) => {
       errors: [
         {
           status: 401,
-          message: 'Token is invalid.'
+          detail: 'Token is invalid.'
         }
       ]
     })

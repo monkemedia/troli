@@ -22,11 +22,11 @@ router.post('/sign-in', async (req, res) => {
       errors: [
         {
           status: 401,
-          message: 'Email address is required.'
+          detail: 'Email address is required.'
         },
         {
           status: 401,
-          message: 'Password is required.'
+          detail: 'Password is required.'
         }
       ]
     })
@@ -37,7 +37,7 @@ router.post('/sign-in', async (req, res) => {
       errors: [
         {
           status: 401,
-          message: 'Email address is required.'
+          detail: 'Email address is required.'
         }
       ]
     })
@@ -48,7 +48,7 @@ router.post('/sign-in', async (req, res) => {
       errors: [
         {
           status: 401,
-          message: 'Password is required.'
+          detail: 'Password is required.'
         }
       ]
     })

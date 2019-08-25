@@ -109,22 +109,24 @@ const actions = {
   },
 
   setCustomerDetails ({ commit }, data) {
-    commit('SET_DETAILS', data.data)
+    commit('SET_DETAILS', data)
 
-    Cookie.set('customer_details', data.data)
+    Cookie.set('customer_details', data)
 
     if (process.client) {
-      localStorage.setItem('customer_details', JSON.stringify(data.data))
+      localStorage.setItem('customer_details', JSON.stringify(data))
     }
   },
 
   async login ({ dispatch }, data) {
-    const customerToken = await this.$moltin.customerToken(data)
-    const customerDetails = await this.$moltin.getCustomer(customerToken.data.customer_id)
+    const customerToken = await this.$axios.$post('/api/v1/sign-in', data)
+    const customerDetails = await this.$axios.$post('/api/v1/get-customer', {
+      customer_id: customerToken.customer_id
+    })
 
     dispatch('setCustomerToken', {
-      token: customerToken.data.token,
-      id: customerToken.data.customer_id
+      token: customerToken.token,
+      id: customerToken.customer_id
     })
 
     dispatch('setCustomerDetails', customerDetails)
