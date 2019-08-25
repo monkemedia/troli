@@ -9,6 +9,7 @@
         class="button button--flag"
         aria-haspopup="true"
         aria-controls="dropdown-menu"
+        data-qa="language selector button"
         :class="{ 'is-active': isActive }">
         <figure class="flag">
           <img :src="getFlag">
@@ -25,6 +26,7 @@
           v-for="loc in availableLocales"
           :key="loc.code"
           class="dropdown-item contains-flag"
+          data-qa="language selector dropdown button"
           @click="switchLanguage(loc.code)">
           {{ loc.name }}
         </button>

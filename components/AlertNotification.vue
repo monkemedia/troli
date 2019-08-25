@@ -10,7 +10,7 @@
       <li
         v-for="(alert, index) in alerts"
         :key="index">
-        {{ alert.message }}
+        {{ alert.detail }}
       </li>
     </ul>
   </div>

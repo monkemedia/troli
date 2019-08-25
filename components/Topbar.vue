@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import LangSelector from '~/components/LangSelector'
+  import LangSelector from '~/components/LanguageSelector'
 
   export default {
     name: 'Topbar',

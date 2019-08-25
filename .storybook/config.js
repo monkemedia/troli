@@ -7,7 +7,7 @@ import 'bulma'
 import '../assets/scss/main.scss'
 
 // Components
-import LangSelector from '../components/LangSelector.vue'
+import LangSelector from '../components/LanguageSelector.vue'
 
 Vue.use(Vuex)
 

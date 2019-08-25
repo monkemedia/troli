@@ -48,6 +48,7 @@
         :key="index"
         :data-slide-to="index">
         <button
+          data-qa="hero indicator controls"
           :class="{ 'is-active' : activeImage === index }"
           @click="goToImage(index)">
           <span />

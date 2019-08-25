@@ -111,4 +111,14 @@ describe('components/Hero', () => {
     nextButton.trigger('click')
     expect(wrapper.vm.activeImage).toBe(1)
   })
+
+  it('will slide to correct position when clicking on hero indicator controls', () => {
+    const wrapper = instance()
+    const indicators = wrapper.findAll('[data-qa="hero indicator controls"]')
+
+    for (let i = 0; i < indicators.length; i++) {
+      indicators.at(i).trigger('click')
+      expect(wrapper.vm.activeImage).toEqual(i)
+    }
+  })
 })

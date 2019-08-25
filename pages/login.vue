@@ -108,6 +108,7 @@
           await this.$store.dispatch('customer/login', this.form)
           this.isLoading = false
         } catch (err) {
+          console.log('ERROR', err)
           this.errors = err.response.data
           this.isLoading = false
         }

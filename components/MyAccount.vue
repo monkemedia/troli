@@ -2,6 +2,7 @@
   <div
     id="myAccountDropdown"
     :class="{ 'is-active' : isActive }"
+    data-qa="my account dropdown"
     @mouseover="isActive = true"
     @mouseleave="isActive = false">
     <button class="navbar-item my-account-button">
@@ -13,7 +14,8 @@
       <div class="dropdown">
         <header
           v-if="isAuthenticated"
-          class="dropdown__header">
+          class="dropdown__header"
+          data-qa="my account dropdown authenticated header">
           <span>{{ $t('my_account_dropdown.hi') }} {{ customerDetails.name }}</span>
           <a
             href=""
@@ -24,7 +26,8 @@
         </header>
         <header
           v-else
-          class="dropdown__header">
+          class="dropdown__header"
+          data-qa="my account dropdown deauthenticated header">
           <span>
             <nuxt-link to="/login">
               {{ $t('my_account_dropdown.sign_in') }}
@@ -56,6 +59,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     name: 'MyAccount',
 
@@ -78,13 +83,10 @@
     },
 
     computed: {
-      customerDetails () {
-        return this.$store.getters['auth/getDetails']
-      },
-
-      isAuthenticated () {
-        return this.$store.getters['auth/isAuthenticated']
-      }
+      ...mapGetters({
+        customerDetails: 'customer/getDetails',
+        isAuthenticated: 'customer/isAuthenticated'
+      })
     },
 
     methods: {
