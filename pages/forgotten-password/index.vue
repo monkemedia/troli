@@ -84,14 +84,14 @@
 
     methods: {
       async submitEmail () {
+        let response
         this.isLoading = true
-        let res
 
         try {
-          res = await axios.post('/api/v1/forgotten-password', this.form)
+          response = await axios.post('/api/v1/forgotten-password', this.form)
           this.isLoading = false
           this.success = true
-          return res
+          return response
         } catch (err) {
           this.errors = err.response.data
           this.isLoading = false

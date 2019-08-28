@@ -17,7 +17,8 @@
             <form @submit.prevent="submitPassword">
               <alert-notification
                 v-if="errors"
-                :alerts="errors" />
+                :alerts="errors"
+                data-qa="alert notification" />
               <div v-if="!success" class="field">
                 <label class="label">{{ $t('pages.reset_password.password') }}<sup>*</sup></label>
                 <div class="control">
@@ -48,7 +49,9 @@
                 </div>
               </div>
 
-              <div v-if="success">
+              <div
+                v-if="success"
+                data-qa="success message">
                 <h2 class="subtitle">
                   {{ $t('pages.reset_password.success.title') }}
                 </h2>
@@ -66,6 +69,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import AlertNotification from '~/components/AlertNotification'
 
   export default {
@@ -83,31 +87,33 @@
         },
         isLoading: false,
         success: false,
-        errors: null
+        errors: null,
+        token: null
       }
+    },
+
+    mounted () {
+      this.token = this.$route.params.token
     },
 
     methods: {
       async submitPassword () {
-        const token = this.$route.params.token
-
-        if (!token) {
-          alert('A token is required to reset your password.')
-          return
-        }
+        let response
 
         this.isLoading = true
 
         try {
-          await this.$axios.$post('/api/v1/forgotten-password/update-password', {
+          response = await axios.post('/api/v1/forgotten-password/update-password', {
             ...this.form,
-            token
+            token: this.token
           })
           this.isLoading = false
           this.success = true
+          return response
         } catch (err) {
           this.errors = err.response.data
           this.isLoading = false
+          return err
         }
       }
     }
