@@ -28,10 +28,10 @@
       toggle () {
         if (this.toggleMobileMenu) {
           this.toggleMobileMenu = false
-          this.$emit('toggle', this.toggleMobileMenu = false)
+          this.$emit('toggle', false)
         } else {
           this.toggleMobileMenu = true
-          this.$emit('toggle', this.toggleMobileMenu = true)
+          this.$emit('toggle', true)
         }
       }
     }

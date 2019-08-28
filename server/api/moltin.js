@@ -1,5 +1,5 @@
+import { gateway as MoltinGateway, MemoryStorageFactory } from '@moltin/sdk'
 require('dotenv').config()
-const MoltinGateway = require('@moltin/sdk').gateway
 const { Router } = require('express')
 const errorHandler = require('../utils/errorHandler')
 // const postmark = require('postmark')
@@ -9,7 +9,8 @@ const router = Router()
 
 const Moltin = MoltinGateway({
   client_id: process.env.CLIENT_ID,
-  client_secret: process.env.CLIENT_SECRET
+  client_secret: process.env.CLIENT_SECRET,
+  storage: new MemoryStorageFactory()
 })
 
 /* Sign user in. */

@@ -17,10 +17,13 @@
             <p>
               {{ $t('pages.forgotten_password.paragraph') }}
             </p>
-            <form @submit.prevent="submitEmail">
+            <form
+              data-qa="forgotten password form"
+              @submit.prevent="submitEmail">
               <alert-notification
                 v-if="errors"
-                :alerts="errors" />
+                :alerts="errors"
+                data-qa="alert notification" />
               <div v-if="!success" class="field">
                 <label class="label">{{ $t('pages.forgotten_password.label') }}<sup>*</sup></label>
                 <div class="control">
@@ -36,13 +39,17 @@
                   <button
                     :class="{ 'is-loading' : isLoading }"
                     class="button is-large is-black"
-                    type="submit">
+                    type="submit"
+                    data-qa="forgotten passward button">
                     {{ $t('pages.forgotten_password.button') }}
                   </button>
                 </div>
               </div>
 
-              <div v-if="success" class="notification is-success">
+              <div
+                v-if="success"
+                class="notification is-success"
+                data-qa="success message">
                 {{ $t('pages.forgotten_password.success_message') }}
               </div>
             </form>
@@ -54,6 +61,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import AlertNotification from '~/components/AlertNotification'
 
   export default {
@@ -77,11 +85,13 @@
     methods: {
       async submitEmail () {
         this.isLoading = true
+        let res
 
         try {
-          await this.$axios.$post('/api/v1/forgotten-password', this.form)
+          res = await axios.post('/api/v1/forgotten-password', this.form)
           this.isLoading = false
           this.success = true
+          return res
         } catch (err) {
           this.errors = err.response.data
           this.isLoading = false

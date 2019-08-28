@@ -43,4 +43,11 @@ describe('components/Navbar', () => {
 
     expect(wrapper.find('[data-qa="icon menu"]').exists()).toBe(true)
   })
+
+  it('updates toggleMobileMenu with true', () => {
+    const wrapper = instance()
+
+    wrapper.vm.toggleMobileMenuHandler(true)
+    expect(wrapper.vm.toggleMobileMenu).toBe(true)
+  })
 })

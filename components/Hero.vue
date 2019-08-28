@@ -85,7 +85,7 @@
         this.timer = setInterval(() => {
           this.activeImage += 1
 
-          if (this.activeImage === this.items.length) {
+          if (this.activeImage === this.slides.length) {
             this.activeImage = 0
           }
         }, 7000)

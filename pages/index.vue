@@ -1,6 +1,8 @@
 <template>
   <div id="homepage">
-    <hero :slides="slides" />
+    <hero
+      data-qa="hero"
+      :slides="slides" />
   </div>
 </template>
 
@@ -13,14 +15,6 @@
     components: {
       Hero
     },
-
-    // async asyncData ({ $axios }) {
-    //   const response = await $axios.$get('http://localhost:1337/homepages')
-    //   console.log('RESPONSE', response)
-    //   return {
-    //     data: response[0].heroes
-    //   }
-    // }
     data () {
       return {
         slides: [
@@ -55,20 +49,6 @@
           }
         ]
       }
-    },
-
-    async mounted () {
-      // const response = await this.$moltin.createCustomer({
-      //   name: 'Ron Swanson',
-      //   email: 'ron@swanson.com',
-      //   password: 'mysecretpassword'
-      // })
-
-      // console.log(response)
     }
   }
 </script>
-
-<style>
-
-</style>

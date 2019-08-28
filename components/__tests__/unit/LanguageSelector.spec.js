@@ -1,9 +1,13 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 import LanguageSelector from '@/components/LanguageSelector.vue'
+const switchLanguage = jest.fn()
 
 const localVue = createLocalVue()
 const instance = () => shallowMount(LanguageSelector, {
   localVue,
+  methods: {
+    switchLanguage
+  },
   computed: {
     locale: () => {
       return 'nl'
@@ -55,11 +59,11 @@ describe('components/LanguageSelector', () => {
     expect(wrapper.vm.selectedLocale.code).toBe('nl')
   })
 
-  // it('selects the correct locale when clicking on items from dropdown', () => {
-  //   const wrapper = instance()
-  //   const button = wrapper.findAll('[data-qa="language selector dropdown button"]').at(0)
+  it('calls `Switch Language` method when clicking on a language selector dropdown button', () => {
+    const wrapper = instance()
+    const button = wrapper.find('[data-qa="language selector dropdown button"]')
 
-  //   button.trigger('click')
-  //   expect(wrapper.vm.selectedLocale.code).toBe('en')
-  // })
+    button.trigger('click')
+    expect(switchLanguage).toHaveBeenCalled()
+  })
 })

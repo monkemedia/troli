@@ -34,6 +34,19 @@ const instance = () => shallowMount(Hero, {
           path: '/',
           classes: 'btn'
         }
+      },
+      {
+        id: '3',
+        image: 'https://example.org/img4.jpg',
+        content: {
+          title: 'This is a title 3',
+          tagline: 'This is a tagline 3'
+        },
+        link: {
+          name: 'Button 3',
+          path: '/',
+          classes: 'btn'
+        }
       }
     ]
   }
@@ -106,10 +119,10 @@ describe('components/Hero', () => {
     const nextButton = wrapper.find('[data-qa="hero next button"]')
 
     wrapper.setData({
-      activeImage: 1
+      activeImage: 2
     })
     nextButton.trigger('click')
-    expect(wrapper.vm.activeImage).toBe(1)
+    expect(wrapper.vm.activeImage).toBe(2)
   })
 
   it('will slide to correct position when clicking on hero indicator controls', () => {
@@ -120,5 +133,15 @@ describe('components/Hero', () => {
       indicators.at(i).trigger('click')
       expect(wrapper.vm.activeImage).toEqual(i)
     }
+  })
+
+  it('automatically slides the carousel every 7 seconds', () => {
+    jest.useFakeTimers()
+    const wrapper = instance()
+
+    wrapper.vm.setActiveImage() // Fire off method
+
+    expect(setInterval).toHaveBeenCalledTimes(2)
+    expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), 7000)
   })
 })

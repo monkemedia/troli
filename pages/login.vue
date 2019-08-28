@@ -14,10 +14,13 @@
         </div>
         <div class="columns is-variable is-8">
           <div class="column is-5">
-            <form @submit.prevent="login">
+            <form
+              data-qa="login form"
+              @submit.prevent="login">
               <alert-notification
                 v-if="errors"
-                :alerts="errors" />
+                :alerts="errors"
+                data-qa="alert notification" />
               <h2 class="subtitle">
                 {{ $t('pages.login.returning_customer.title') }}
               </h2>
@@ -45,6 +48,7 @@
                   <button
                     :class="{ 'is-loading' : isLoading }"
                     class="button is-large is-black login-button"
+                    data-qa="submit button"
                     type="submit">
                     {{ $t('pages.login.returning_customer.button') }}
                   </button>
@@ -80,6 +84,7 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
   import AlertNotification from '~/components/AlertNotification'
 
   export default {
@@ -101,16 +106,20 @@
     },
 
     methods: {
+      ...mapActions({
+        loginForm: 'customer/login'
+      }),
+
       async login () {
         this.isLoading = true
 
         try {
-          await this.$store.dispatch('customer/login', this.form)
+          await this.loginForm(this.form)
           this.isLoading = false
         } catch (err) {
-          console.log('ERROR', err)
           this.errors = err.response.data
           this.isLoading = false
+          return err
         }
       }
     }

@@ -16,13 +16,13 @@
           v-if="isAuthenticated"
           class="dropdown__header"
           data-qa="my account dropdown authenticated header">
-          <span>{{ $t('my_account_dropdown.hi') }} {{ customerDetails.name }}</span>
-          <a
-            href=""
+          <span data-qa="my account user name">{{ $t('my_account_dropdown.hi') }} {{ customerDetails.name }}</span>
+          <button
             class="sign-out"
-            @click.prevent="signOutHandler">
+            data-qa="sign out button"
+            @click="signOut">
             {{ $t('my_account_dropdown.sign_out') }}
-          </a>
+          </button>
         </header>
         <header
           v-else
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
 
   export default {
     name: 'MyAccount',
@@ -90,9 +90,9 @@
     },
 
     methods: {
-      signOutHandler () {
-        this.$store.dispatch('auth/signOut')
-      }
+      ...mapActions({
+        signOut: 'customer/logout'
+      })
     }
   }
 </script>

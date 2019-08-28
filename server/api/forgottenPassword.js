@@ -13,14 +13,6 @@ const Moltin = MoltinGateway({
   client_secret: process.env.CLIENT_SECRET
 })
 
-const generateResetToken = () => {
-  return crypto.randomBytes(20).toString('hex')
-}
-
-const generateExpiry = () => {
-  return new Date().getTime() + 15 * 60 * 1000
-}
-
 const sendEmail = async (data) => {
   const textBodyUrl = process.env.NODE_ENV === 'dev' ? `http://localhost:'${process.env.PORT}/forgotten-password/${data.token}` : `http://${process.env.WEB_ADDRESS}/forgotten-password/${data.token}`
   await postmarkClient.sendEmail({
@@ -56,10 +48,10 @@ router.post('/forgotten-password', async (req, res) => {
       return
     }
 
-    const customerId = filteredCustomer.data[0].id
-    const updateCustomer = await Moltin.Customers.Update(customerId, {
-      reset_token: generateResetToken(),
-      reset_token_expiry: generateExpiry()
+    const customer = filteredCustomer.data[0]
+    const updateCustomer = await Moltin.Customers.Update(customer.id, {
+      reset_token: customer.reset_token,
+      reset_token_expiry: customer.reset_token_expiry
     })
 
     sendEmail({
