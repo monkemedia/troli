@@ -1,5 +1,4 @@
 require('dotenv').config()
-const crypto = require('crypto')
 const MoltinGateway = require('@moltin/sdk').gateway
 const postmark = require('postmark')
 const postmarkClient = new postmark.ServerClient(process.env.POSTMARK_ID)
