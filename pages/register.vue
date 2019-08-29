@@ -1,5 +1,7 @@
 <template>
-  <div id="register">
+  <div
+    id="register"
+    data-qa="register">
     <div class="banner" />
 
     <section id="register" class="section">

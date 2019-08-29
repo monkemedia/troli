@@ -62,6 +62,10 @@ Given('I visit the {string}', async (pageName) => {
   await client.url(pageUrl(pageName)).waitForElementVisible('body', 1000)
 })
 
+Then('I visit the {string} page', async (pageName) => {
+  await client.url(pageUrl(pageName)).waitForElementVisible('body', 1000)
+})
+
 Then('I see a/the {string}', async (qa) => {
   await client.waitForElementVisible(dataQa(qa))
 })

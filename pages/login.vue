@@ -59,7 +59,8 @@
                   <div class="forgotten-password">
                     <nuxt-link
                       to="/forgotten-password"
-                      class="is-link">
+                      class="is-link"
+                      data-qa="forgotten password link">
                       {{ $t('pages.login.returning_customer.forgotten_password') }}
                     </nuxt-link>
                   </div>
@@ -76,7 +77,10 @@
               <p>
                 {{ $t('pages.login.new_customer.paragraph') }}
               </p>
-              <nuxt-link to="/register" class="button is-large is-black">
+              <nuxt-link
+                to="/register"
+                class="button is-large is-black"
+                data-qa="create account now button">
                 {{ $t('pages.login.new_customer.button') }}
               </nuxt-link>
             </div>
