@@ -21,12 +21,14 @@
       id="dropdown-menu"
       class="dropdown-menu"
       role="menu">
-      <div class="dropdown-content">
+      <div
+        class="dropdown-content"
+        data-qa="language selector list">
         <button
           v-for="loc in availableLocales"
           :key="loc.code"
           class="dropdown-item contains-flag"
-          data-qa="language selector dropdown button"
+          :data-qa="loc.name"
           @click="switchLanguage(loc.code)">
           {{ loc.name }}
         </button>

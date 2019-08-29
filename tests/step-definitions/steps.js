@@ -58,15 +58,15 @@ function pageUrl (pageName) {
   return pages[pageName.toLowerCase()]
 }
 
-Given('I visit the {string}', async (pageName) => {
+Given('I visit/the/see the/a {string}', async (pageName) => {
   await client.url(pageUrl(pageName)).waitForElementVisible('body', 1000)
 })
 
-Then('I visit the {string} page', async (pageName) => {
+Then('I visit/see the/a {string} page', async (pageName) => {
   await client.url(pageUrl(pageName)).waitForElementVisible('body', 1000)
 })
 
-Then('I see a/the {string}', async (qa) => {
+Then('I see {string} in the {string}', async (qa) => {
   await client.waitForElementVisible(dataQa(qa))
 })
 

@@ -30,9 +30,9 @@ const instance = () => shallowMount(LanguageSelector, {
 })
 
 describe('components/LanguageSelector', () => {
-  it('sets toggle state to active=`true` on mouse over', () => {
+  it('sets toggle state to active=`true` on mouse over', async () => {
     const wrapper = instance()
-    const button = wrapper.find('[data-qa="language selector button"]')
+    const button = wrapper.find('[data-qa="English"]')
 
     wrapper.setData({
       isActive: false
@@ -61,7 +61,7 @@ describe('components/LanguageSelector', () => {
 
   it('calls `Switch Language` method when clicking on a language selector dropdown button', () => {
     const wrapper = instance()
-    const button = wrapper.find('[data-qa="language selector dropdown button"]')
+    const button = wrapper.find('[data-qa="English"]')
 
     button.trigger('click')
     expect(switchLanguage).toHaveBeenCalled()

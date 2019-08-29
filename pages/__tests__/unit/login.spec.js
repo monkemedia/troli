@@ -4,6 +4,7 @@ import Login from '@/pages/login.vue'
 
 const localVue = createLocalVue()
 const store = new Store()
+const $router = []
 
 const instance = () => shallowMount(Login, {
   localVue,
@@ -12,12 +13,13 @@ const instance = () => shallowMount(Login, {
   },
   mocks: {
     $t: () => {},
-    $store: store
+    $store: store,
+    $router
   }
 })
 
 describe('pages/Login', () => {
-  it('on submit dispatch is called', async () => {
+  it('on submit dispatch is called', () => {
     const wrapper = instance()
     const form = wrapper.find('[data-qa="login form"]')
 
