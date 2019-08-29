@@ -1,5 +1,7 @@
 <template>
-  <div id="login">
+  <div
+    id="login"
+    data-qa="login page">
     <div class="banner" />
 
     <section id="register" class="section">
@@ -31,7 +33,8 @@
                   <input
                     v-model="form.email"
                     class="input"
-                    type="text">
+                    type="text"
+                    data-qa="email box">
                 </div>
               </div>
               <div class="field">
@@ -40,7 +43,8 @@
                   <input
                     v-model="form.password"
                     class="input"
-                    type="password">
+                    type="password"
+                    data-qa="password box">
                 </div>
               </div>
               <div class="field">
@@ -48,7 +52,7 @@
                   <button
                     :class="{ 'is-loading' : isLoading }"
                     class="button is-large is-black login-button"
-                    data-qa="submit button"
+                    data-qa="login button"
                     type="submit">
                     {{ $t('pages.login.returning_customer.button') }}
                   </button>
@@ -116,6 +120,7 @@
         try {
           await this.loginForm(this.form)
           this.isLoading = false
+          this.$router.push({ name: 'homepage' })
         } catch (err) {
           this.errors = err.response.data
           this.isLoading = false

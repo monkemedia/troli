@@ -6,7 +6,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'Shop template', // process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -41,7 +41,14 @@ module.exports = {
     '@/assets/scss/main.scss'
   ],
   router: {
-    middleware: 'i18n'
+    middleware: 'i18n',
+    extendRoutes (routes, resolve) {
+      routes.push({
+        name: 'homepage',
+        path: '/',
+        component: resolve(__dirname, 'pages/index.vue')
+      })
+    }
   },
   /*
    ** Plugins to load before mounting the App

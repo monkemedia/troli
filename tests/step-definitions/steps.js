@@ -42,16 +42,61 @@
 // // })
 
 const { client } = require('nightwatch-api')
-const { Given, Then, When } = require('cucumber')
+const { Given, Then } = require('cucumber')
+const { url, email, password } = require('../../nightwatch.conf.js').test_settings.default.globals
 
-Given(/^I open Google's search page$/, () => {
-  return client.url('http://google.com').waitForElementVisible('body', 1000)
+const pages = {
+  'homepage': `${url}/`,
+  'login page': `${url}/login`
+}
+
+function dataQa (qa) {
+  return `[data-qa="${qa}"]`
+}
+
+function pageUrl (pageName) {
+  return pages[pageName.toLowerCase()]
+}
+
+Given('I visit the {string}', async (pageName) => {
+  await client.url(pageUrl(pageName)).waitForElementVisible('body', 1000)
 })
 
-Then(/^the title is "([^"]*)"$/, (title) => {
-  return client.assert.title(title)
+Then('I see a/the {string}', async (qa) => {
+  await client.waitForElementVisible(dataQa(qa))
 })
 
-Then(/^the Google search form exists$/, () => {
-  return client.assert.visible('input[name="q"]')
+Then('I enter {string} in the {string}', async (text, qa) => {
+  await client
+    .waitForElementVisible(dataQa(qa))
+    .setValue(dataQa(qa), text)
+})
+
+Then('I enter email in the email box', async () => {
+  await client
+    .waitForElementVisible(dataQa('email box'))
+    .setValue(dataQa('email box'), email)
+})
+
+Then('I enter password in the password box', async () => {
+  await client
+    .waitForElementVisible(dataQa('password box'))
+    .setValue(dataQa('password box'), password)
+})
+
+Then('I click the {string}', async (qa) => {
+  await client
+    .waitForElementVisible(dataQa(qa))
+    .click(dataQa(qa))
+})
+
+Then('I wait {int} seconds', async (seconds) => {
+  await client.pause(seconds * 1000)
+})
+
+// Then I see an "alert notification" with the text "Unable to verify customer."
+Then('I see an {string} with the text {string}', async (qa, text) => {
+  await client
+    .waitForElementVisible(dataQa(qa))
+    .assert.containsText(dataQa(qa), text)
 })

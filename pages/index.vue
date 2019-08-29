@@ -1,5 +1,7 @@
 <template>
-  <div id="homepage">
+  <div
+    id="homepage"
+    data-qa="homepage">
     <hero
       data-qa="hero"
       :slides="slides" />
