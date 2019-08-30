@@ -66,8 +66,11 @@ Then('I visit/see the/a {string} page', async (pageName) => {
   await client.url(pageUrl(pageName)).waitForElementVisible('body', 1000)
 })
 
-Then('I see {string} in the {string}', async (qa) => {
-  await client.waitForElementVisible(dataQa(qa))
+Then('I see {string} in the {string}', async (qa, qa2) => {
+  await client
+    .waitForElementVisible(dataQa(qa))
+    .waitForElementVisible(dataQa(qa2))
+    .click(dataQa(qa2))
 })
 
 Then('I enter {string} in the {string}', async (text, qa) => {
@@ -88,10 +91,16 @@ Then('I enter password in the password box', async () => {
     .setValue(dataQa('password box'), password)
 })
 
-Then('I click the {string}', async (qa) => {
+Then('I click the/on {string}', async (qa) => {
   await client
     .waitForElementVisible(dataQa(qa))
     .click(dataQa(qa))
+})
+
+Then('I hover the/on {string}', async (qa) => {
+  await client
+    .waitForElementVisible(dataQa(qa))
+    .moveToElement(dataQa(qa), 0, 0)
 })
 
 Then('I wait {int} seconds', async (seconds) => {
@@ -103,4 +112,10 @@ Then('I see an {string} with the text {string}', async (qa, text) => {
   await client
     .waitForElementVisible(dataQa(qa))
     .assert.containsText(dataQa(qa), text)
+})
+
+Then('the lang meta should be {string}', async (text) => {
+  await client
+    .waitForElementVisible(dataQa('html'))
+    .assert.attributeContains(dataQa('html'), 'lang', text)
 })
