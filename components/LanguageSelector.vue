@@ -2,6 +2,7 @@
   <div
     class="dropdown is-right"
     :class="{ 'is-active': isActive }"
+    data-qa="language selector button"
     @mouseover="isActive = true"
     @mouseleave="isActive = false">
     <div class="dropdown-trigger">
@@ -9,7 +10,6 @@
         class="button button--flag"
         aria-haspopup="true"
         aria-controls="dropdown-menu"
-        data-qa="language selector button"
         :class="{ 'is-active': isActive }">
         <figure class="flag">
           <img :src="getFlag">

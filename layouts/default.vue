@@ -17,7 +17,8 @@
     head () {
       return {
         htmlAttrs: {
-          lang: this.locale
+          lang: this.locale,
+          'data-qa': 'html'
         }
       }
     },
