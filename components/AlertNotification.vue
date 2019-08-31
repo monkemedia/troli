@@ -2,15 +2,17 @@
   <div
     role="alert"
     class="notification is-flex"
-    :class="{ 'is-danger' : notificationType === 'error' }">
+    :class="{
+      'is-danger' : notificationType === 'error',
+      'is-success' : notificationType === 'success'}">
     <span class="icon is-large">
       <i class="fas fa-2x fa-exclamation-circle" />
     </span>
     <ul>
       <li
-        v-for="(alert, index) in alerts"
+        v-for="(a, index) in alert"
         :key="index">
-        {{ alert.detail }}
+        {{ a.detail }}
       </li>
     </ul>
   </div>
@@ -21,7 +23,7 @@
     name: 'AlertNotification',
 
     props: {
-      alerts: {
+      alert: {
         type: Array,
         required: true
       }
@@ -29,7 +31,7 @@
 
     computed: {
       notificationType () {
-        if (this.alerts[0].status === 200) {
+        if (this.alert[0].status === 200) {
           return 'success'
         }
         return 'error'

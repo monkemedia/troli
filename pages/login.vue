@@ -21,7 +21,7 @@
               @submit.prevent="login">
               <alert-notification
                 v-if="errors"
-                :alerts="errors"
+                :alert="errors"
                 data-qa="alert notification" />
               <h2 class="subtitle">
                 {{ $t('pages.login.returning_customer.title') }}

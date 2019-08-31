@@ -17,7 +17,7 @@
             <form @submit.prevent="submitPassword">
               <alert-notification
                 v-if="errors"
-                :alerts="errors"
+                :alert="errors"
                 data-qa="alert notification" />
               <div v-if="!success" class="field">
                 <label class="label">{{ $t('pages.reset_password.password') }}<sup>*</sup></label>

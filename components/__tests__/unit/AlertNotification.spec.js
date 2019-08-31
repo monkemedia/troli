@@ -5,7 +5,7 @@ const localVue = createLocalVue()
 const instance = () => shallowMount(AlertNotification, {
   localVue,
   propsData: {
-    alerts: [
+    alert: [
       {
         status: 401,
         message: 'Message 1'
@@ -22,14 +22,14 @@ describe('components/AlertNotification', () => {
   it('receives 2 alerts', () => {
     const wrapper = instance()
 
-    expect(wrapper.props().alerts.length).toBe(2)
+    expect(wrapper.props().alert.length).toBe(2)
   })
 
   it('shows a success notification if first status is `200`', () => {
     const wrapper = instance()
 
     wrapper.setProps({
-      alerts: [
+      alert: [
         {
           status: 200
         }

@@ -35,21 +35,26 @@ describe('pages/forgotten-password/index', () => {
     expect(wrapper.vm.isLoading).toBe(false)
   })
 
-  it('shows success message when `success` is set to true', () => {
+  it('shows success message when alert object has a status of 200', () => {
     const wrapper = instance()
 
     wrapper.setData({
-      success: true
+      alert: [
+        {
+          status: 200,
+          detail: 'This is a success message'
+        }
+      ]
     })
 
-    expect(wrapper.find('[data-qa="success message"]').exists()).toBe(true)
+    expect(wrapper.find('[data-qa="alert notification"]').exists()).toBe(true)
   })
 
-  it('shows error message when there are `errors`', () => {
+  it('shows error message when alert object message has a status of 401', () => {
     const wrapper = instance()
 
     wrapper.setData({
-      errors: [
+      alert: [
         {
           status: 401,
           detail: 'This is an error'
@@ -83,7 +88,7 @@ describe('pages/forgotten-password/index', () => {
     const wrapper = instance()
     await wrapper.vm.submitEmail()
 
-    expect(wrapper.vm.errors.length).toBe(1)
+    expect(wrapper.vm.alert.length).toBe(1)
     expect(wrapper.vm.isLoading).toBe(false)
   })
 })

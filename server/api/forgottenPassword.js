@@ -44,7 +44,8 @@ router.post('/forgotten-password', async (req, res) => {
     }).All()
 
     if (filteredCustomer.data.length < 1) {
-      return
+      // customer doesn't exist but we can't tell users that
+      return res.status(200).send()
     }
 
     const customer = filteredCustomer.data[0]

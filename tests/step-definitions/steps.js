@@ -1,53 +1,11 @@
-// const { client } = require('nightwatch-api')
-// const { Given, Then } = require('cucumber')
-// // const nightwatchConfig = require('../../nightwatch.conf.js')
-
-// // const port = nightwatchConfig.test_settings.default.webdriver.port
-// // const url = `localhost:${port}`
-
-// // function pageUrl (pageName) {
-// //   return `${url + pageName}`
-// // }
-
-// Given(/^I open Google`s search page$/, async () => {
-//   await client.url('http://google.com')
-// })
-
-// Then(/^the title is "(.*?)"$/, async () => {
-//   await client.assert.title('hello')
-// })
-
-// Then(/^the Google search form exists$/, async () => {
-//   await client.assert.visible('input[name="q"]')
-// })
-
-// // When(/^I visit the "(.*?)$/, async (pageName) => {
-// //   await client.url(pageUrl(pageName))
-// // })
-
-// // And(/^I enter "info@monkemedia.co.uk" in the "username" field$/, async (text, elem) => {
-// //   await client.assert.visible('[date-name="username"]').setValue('[date-name="username"]', text)
-// // })
-
-// // And(/^I enter "1111qqqq" in the "password" field$/, async (text, elem) => {
-// //   await client.assert.visible('[date-name="password"]').setValue('[date-name="password"]', text)
-// // })
-
-// // And(/^I press the "login" button$/, async (elem) => {
-// //   await client.click('[date-name="login-button"]')
-// // })
-
-// // Then(/^I press the "login" button$/, async (elem) => {
-// //   await client.assert.visible('input[name="q"]')
-// // })
-
 const { client } = require('nightwatch-api')
 const { Given, Then } = require('cucumber')
 const { url, email, password } = require('../../nightwatch.conf.js').test_settings.default.globals
 
 const pages = {
   'homepage': `${url}/`,
-  'login page': `${url}/login`
+  'login page': `${url}/login`,
+  'forgotten password page': `${url}/forgotten-password`
 }
 
 function dataQa (qa) {
@@ -103,7 +61,7 @@ Then('I hover the/on {string}', async (qa) => {
     .moveToElement(dataQa(qa), 0, 0)
 })
 
-Then('I wait {int} seconds', async (seconds) => {
+Then('I wait {int} second(s)', async (seconds) => {
   await client.pause(seconds * 1000)
 })
 

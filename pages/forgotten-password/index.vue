@@ -1,5 +1,7 @@
 <template>
-  <div id="login">
+  <div
+    id="forgottenPasswordPage"
+    data-qa="forgotten password page">
     <div class="banner" />
 
     <section id="register" class="section">
@@ -21,8 +23,8 @@
               data-qa="forgotten password form"
               @submit.prevent="submitEmail">
               <alert-notification
-                v-if="errors"
-                :alerts="errors"
+                v-if="alert"
+                :alert="alert"
                 data-qa="alert notification" />
               <div v-if="!success" class="field">
                 <label class="label">{{ $t('pages.forgotten_password.label') }}<sup>*</sup></label>
@@ -31,6 +33,7 @@
                     v-model="form.email"
                     class="input"
                     date-name="username"
+                    data-qa="email box"
                     type="text">
                 </div>
               </div>
@@ -40,17 +43,10 @@
                     :class="{ 'is-loading' : isLoading }"
                     class="button is-large is-black"
                     type="submit"
-                    data-qa="forgotten passward button">
+                    data-qa="send reset password button">
                     {{ $t('pages.forgotten_password.button') }}
                   </button>
                 </div>
-              </div>
-
-              <div
-                v-if="success"
-                class="notification is-success"
-                data-qa="success message">
-                {{ $t('pages.forgotten_password.success_message') }}
               </div>
             </form>
           </div>
@@ -77,8 +73,13 @@
           email: ''
         },
         isLoading: false,
-        success: false,
-        errors: null
+        alert: null
+      }
+    },
+
+    computed: {
+      success () {
+        return this.alert && this.alert[0].status === 200
       }
     },
 
@@ -90,10 +91,15 @@
         try {
           response = await axios.post('/api/v1/forgotten-password', this.form)
           this.isLoading = false
-          this.success = true
+          this.alert = [
+            {
+              status: 200,
+              detail: this.$t('pages.forgotten_password.success_message')
+            }
+          ]
           return response
         } catch (err) {
-          this.errors = err.response.data
+          this.alert = err.response.data
           this.isLoading = false
         }
       }
