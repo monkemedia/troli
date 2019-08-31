@@ -53,11 +53,11 @@ describe('pages/forgotten-password/_token/index', () => {
     expect(wrapper.find('[data-qa="success message"]').exists()).toBe(true)
   })
 
-  it('shows error message when there are `errors`', () => {
+  it('shows error message when alert has a status of 401', () => {
     const wrapper = instance()
 
     wrapper.setData({
-      errors: [
+      alert: [
         {
           status: 401,
           detail: 'This is an error'
@@ -81,7 +81,7 @@ describe('pages/forgotten-password/_token/index', () => {
     expect(wrapper.vm.success).toBe(true)
   })
 
-  it('response with errors', async () => {
+  it('response with alert', async () => {
     mock
       .onPost('/api/v1/forgotten-password/update-password')
       .reply(500, [{
@@ -91,7 +91,7 @@ describe('pages/forgotten-password/_token/index', () => {
     const wrapper = instance()
     await wrapper.vm.submitPassword()
 
-    expect(wrapper.vm.errors.length).toBe(1)
+    expect(wrapper.vm.alert.length).toBe(1)
     expect(wrapper.vm.isLoading).toBe(false)
   })
 })

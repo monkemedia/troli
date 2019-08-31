@@ -5,7 +5,8 @@ const { url, email, password } = require('../../nightwatch.conf.js').test_settin
 const pages = {
   'homepage': `${url}/`,
   'login page': `${url}/login`,
-  'forgotten password page': `${url}/forgotten-password`
+  'forgotten password page': `${url}/forgotten-password`,
+  'reset password page': `${url}/forgotten-password/12345`
 }
 
 function dataQa (qa) {

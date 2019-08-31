@@ -6,7 +6,12 @@
       'is-danger' : notificationType === 'error',
       'is-success' : notificationType === 'success'}">
     <span class="icon is-large">
-      <i class="fas fa-2x fa-exclamation-circle" />
+      <i
+        v-if="notificationType === 'error'"
+        class="fas fa-2x fa-exclamation-circle" />
+      <i
+        v-else
+        class="fas fa-2x fa-check-circle" />
     </span>
     <ul>
       <li

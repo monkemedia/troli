@@ -16,8 +16,8 @@
           <div class="column is-5">
             <form @submit.prevent="submitPassword">
               <alert-notification
-                v-if="errors"
-                :alert="errors"
+                v-if="alert"
+                :alert="alert"
                 data-qa="alert notification" />
               <div v-if="!success" class="field">
                 <label class="label">{{ $t('pages.reset_password.password') }}<sup>*</sup></label>
@@ -25,7 +25,8 @@
                   <input
                     v-model="form.password"
                     class="input"
-                    type="password">
+                    type="password"
+                    data-qa="password box">
                 </div>
               </div>
               <div v-if="!success" class="field">
@@ -34,7 +35,8 @@
                   <input
                     v-model="form.confirm_password"
                     class="input"
-                    type="password">
+                    type="password"
+                    data-qa="confirm password box">
                 </div>
               </div>
               <div v-if="!success" class="field">
@@ -43,7 +45,8 @@
                     :class="{ 'is-loading' : isLoading }"
                     class="button is-large is-black"
                     date-name="login-button"
-                    type="submit">
+                    type="submit"
+                    data-qa="reset password button">
                     {{ $t('pages.reset_password.button') }}
                   </button>
                 </div>
@@ -87,7 +90,7 @@
         },
         isLoading: false,
         success: false,
-        errors: null,
+        alert: null,
         token: null
       }
     },
@@ -111,7 +114,7 @@
           this.success = true
           return response
         } catch (err) {
-          this.errors = err.response.data
+          this.alert = err.response.data
           this.isLoading = false
           return err
         }
