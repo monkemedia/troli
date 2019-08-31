@@ -55,28 +55,28 @@ const instance = () => shallowMount(Hero, {
 describe('components/Hero', () => {
   it('has a background image', () => {
     const wrapper = instance()
-    const slide = wrapper.find('[data-qa="hero slide"]')
+    const slide = wrapper.find('[data-qa="hero slide 1"]')
 
     expect(slide.attributes().style).toContain('https://example.org/img.jpg')
   })
 
   it('has a tagline', () => {
     const wrapper = instance()
-    const tagline = wrapper.find('[data-qa="hero slide"] .tagline')
+    const tagline = wrapper.find('[data-qa="hero slide 1"] .tagline')
 
     expect(tagline.text()).toEqual('This is a tagline')
   })
 
   it('has a title', () => {
     const wrapper = instance()
-    const tagline = wrapper.find('[data-qa="hero slide"] .title')
+    const tagline = wrapper.find('[data-qa="hero slide 1"] .title')
 
     expect(tagline.text()).toEqual('This is a title')
   })
 
   it('has a button', () => {
     const wrapper = instance()
-    const button = wrapper.find('[data-qa="hero slide"] .btn')
+    const button = wrapper.find('[data-qa="hero slide 1"] .btn')
 
     expect(button.text()).toEqual('Button')
   })

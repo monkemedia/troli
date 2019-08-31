@@ -7,7 +7,7 @@
       class="carousel-item"
       :class="{ 'carousel-item--active' : activeImage === index }"
       :style="`background-image: url(${slide.image});`"
-      data-qa="hero slide">
+      :data-qa="`hero slide ${index + 1}`">
       <div class="carousel-caption hero-body">
         <div class="container">
           <p class="tagline">
