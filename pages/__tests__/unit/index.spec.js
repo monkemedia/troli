@@ -17,6 +17,6 @@ describe('pages/Homepage', () => {
   it('contains hero component', () => {
     const wrapper = instance()
 
-    expect(wrapper.find('[data-qa="hero"]').exists()).toBe(true)
+    expect(wrapper.find('[data-qa="hero banner"]').exists()).toBe(true)
   })
 })

@@ -3,7 +3,7 @@
     id="homepage"
     data-qa="homepage">
     <hero
-      data-qa="hero"
+      data-qa="hero banner"
       :slides="slides" />
   </div>
 </template>

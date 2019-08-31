@@ -66,7 +66,6 @@ Then('I wait {int} second(s)', async (seconds) => {
   await client.pause(seconds * 1000)
 })
 
-// Then I see an "alert notification" with the text "Unable to verify customer."
 Then('I see an {string} with the text {string}', async (qa, text) => {
   await client
     .waitForElementVisible(dataQa(qa))
@@ -77,4 +76,10 @@ Then('the lang meta should be {string}', async (text) => {
   await client
     .waitForElementVisible(dataQa('html'))
     .assert.attributeContains(dataQa('html'), 'lang', text)
+})
+
+Then('I should see {string}', async (qa) => {
+  await client
+    .waitForElementVisible(dataQa(qa))
+    .assert.visible(dataQa(qa))
 })

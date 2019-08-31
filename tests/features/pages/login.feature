@@ -7,7 +7,7 @@ Feature: Login page
 
   Scenario: I login in successfully
     Given I visit the "Login page"
-    And I enter email in the email box
+    When I enter email in the email box
     And I enter password in the password box
     And I click the "login button"
     And I wait 3 seconds
@@ -15,7 +15,7 @@ Feature: Login page
   
   Scenario: I login in with wrong email
     Given I visit the "Login page"
-    And I enter "mmonkey@monkey.com" in the "email box"
+    When I enter "mmonkey@monkey.com" in the "email box"
     And I enter password in the password box
     And I click the "login button"
     And I wait 3 seconds
@@ -23,7 +23,7 @@ Feature: Login page
 
   Scenario: I login in with wrong password
     Given I visit the "Login page"
-    And I enter email in the email box
+    When I enter email in the email box
     And I enter "password" in the "password box"
     And I click the "login button"
     And I wait 2 seconds
@@ -31,12 +31,12 @@ Feature: Login page
 
   Scenario: I forgotten my password
     Given I visit the "Login page"
-    And I click the "forgotten password link"
+    When I click the "forgotten password link"
     And I wait 2 seconds
     Then I visit the "forgotten password" page
 
   Scenario: I am a new customer
     Given I visit the "Login page"
-    And I click the "create account now button"
+    When I click the "create account now button"
     And I wait 2 seconds
     Then I visit the "register" page
