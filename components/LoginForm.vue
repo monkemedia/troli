@@ -19,7 +19,8 @@
           :class="{'is-danger': errors.has('email') }"
           class="input"
           name="email"
-          type="text">
+          type="text"
+          data-qa="email box">
         <p
           v-show="errors.has('email')"
           class="help is-danger">

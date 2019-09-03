@@ -1,5 +1,6 @@
 import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
 import { Store } from 'vuex-mock-store'
+import flushPromises from 'flush-promises'
 import Login from '@/components/loginForm.vue'
 
 const localVue = createLocalVue()
@@ -25,13 +26,22 @@ const instance = () => shallowMount(Login, {
 })
 
 describe('components/LoginForm', () => {
-  it('on submit dispatch is called', () => {
+  it('on submit dispatch is called', async () => {
     const wrapper = instance()
     const form = wrapper.find('[data-qa="login form"]')
 
+    wrapper.setData({
+      form: {
+        email: 'test@test.com',
+        password: '1111qqqq'
+      }
+    })
+
     form.trigger('submit.prevent')
 
-    expect(store.dispatch).toHaveBeenCalledWith('customer/login', { 'email': '', 'password': '' })
+    await flushPromises()
+
+    expect(store.dispatch).toHaveBeenCalledWith('customer/login', { 'email': 'test@test.com', 'password': '1111qqqq' })
   })
 
   it('shows the loading spinner when set to true', () => {
@@ -54,7 +64,7 @@ describe('components/LoginForm', () => {
     expect(wrapper.vm.isLoading).toBe(false)
   })
 
-  it('shows a alert notification if there is an error', () => {
+  it('shows an alert notification if there is an error', async () => {
     const wrapper = instance()
 
     wrapper.setData({
@@ -65,6 +75,8 @@ describe('components/LoginForm', () => {
         }
       ]
     })
+
+    await flushPromises()
 
     expect(wrapper.find('[data-qa="alert notification"]').exists()).toBe(true)
   })
@@ -83,7 +95,15 @@ describe('components/LoginForm', () => {
     }))
     const wrapper = instance()
 
+    wrapper.setData({
+      form: {
+        email: 'test@test.com',
+        password: '1111qqqq'
+      }
+    })
+
     await wrapper.vm.login()
+
     expect(wrapper.vm.alert.length).toBe(1)
     expect(wrapper.vm.isLoading).toBe(false)
   })
