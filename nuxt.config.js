@@ -41,10 +41,9 @@ module.exports = {
     '@/assets/scss/main.scss'
   ],
   router: {
-    middleware: 'i18n',
     extendRoutes (routes, resolve) {
       routes.push({
-        name: 'homepage',
+        name: 'home',
         path: '/',
         component: resolve(__dirname, 'pages/index.vue')
       })
@@ -54,12 +53,12 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/moltin.js',
-    '~/plugins/i18n.js'
-    // {
-    //   src: '~/plugins/storyBlok',
-    //   ssr: false
-    // }
+    '~plugins/moltin.js',
+    {
+      src: '~plugins/vee-validate.js',
+      ssr: true
+    },
+    '~plugins/vue-scrollto.js'
   ],
   /*
    ** Nuxt.js dev-modules
@@ -73,13 +72,43 @@ module.exports = {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    ['nuxt-i18n', {
+      detectBrowserLanguage: {
+        useCookie: true,
+        cookieKey: 'i18n_redirected',
+        alwaysRedirect: false
+      }
+    }]
   ],
+  i18n: {
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-GB',
+        name: 'English',
+        file: 'en-GB.json'
+      },
+      {
+        code: 'nl',
+        iso: 'nl-NL',
+        name: 'Netherlands',
+        file: 'nl-NL.json'
+      }
+    ],
+    lazy: true,
+    defaultLocale: 'en',
+    langDir: 'lang/',
+    vueI18n: {
+      fallbackLocale: 'en',
+      silentFallbackWarn: true
+    }
+  },
   /*
    ** Build configuration
    */
   build: {
-    vendor: ['vue-i18n'],
+    vendor: ['vue-i18n', 'vee-validate'],
     postcss: {
       preset: {
         features: {

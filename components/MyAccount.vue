@@ -29,11 +29,11 @@
           class="dropdown__header"
           data-qa="my account dropdown deauthenticated header">
           <span>
-            <nuxt-link to="/login">
+            <nuxt-link :to="localePath('login')">
               {{ $t('my_account_dropdown.sign_in') }}
             </nuxt-link>
             <span class="divider">|</span>
-            <nuxt-link to="/register">
+            <nuxt-link :to="localePath('register')">
               {{ $t('my_account_dropdown.register') }}
             </nuxt-link>
           </span>
@@ -43,7 +43,7 @@
             <nuxt-link
               v-for="(item, index) in items"
               :key="index"
-              :to="item.path">
+              :to="localePath(item.path)">
               <span class="icon">
                 <i :class="item.classes" />
               </span>

@@ -5,6 +5,7 @@ import Login from '@/components/loginForm.vue'
 const localVue = createLocalVue()
 const store = new Store()
 const $router = []
+const $scrollTo = jest.fn()
 
 const instance = () => shallowMount(Login, {
   localVue,
@@ -14,8 +15,13 @@ const instance = () => shallowMount(Login, {
   mocks: {
     $t: () => {},
     $store: store,
-    $router
-  }
+    $router,
+    localePath: code => window.location.href + code
+  },
+  methods: {
+    $scrollTo
+  },
+  sync: false
 })
 
 describe('components/LoginForm', () => {
@@ -52,7 +58,7 @@ describe('components/LoginForm', () => {
     const wrapper = instance()
 
     wrapper.setData({
-      errors: [
+      alert: [
         {
           status: 401,
           detail: 'This is an error'
@@ -78,7 +84,7 @@ describe('components/LoginForm', () => {
     const wrapper = instance()
 
     await wrapper.vm.login()
-    expect(wrapper.vm.errors.length).toBe(1)
+    expect(wrapper.vm.alert.length).toBe(1)
     expect(wrapper.vm.isLoading).toBe(false)
   })
 })

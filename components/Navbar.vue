@@ -8,7 +8,7 @@
       <div class="container">
         <div class="navbar-brand">
           <nuxt-link
-            to="/"
+            :to="localePath('home')"
             class="navbar-item logo"
             data-qa="logo">
             <img src="~assets/images/logo.png" alt="">
@@ -27,11 +27,21 @@
               class="group-links is-flex"
               data-qa="main navigation">
               <nuxt-link
-                v-for="nav in navigation"
-                :key="nav.name"
                 class="navbar-item"
-                :to="nav.path">
-                {{ nav.name }}
+                :to="localePath('home')">
+                {{ $t('navigation.home') }}
+              </nuxt-link>
+
+              <nuxt-link
+                class="navbar-item"
+                :to="localePath('pages')">
+                {{ $t('navigation.pages') }}
+              </nuxt-link>
+
+              <nuxt-link
+                class="navbar-item"
+                :to="localePath('shop')">
+                {{ $t('navigation.shop') }}
               </nuxt-link>
             </div>
 
@@ -59,20 +69,6 @@
 
     data () {
       return {
-        navigation: [
-          {
-            name: this.$t('navigation.home'),
-            path: '/'
-          },
-          {
-            name: this.$t('navigation.pages'),
-            path: '/pages'
-          },
-          {
-            name: this.$t('navigation.shop'),
-            path: '/shop'
-          }
-        ],
         toggleMobileMenu: false
       }
     },

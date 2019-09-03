@@ -28,7 +28,7 @@
                 {{ $t('pages.login.new_customer.paragraph') }}
               </p>
               <nuxt-link
-                to="/register"
+                :to="localePath('register')"
                 class="button is-large is-black"
                 data-qa="create account now button">
                 {{ $t('pages.login.new_customer.button') }}

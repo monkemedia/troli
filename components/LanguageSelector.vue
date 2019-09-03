@@ -24,22 +24,20 @@
       <div
         class="dropdown-content"
         data-qa="language selector list">
-        <button
+        <nuxt-link
           v-for="loc in availableLocales"
           :key="loc.code"
           class="dropdown-item contains-flag"
           :data-qa="loc.name"
-          @click="switchLanguage(loc.code)">
+          :to="switchLocalePath(loc.code)">
           {{ loc.name }}
-        </button>
+        </nuxt-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
-
   export default {
     name: 'LangSelector',
 
@@ -50,10 +48,13 @@
     },
 
     computed: {
-      ...mapGetters({
-        locale: 'locales/getLocale',
-        locales: 'locales/getLocales'
-      }),
+      locale () {
+        return this.$i18n.locale
+      },
+
+      locales () {
+        return this.$i18n.locales
+      },
 
       availableLocales () {
         return this.locales.filter((loc) => {
@@ -74,8 +75,10 @@
 
     methods: {
       switchLanguage (localeCode) {
-        document.cookie = `locale=${localeCode}`
-        location.reload()
+        console.log(localeCode)
+        this.$i18n.setLocaleCookie(localeCode)
+        this.$router.push(this.switchLocalePath(localeCode))
+        // location.reload()
       }
     }
   }

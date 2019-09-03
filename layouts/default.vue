@@ -6,7 +6,6 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
   import Navbar from '~/components/Navbar.vue'
 
   export default {
@@ -17,16 +16,10 @@
     head () {
       return {
         htmlAttrs: {
-          lang: this.locale,
+          lang: this.$i18n.locale,
           'data-qa': 'html'
         }
       }
-    },
-
-    computed: {
-      ...mapGetters({
-        locale: 'locales/getLocale'
-      })
     }
   }
 </script>

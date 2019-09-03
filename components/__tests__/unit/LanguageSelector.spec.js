@@ -1,10 +1,17 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils'
+import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
 import LanguageSelector from '@/components/LanguageSelector.vue'
 const switchLanguage = jest.fn()
 
 const localVue = createLocalVue()
 const instance = () => shallowMount(LanguageSelector, {
   localVue,
+  stubs: {
+    NuxtLink: RouterLinkStub
+  },
+  mocks: {
+    switchLocalePath: code => window.location.href + code
+  },
+  sync: false,
   methods: {
     switchLanguage
   },
@@ -57,13 +64,5 @@ describe('components/LanguageSelector', () => {
     const wrapper = instance()
 
     expect(wrapper.vm.selectedLocale.code).toBe('nl')
-  })
-
-  it('calls `Switch Language` method when clicking on a language selector dropdown button', () => {
-    const wrapper = instance()
-    const button = wrapper.find('[data-qa="English"]')
-
-    button.trigger('click')
-    expect(switchLanguage).toHaveBeenCalled()
   })
 })

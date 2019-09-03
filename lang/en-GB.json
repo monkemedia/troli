@@ -50,5 +50,14 @@
 
             }
         }
+    },
+    "form_errors": {
+        "email": {
+            "required": "Whoops! Email is required",
+            "email": "Whoops! Wrong email format"
+        },
+        "password": {
+            "required": "Whoops! Password is required'"
+        }
     }
 }

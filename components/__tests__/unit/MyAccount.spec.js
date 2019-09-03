@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
 import VueI18n from 'vue-i18n'
 import MyAccount from '@/components/MyAccount.vue'
-import englishLang from '@/locales/en-GB.json'
+import englishLang from '@/lang/en-GB.json'
 
 Vue.use(VueI18n)
 const i18n = new VueI18n({
@@ -18,7 +18,8 @@ const mockStore = {
 }
 const instance = customer => shallowMount(MyAccount, {
   mocks: {
-    $store: mockStore
+    $store: mockStore,
+    localePath: code => window.location.href + code
   },
   localVue,
   i18n,

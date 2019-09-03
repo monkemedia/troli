@@ -11,7 +11,8 @@ const instance = () => shallowMount(Login, {
   },
   mocks: {
     $t: () => {},
-    $router
+    $router,
+    localePath: code => window.location.href + code
   }
 })
 

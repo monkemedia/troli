@@ -9,8 +9,10 @@ const instance = () => shallowMount(Navbar, {
   },
   mocks: {
     $t: () => {},
-    $route: () => {}
-  }
+    $route: () => {},
+    localePath: code => window.location.href + code
+  },
+  sync: false
 })
 
 describe('components/Navbar', () => {
