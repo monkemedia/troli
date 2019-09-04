@@ -105,10 +105,10 @@
           email: {
             required: this.$t('form_errors.email.required'),
             email: this.$t('form_errors.email.email')
+          },
+          password: {
+            required: this.$t('form_errors.password.required')
           }
-        },
-        password: {
-          required: this.$t('form_errors.password.required')
         }
       }
 
