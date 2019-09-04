@@ -37,5 +37,14 @@
             "button": "Maak nu een account aan",
             "success_message": "Please check your email and click on the provided link to reset your password."
         }
+    },
+    "form_errors": {
+        "email": {
+            "required": "Whoops! NL Email is required",
+            "email": "Whoops! NL Wrong email format"
+        },
+        "password": {
+            "required": "Whoops! NL Password is required'"
+        }
     }
 }

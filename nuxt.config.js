@@ -108,7 +108,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    vendor: ['vue-i18n', 'vee-validate'],
+    vendor: ['vee-validate'],
     postcss: {
       preset: {
         features: {

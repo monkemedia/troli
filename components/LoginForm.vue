@@ -23,7 +23,8 @@
           data-qa="email box">
         <p
           v-show="errors.has('email')"
-          class="help is-danger">
+          class="help is-danger"
+          data-qa="email error">
           {{ errors.first('email') }}
         </p>
       </div>
@@ -40,7 +41,8 @@
           data-qa="password box">
         <p
           v-show="errors.has('password')"
-          class="help is-danger">
+          class="help is-danger"
+          data-qa="password error">
           {{ errors.first('password') }}
         </p>
       </div>
@@ -69,25 +71,15 @@
 
 <script>
   import Vue from 'vue'
-  import VeeValidate from 'vee-validate'
+  import VeeValidate, { Validator } from 'vee-validate'
   import { mapActions } from 'vuex'
   import AlertNotification from '~/components/AlertNotification'
 
   Vue.use(VeeValidate)
 
-  // const dictionary = {
-  //   custom: {
-  //     email: {
-  //       required: this.$i18n.t('form_errors.email.required'),
-  //       email: this.$i18n.t('form_errors.email.email')
-  //     },
-  //     password: {
-  //       required: this.$i18n.t('form_errors.password.required')
-  //     }
-  //   }
-  // }
-
-  // VeeValidate.setI18nDriver('custom')// ,dictionary
+  function validatorLocalize (locale, dictionary) {
+    Validator.localize(locale, dictionary)
+  }
 
   export default {
     name: 'LoginForm',
@@ -105,6 +97,22 @@
         isLoading: false,
         alert: null
       }
+    },
+
+    mounted () {
+      const dictionary = {
+        custom: {
+          email: {
+            required: this.$t('form_errors.email.required'),
+            email: this.$t('form_errors.email.email')
+          }
+        },
+        password: {
+          required: this.$t('form_errors.password.required')
+        }
+      }
+
+      validatorLocalize(this.$i18n.locale, dictionary)
     },
 
     methods: {
