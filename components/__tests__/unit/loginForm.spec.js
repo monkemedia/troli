@@ -149,4 +149,15 @@ describe('components/LoginForm', () => {
     await flushPromises()
     expect(passwordError.isVisible()).toBe(true)
   })
+
+  it('hides and spinner and called scrollTo method when validation fails', async () => {
+    const wrapper = instance()
+
+    wrapper.vm.login()
+
+    await flushPromises()
+
+    expect($scrollTo).toBeCalled()
+    expect(wrapper.vm.isLoading).toBe(false)
+  })
 })
