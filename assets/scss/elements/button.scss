@@ -6,19 +6,46 @@
   text-transform: uppercase;
   cursor: pointer;
   width: 100%;
+  background-color: $black;
+  color: $white;
+  font-size: rem(14px);
+  padding: 0 rem(34px);
+  height: rem(50px);
+  line-height: rem(54px);
+  margin-right: 0 !important;
 
-  @include mq($from: tablet) {
-    width: auto;
+  &:hover, &:focus, &:active {
+    color: $white;
   }
-
-  &.is-large {
-    font-size: rem(14px);
-    padding: rem(18px) rem(34px);
-    height: rem(50px);
-    line-height: 1.2;
-  }
-
   &:focus {
     box-shadow: none !important;
   }
+
+  @include mq($from: tablet) {
+    width: auto;
+    margin-right: rem(8px) !important;
+  }
+
+  &--flip {
+    overflow: hidden;
+
+    span {
+      position: relative;
+      transition: all .25s cubic-bezier(.4,.01,.1,1);
+
+      &:before {
+        content: attr(data-text);
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        left: 0;
+      }
+    }
+
+    &:hover {
+      span {
+        transform: translateY(-100%);
+      }
+    }
+  } 
 }

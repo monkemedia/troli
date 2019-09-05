@@ -58,7 +58,8 @@ module.exports = {
       src: '~plugins/vee-validate.js',
       ssr: true
     },
-    '~plugins/vue-scrollto.js'
+    '~plugins/vue-scrollto.js',
+    '~plugins/global.js'
   ],
   /*
    ** Nuxt.js dev-modules
