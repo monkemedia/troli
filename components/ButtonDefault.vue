@@ -1,6 +1,5 @@
 <template>
   <button
-    v-if="!isLink"
     class="button"
     :class="{ 'button--flip' : isFlip }">
     <span :data-text="text">

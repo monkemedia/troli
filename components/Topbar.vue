@@ -2,7 +2,7 @@
   <div id="topbar">
     <div class="container">
       <div class="topbar-container">
-        <lang-selector />
+        <lang-selector data-qa="language selector" />
       </div>
     </div>
   </div>
