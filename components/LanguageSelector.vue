@@ -71,15 +71,6 @@
       getFlag () {
         return `/flags/${this.selectedLocale.code}.svg`
       }
-    },
-
-    methods: {
-      switchLanguage (localeCode) {
-        console.log(localeCode)
-        this.$i18n.setLocaleCookie(localeCode)
-        this.$router.push(this.switchLocalePath(localeCode))
-        // location.reload()
-      }
     }
   }
 </script>

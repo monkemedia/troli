@@ -27,12 +27,11 @@
               <p>
                 {{ $t('pages.login.new_customer.paragraph') }}
               </p>
-              <nuxt-link
+              <link-default
                 :to="localePath('register')"
-                class="button is-large is-black"
-                data-qa="create account now button">
-                {{ $t('pages.login.new_customer.button') }}
-              </nuxt-link>
+                :text="$t('pages.login.new_customer.button')"
+                is-flip
+                data-qa="create account now button" />
             </div>
           </div>
         </div>

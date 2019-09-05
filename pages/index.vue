@@ -30,7 +30,7 @@
             link: {
               name: 'Shop now',
               path: '/',
-              classes: 'button is-large is-primary'
+              classes: 'is-primary'
             }
           },
           {
@@ -40,15 +40,15 @@
               tagline: 'Limited product',
               title: 'Rockstar collection'
             }
-          },
-          {
-            id: 3,
-            image: 'https://cdn.pixabay.com/photo/2015/03/26/10/38/girl-691712_960_720.jpg',
-            content: {
-              tagline: 'Limited product',
-              title: 'Rockstar collection'
-            }
           }
+          // {
+          //   id: 3,
+          //   image: 'https://cdn.pixabay.com/photo/2015/03/26/10/38/girl-691712_960_720.jpg',
+          //   content: {
+          //     tagline: 'Limited product',
+          //     title: 'Rockstar collection'
+          //   }
+          // }
         ]
       }
     }

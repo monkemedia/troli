@@ -16,16 +16,19 @@
           <h1 class="title">
             {{ slide.content.title }}
           </h1>
-          <nuxt-link
+          <link-default
             v-if="slide.link"
-            :to="slide.link.path"
-            :class="slide.link.classes">
-            {{ slide.link.name }}
-          </nuxt-link>
+            :to="localePath(slide.link.path)"
+            :text="slide.link.name"
+            :class="slide.link.classes"
+            is-flip
+            type="submit" />
         </div>
       </div>
     </div>
-    <div class="carousel-control-prev is-hidden-mobile">
+    <div
+      v-if="slides.length > 1"
+      class="carousel-control-prev is-hidden-mobile">
       <button
         :class="{ 'is-active' : activeImage > 0 }"
         class="test"
@@ -34,7 +37,9 @@
         Prev
       </button>
     </div>
-    <div class="carousel-control-next is-hidden-mobile">
+    <div
+      v-if="slides.length > 1"
+      class="carousel-control-next is-hidden-mobile">
       <button
         :class="{ 'is-active' : activeImage + 1 < slides.length }"
         data-qa="hero next button"
@@ -42,7 +47,9 @@
         Next
       </button>
     </div>
-    <ol class="carousel-indicators">
+    <ol
+      v-if="slides.length > 1"
+      class="carousel-indicators">
       <li
         v-for="(slide, index) in slides.length"
         :key="index"
@@ -140,6 +147,7 @@
     &--active {
       transition: all 0.8s !important;
       opacity: 1 !important;
+      z-index: 1;
     }
   }
 
@@ -150,6 +158,7 @@
     bottom: 0;
     display: flex;
     align-items: center;
+    z-index: 2;
 
     button {
       background: transparent;
@@ -196,6 +205,7 @@
     display: flex;
     justify-content: center;
     list-style: none;
+    z-index: 2;
 
     li {
       flex: 0 1 auto;

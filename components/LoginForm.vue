@@ -49,13 +49,12 @@
     </div>
     <div class="field">
       <div class="control buttons">
-        <button
+        <button-default
+          :text="$t('pages.login.returning_customer.button')"
           :class="{ 'is-loading' : isLoading }"
-          class="button is-large is-black login-button"
+          is-flip
           data-qa="login button"
-          type="submit">
-          {{ $t('pages.login.returning_customer.button') }}
-        </button>
+          type="submit" />
         <div class="forgotten-password">
           <nuxt-link
             :to="localePath('forgotten-password')"
@@ -150,13 +149,13 @@
   @import '~sass-mq';
   @import '~assets/scss/utilities/variables';
 
-  .login-button {
-    margin-bottom: 0;
+  button {
+    margin-bottom: 0 !important;
   }
 
   .forgotten-password {
     justify-content: center;
-    padding: rem(20px);
+    padding: 0 rem(20px);
     display: flex;
     width: 100%;
 
