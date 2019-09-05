@@ -1,11 +1,19 @@
 import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
 import Hero from '@/components/Hero.vue'
+import LinkDefault from '@/components/LinkDefault.vue'
 
 const localVue = createLocalVue()
+
+localVue.component('link-default', LinkDefault)
+
 const instance = () => shallowMount(Hero, {
   localVue,
   stubs: {
-    NuxtLink: RouterLinkStub
+    NuxtLink: RouterLinkStub,
+    LinkDefault: true
+  },
+  mocks: {
+    localePath: code => window.location.href + code
   },
   propsData: {
     slides: [
@@ -72,13 +80,6 @@ describe('components/Hero', () => {
     const tagline = wrapper.find('[data-qa="hero slide 1"] .title')
 
     expect(tagline.text()).toEqual('This is a title')
-  })
-
-  it('has a button', () => {
-    const wrapper = instance()
-    const button = wrapper.find('[data-qa="hero slide 1"] .btn')
-
-    expect(button.text()).toEqual('Button')
   })
 
   it('slides to the previous slide when clicking on the `previous` button', () => {

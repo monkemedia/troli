@@ -7,11 +7,10 @@ import 'bulma'
 import '../assets/scss/main.scss'
 
 // Components
-import LangSelector from '../components/LanguageSelector.vue'
+// import B from '../components/LanguageSelector.vue'
 
-Vue.use(Vuex)
 
-Vue.component('lang-selector', LangSelector)
+// Vue.component('lang-selector', LangSelector)
 
 const req = require.context('../components/stories', true, /.stories.js$/);
 

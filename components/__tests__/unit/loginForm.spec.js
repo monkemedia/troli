@@ -2,16 +2,20 @@ import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
 import { Store } from 'vuex-mock-store'
 import flushPromises from 'flush-promises'
 import Login from '@/components/loginForm.vue'
+import ButtonDefault from '@/components/ButtonDefault.vue'
 
 const localVue = createLocalVue()
 const store = new Store()
 const $router = []
 const $scrollTo = jest.fn()
 
+localVue.component('button-default', ButtonDefault)
+
 const instance = () => shallowMount(Login, {
   localVue,
   stubs: {
-    NuxtLink: RouterLinkStub
+    NuxtLink: RouterLinkStub,
+    ButtonDefault: true
   },
   mocks: {
     $t: () => {},

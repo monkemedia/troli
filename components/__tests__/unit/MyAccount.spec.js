@@ -3,6 +3,7 @@ import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
 import VueI18n from 'vue-i18n'
 import MyAccount from '@/components/MyAccount.vue'
 import englishLang from '@/lang/en-GB.json'
+import LinkDefault from '@/components/LinkDefault.vue'
 
 Vue.use(VueI18n)
 const i18n = new VueI18n({
@@ -16,6 +17,9 @@ const localVue = createLocalVue()
 const mockStore = {
   dispatch: jest.fn()
 }
+
+localVue.component('link-default', LinkDefault)
+
 const instance = customer => shallowMount(MyAccount, {
   mocks: {
     $store: mockStore,
@@ -24,7 +28,8 @@ const instance = customer => shallowMount(MyAccount, {
   localVue,
   i18n,
   stubs: {
-    NuxtLink: RouterLinkStub
+    NuxtLink: RouterLinkStub,
+    LinkDefault: true
   },
   computed: {
     customerDetails: () => {

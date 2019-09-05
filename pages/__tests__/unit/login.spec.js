@@ -1,13 +1,17 @@
 import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
 import Login from '@/pages/login.vue'
+import LinkDefault from '@/components/LinkDefault.vue'
 
 const localVue = createLocalVue()
 const $router = []
 
+localVue.component('link-default', LinkDefault)
+
 const instance = () => shallowMount(Login, {
   localVue,
   stubs: {
-    NuxtLink: RouterLinkStub
+    NuxtLink: RouterLinkStub,
+    LinkDefault: true
   },
   mocks: {
     $t: () => {},
