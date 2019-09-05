@@ -10,9 +10,7 @@ const instance = () => shallowMount(LinkDefault, {
   },
   propsData: {
     text: 'Button',
-    to: {
-      to: '/'
-    }
+    to: '/'
   }
 })
 
@@ -26,6 +24,6 @@ describe('components/LinkDefault', () => {
   it('has the correct to prop', () => {
     const wrapper = instance()
 
-    expect(wrapper.vm.to.to).toBe('/')
+    expect(wrapper.vm.to).toBe('/')
   })
 })
