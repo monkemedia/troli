@@ -11,7 +11,6 @@
   font-size: rem(14px);
   padding: 0 rem(34px);
   height: rem(50px);
-  line-height: rem(54px);
   margin-right: 0 !important;
 
   &:hover, &:focus, &:active {
@@ -32,6 +31,8 @@
     span {
       position: relative;
       transition: all .25s cubic-bezier(.4,.01,.1,1);
+      padding: rem(18px) 0;
+      line-height: .8;
 
       &:before {
         content: attr(data-text);
@@ -39,6 +40,7 @@
         top: 100%;
         width: 100%;
         left: 0;
+        padding: rem(18px) 0;
       }
     }
 

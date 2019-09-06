@@ -1,6 +1,6 @@
 <template>
   <nuxt-link
-    :to="to"
+    :to="localePath(to)"
     class="button"
     :class="{ 'button--flip' : isFlip }">
     <span :data-text="text">

@@ -18,7 +18,7 @@
           </h1>
           <link-default
             v-if="slide.link"
-            :to="localePath(slide.link.path)"
+            :to="slide.link.path"
             :text="slide.link.name"
             :class="slide.link.classes"
             is-flip

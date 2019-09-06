@@ -1,19 +1,8 @@
-<template>
-  <div
-    id="homepage"
-    data-qa="homepage">
-    <hero
-      data-qa="hero banner"
-      :slides="slides" />
-  </div>
-</template>
+import { storiesOf } from '@storybook/vue'
+import Hero from '../Hero.vue'
 
-<script>
-  import Hero from '~/components/Hero'
-
-  export default {
-    name: 'Homepage',
-
+storiesOf('Hero', module)
+  .add('Primary', () => ({
     components: {
       Hero
     },
@@ -29,7 +18,7 @@
             },
             link: {
               name: 'Shop now',
-              path: 'login',
+              path: '/',
               classes: 'is-primary'
             }
           },
@@ -51,6 +40,15 @@
           }
         ]
       }
-    }
-  }
-</script>
+    },
+    // methods: {
+    //   localePath () {}
+    // },
+    template: `
+      <div class="section">
+        <div class="container">
+          <hero :slides="slides" />
+        </div>
+      </div>
+    `
+  }))
