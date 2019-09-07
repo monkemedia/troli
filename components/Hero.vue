@@ -58,6 +58,9 @@
           data-qa="hero indicator controls"
           :class="{ 'is-active' : activeImage === index }"
           @click="goToImage(index)">
+          <span class="is-sr-only">
+            Go to slide {{ index + 1 }}
+          </span>
           <span />
         </button>
       </li>
@@ -133,6 +136,7 @@
   .hero {
     position: relative;
     height: 100vh;
+    background: $grey-dark;
     // height: 950px;
   }
 
@@ -253,9 +257,9 @@
       }
     }
 
-    .tagline {
-      font-size: rem(18px);
-      color: $white;
+    p.tagline {
+      font-size: rem(18px) !important;
+      color: $white !important;
       letter-spacing: rem(3.2px);
       display: block;
       text-align: center;
@@ -267,7 +271,7 @@
     }
 
     .title {
-      font-size: rem(45px);
+      font-size: rem(45px) !important;
       color: $white;
       text-transform: uppercase;
       display: block;

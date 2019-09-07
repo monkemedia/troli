@@ -1,6 +1,8 @@
 <template>
   <form
     data-qa="login form"
+    role="form"
+    aria-label="Login form"
     @submit.prevent="login">
     <alert-notification
       v-if="alert"
@@ -11,11 +13,16 @@
     </h2>
     <p>{{ $t('pages.login.returning_customer.paragraph') }}</p>
     <div class="field">
-      <label class="label">{{ $t('pages.login.returning_customer.label') }}<sup>*</sup></label>
+      <label
+        class="label"
+        aria-label=""
+        for="email">{{ $t('pages.login.returning_customer.label') }}<sup>*</sup></label>
       <div class="control">
         <input
+          id="email"
           v-model="form.email"
           v-validate="'required|email'"
+          aria-required="true"
           :class="{'is-danger': errors.has('email') }"
           class="input"
           name="email"
@@ -23,6 +30,8 @@
           data-qa="email box">
         <p
           v-show="errors.has('email')"
+          role="alert"
+          aria-invalid="true"
           class="help is-danger"
           data-qa="email error">
           {{ errors.first('email') }}
@@ -35,12 +44,15 @@
         <input
           v-model="form.password"
           v-validate="'required'"
+          aria-required="true"
           class="input"
           name="password"
           type="password"
           data-qa="password box">
         <p
           v-show="errors.has('password')"
+          role="alert"
+          aria-invalid="true"
           class="help is-danger"
           data-qa="password error">
           {{ errors.first('password') }}

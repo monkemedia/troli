@@ -2,6 +2,7 @@
   <div
     role="alert"
     class="notification is-flex"
+    :aria-invalid="notificationType === 'error'"
     :class="{
       'is-danger' : notificationType === 'error',
       'is-success' : notificationType === 'success'}">

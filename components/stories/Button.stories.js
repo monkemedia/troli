@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/vue'
 import ButtonDefault from '../ButtonDefault.vue'
 
-storiesOf('Buttons', module)
+storiesOf('Button', module)
   .add('Primary', () => ({
     components: {
       ButtonDefault
