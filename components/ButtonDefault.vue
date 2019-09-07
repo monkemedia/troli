@@ -1,6 +1,7 @@
 <template>
   <button
     class="button"
+    role="button"
     :class="{ 'button--flip' : isFlip }">
     <span :data-text="text">
       {{ text }}

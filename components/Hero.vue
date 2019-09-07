@@ -4,6 +4,8 @@
     <div
       v-for="(slide, index) in slides"
       :key="slide.id"
+      :aria-hidden="activeImage !== index"
+      role="tabpanel"
       class="carousel-item"
       :class="{ 'carousel-item--active' : activeImage === index }"
       :style="`background-image: url(${slide.image});`"
@@ -31,6 +33,7 @@
       class="carousel-control-prev is-hidden-mobile">
       <button
         :class="{ 'is-active' : activeImage > 0 }"
+        role="button"
         class="test"
         data-qa="hero previous button"
         @click="prevImage()">
@@ -42,6 +45,7 @@
       class="carousel-control-next is-hidden-mobile">
       <button
         :class="{ 'is-active' : activeImage + 1 < slides.length }"
+        role="button"
         data-qa="hero next button"
         @click="nextImage()">
         Next
@@ -49,13 +53,17 @@
     </div>
     <ol
       v-if="slides.length > 1"
-      class="carousel-indicators">
+      class="carousel-indicators"
+      role="tablist">
       <li
         v-for="(slide, index) in slides.length"
         :key="index"
+        role="tab"
+        :aria-selected="activeImage === index"
         :data-slide-to="index">
         <button
           data-qa="hero indicator controls"
+          role="button"
           :class="{ 'is-active' : activeImage === index }"
           @click="goToImage(index)">
           <span class="is-sr-only">

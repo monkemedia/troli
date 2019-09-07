@@ -27,6 +27,7 @@
         <nuxt-link
           v-for="loc in availableLocales"
           :key="loc.code"
+          role="option"
           class="dropdown-item contains-flag"
           :data-qa="loc.name"
           :to="switchLocalePath(loc.code)">
