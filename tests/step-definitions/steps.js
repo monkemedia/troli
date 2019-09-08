@@ -38,13 +38,13 @@ Then('I enter {string} in the {string}', async (text, qa) => {
     .setValue(dataQa(qa), text)
 })
 
-Then('I enter email in the email box', async () => {
+Then('I enter correct email in the email box', async () => {
   await client
     .waitForElementVisible(dataQa('email box'))
     .setValue(dataQa('email box'), email)
 })
 
-Then('I enter password in the password box', async () => {
+Then('I enter correct password in the password box', async () => {
   await client
     .waitForElementVisible(dataQa('password box'))
     .setValue(dataQa('password box'), password)
@@ -70,6 +70,11 @@ Then('I see an {string} with the text {string}', async (qa, text) => {
   await client
     .waitForElementVisible(dataQa(qa))
     .assert.containsText(dataQa(qa), text)
+})
+
+Then('I see an {string}', async (qa) => {
+  await client
+    .waitForElementVisible(dataQa(qa))
 })
 
 Then('the lang meta should be {string}', async (text) => {

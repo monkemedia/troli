@@ -14,14 +14,14 @@
         class="input"
         :name="id"
         :type="type"
-        data-qa="input"
-        @change="onInput">
+        :data-qa="dataQa"
+        @input="onInput">
       <p
         v-show="error"
         role="alert"
         aria-invalid="true"
         class="help is-danger"
-        data-qa="error">
+        :data-qa="`${id} error`">
         {{ error }}
       </p>
     </div>
@@ -42,6 +42,12 @@
     },
 
     props: {
+      // value: {
+      //   type: String,
+      //   required: false,
+      //   default: () => ''
+      // },
+
       hideLabel: {
         type: Boolean,
         required: false,
@@ -74,6 +80,11 @@
         type: String,
         required: false,
         default: () => ''
+      },
+
+      dataQa: {
+        type: String,
+        required: true
       }
     },
 

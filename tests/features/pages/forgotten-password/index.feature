@@ -17,4 +17,4 @@ Feature: Forgotten password page
     When I enter "" in the "email box"
     And I click the "send reset password button"
     And I wait 2 seconds
-    Then I see an "alert notification" with the text "Email address is required."
+    Then I see an "email error"

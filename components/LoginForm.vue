@@ -119,7 +119,7 @@
         try {
           await this.loginForm(this.form)
           this.isLoading = false
-          // this.$router.push(this.localePath({ name: 'home' }))
+          this.$router.push(this.localePath({ name: 'home' }))
         } catch (err) {
           this.alert = err.response.data
           this.isLoading = false
