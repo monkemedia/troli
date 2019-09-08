@@ -11,6 +11,9 @@ const instance = () => shallowMount(LinkDefault, {
   propsData: {
     text: 'Button',
     to: '/'
+  },
+  mocks: {
+    localePath: code => window.location.href + code
   }
 })
 

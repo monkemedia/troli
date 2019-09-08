@@ -1,30 +1,39 @@
+import Vue from 'vue'
+import VueI18n from 'vue-i18n'
 import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
 import { Store } from 'vuex-mock-store'
 import flushPromises from 'flush-promises'
 import Login from '@/components/loginForm.vue'
 import ButtonDefault from '@/components/ButtonDefault.vue'
+import englishLang from '@/lang/en-GB.json'
 
 const localVue = createLocalVue()
 const store = new Store()
 const $router = []
 const $scrollTo = jest.fn()
 
+Vue.use(VueI18n)
+const i18n = new VueI18n({
+  locale: 'en',
+  fallbackLocale: 'en',
+  messages: {
+    en: englishLang
+  }
+})
+
 localVue.component('button-default', ButtonDefault)
 
 const instance = () => shallowMount(Login, {
   localVue,
+  i18n,
   stubs: {
     NuxtLink: RouterLinkStub,
     ButtonDefault: true
   },
   mocks: {
-    $t: () => {},
     $store: store,
     $router,
-    localePath: code => window.location.href + code,
-    $i18n: {
-      locale: 'en'
-    }
+    localePath: code => window.location.href + code
   },
   methods: {
     $scrollTo
@@ -113,41 +122,6 @@ describe('components/LoginForm', () => {
 
     expect(wrapper.vm.alert.length).toBe(1)
     expect(wrapper.vm.isLoading).toBe(false)
-  })
-
-  it('shows an error if email box is left empty', async () => {
-    const wrapper = instance()
-    const emailBox = wrapper.find('[data-qa="email box"]')
-    const emailError = wrapper.find('[data-qa="email error"]')
-
-    emailBox.trigger('blur')
-
-    await flushPromises()
-    expect(emailError.isVisible()).toBe(true)
-  })
-
-  it('shows an error if email address is wrong', async () => {
-    const wrapper = instance()
-    const emailBox = wrapper.find('[data-qa="email box"]')
-    const emailError = wrapper.find('[data-qa="email error"]')
-
-    emailBox.setValue('test&test.com')
-
-    emailBox.trigger('blur')
-
-    await flushPromises()
-    expect(emailError.isVisible()).toBe(true)
-  })
-
-  it('shows an error if password box is left empty', async () => {
-    const wrapper = instance()
-    const passwordBox = wrapper.find('[data-qa="password box"]')
-    const passwordError = wrapper.find('[data-qa="password error"]')
-
-    passwordBox.trigger('blur')
-
-    await flushPromises()
-    expect(passwordError.isVisible()).toBe(true)
   })
 
   it('hides and spinner and called scrollTo method when validation fails', async () => {

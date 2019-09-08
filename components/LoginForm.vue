@@ -16,17 +16,17 @@
       id="email"
       v-model="form.email"
       v-validate="'required|email'"
-      label="pages.login.returning_customer.label"
+      :label="$t('pages.login.returning_customer.label')"
       type="email"
       data-qa="email box"
-      :is-required="true"
+      is-required
       :error="errors.first('email')" />
 
     <custom-input
       id="password"
       v-model="form.password"
       v-validate="'required'"
-      label="pages.login.returning_customer.password"
+      :label="$t('pages.login.returning_customer.password')"
       is-required
       type="password"
       data-qa="password box"
