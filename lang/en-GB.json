@@ -58,6 +58,9 @@
         },
         "password": {
             "required": "Whoops! Password is required'"
+        },
+        "confirm_password": {
+            "required": "Whoops! Confirm password is required"
         }
     }
 }

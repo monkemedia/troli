@@ -5,17 +5,16 @@
       v-if="alert"
       :alert="alert"
       data-qa="alert notification" />
-    <div v-if="!success" class="field">
-      <custom-input
-        id="email"
-        v-model="form.email"
-        v-validate="'required|email'"
-        :label="$t('pages.forgotten_password.label')"
-        is-required
-        type="text"
-        data-qa="email box"
-        :error="errors.first('email')" />
-    </div>
+    <custom-input
+      v-if="!success"
+      id="email"
+      v-model="form.email"
+      v-validate="'required|email'"
+      :label="$t('pages.forgotten_password.label')"
+      is-required
+      type="text"
+      data-qa="email box"
+      :error="errors.first('email')" />
     <div v-if="!success" class="field">
       <div class="control">
         <button-default
