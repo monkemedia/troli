@@ -12,53 +12,25 @@
       {{ $t('pages.login.returning_customer.title') }}
     </h2>
     <p>{{ $t('pages.login.returning_customer.paragraph') }}</p>
-    <div class="field">
-      <label
-        class="label"
-        aria-label=""
-        for="email">{{ $t('pages.login.returning_customer.label') }}<sup>*</sup></label>
-      <div class="control">
-        <input
-          id="email"
-          v-model="form.email"
-          v-validate="'required|email'"
-          aria-required="true"
-          :class="{'is-danger': errors.has('email') }"
-          class="input"
-          name="email"
-          type="text"
-          data-qa="email box">
-        <p
-          v-show="errors.has('email')"
-          role="alert"
-          aria-invalid="true"
-          class="help is-danger"
-          data-qa="email error">
-          {{ errors.first('email') }}
-        </p>
-      </div>
-    </div>
-    <div class="field">
-      <label class="label">{{ $t('pages.login.returning_customer.password') }}<sup>*</sup></label>
-      <div class="control">
-        <input
-          v-model="form.password"
-          v-validate="'required'"
-          aria-required="true"
-          class="input"
-          name="password"
-          type="password"
-          data-qa="password box">
-        <p
-          v-show="errors.has('password')"
-          role="alert"
-          aria-invalid="true"
-          class="help is-danger"
-          data-qa="password error">
-          {{ errors.first('password') }}
-        </p>
-      </div>
-    </div>
+    <custom-input
+      id="email"
+      v-model="form.email"
+      v-validate="'required|email'"
+      label="pages.login.returning_customer.label"
+      type="email"
+      data-qa="email box"
+      :is-required="true"
+      :error="errors.first('email')" />
+
+    <custom-input
+      id="password"
+      v-model="form.password"
+      v-validate="'required'"
+      label="pages.login.returning_customer.password"
+      is-required
+      type="password"
+      data-qa="password box"
+      :error="errors.first('password')" />
     <div class="field">
       <div class="control buttons">
         <button-default
@@ -84,6 +56,7 @@
   import Vue from 'vue'
   import VeeValidate, { Validator } from 'vee-validate'
   import { mapActions } from 'vuex'
+  import CustomInput from '~/components/CustomInput'
   import AlertNotification from '~/components/AlertNotification'
 
   Vue.use(VeeValidate)
@@ -96,6 +69,7 @@
     name: 'LoginForm',
 
     components: {
+      CustomInput,
       AlertNotification
     },
 
@@ -145,7 +119,7 @@
         try {
           await this.loginForm(this.form)
           this.isLoading = false
-          this.$router.push({ name: 'homepage' })
+          // this.$router.push(this.localePath({ name: 'home' }))
         } catch (err) {
           this.alert = err.response.data
           this.isLoading = false
