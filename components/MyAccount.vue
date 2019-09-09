@@ -10,7 +10,9 @@
         <i class="fa fa-user" />
       </span>
     </button>
-    <div id="myaccount-dropdown">
+    <div
+      id="myaccount-dropdown"
+      :class="{ 'is-active': isActive }">
       <div class="dropdown">
         <header
           v-if="isAuthenticated"
@@ -143,6 +145,11 @@
     position: absolute;
     left: rem(-50px);
     width: 325px;
+    pointer-events: none;
+
+    &.is-active {
+      pointer-events: auto;
+    }
   }
 
   .dropdown {
