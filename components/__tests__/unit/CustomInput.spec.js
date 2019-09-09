@@ -81,7 +81,7 @@ describe('components/CustomInput', () => {
     expect(wrapper.vm.error).toEqual('Whoops! Email address is required')
   })
 
-  it('emits input value on @input event', async () => {
+  it('emits input value on @input event', () => {
     const wrapper = instance()
     const id = wrapper.vm.id
     const input = wrapper.find(`[data-qa="${id} box"]`)

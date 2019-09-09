@@ -17,7 +17,7 @@
         :data-qa="dataQa"
         @input="onInput">
       <p
-        v-show="error"
+        v-if="error"
         role="alert"
         aria-invalid="true"
         class="help is-danger"
