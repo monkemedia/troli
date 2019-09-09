@@ -1,0 +1,139 @@
+<template>
+  <form @submit.prevent="submitPassword">
+    <alert-notification
+      v-if="alert"
+      :alert="alert"
+      data-qa="alert notification" />
+
+    <p>
+      {{ $t('pages.register.paragraph') }}
+    </p>
+
+    <custom-input
+      id="first_name"
+      v-model="form.first_name"
+      v-validate="'required'"
+      :label="$t('pages.register.first_name')"
+      is-required
+      type="text"
+      data-qa="first name box"
+      :error="errors.first('first_name')" />
+
+    <custom-input
+      id="last_name"
+      v-model="form.last_name"
+      v-validate="'required'"
+      :label="$t('pages.register.last_name')"
+      is-required
+      type="text"
+      data-qa="last name box"
+      :error="errors.first('last_name')" />
+
+    <custom-input
+      id="email"
+      v-model="form.email"
+      v-validate="'required'"
+      :label="$t('pages.register.email')"
+      is-required
+      type="text"
+      data-qa="email box"
+      :error="errors.first('email')" />
+
+    <custom-input
+      id="password"
+      v-model="form.password"
+      v-validate="'required'"
+      :label="$t('pages.register.password')"
+      is-required
+      type="text"
+      data-qa="password box"
+      :error="errors.first('password')" />
+
+    <custom-input
+      id="confirm_password"
+      v-model="form.confirm_password"
+      v-validate="'required'"
+      :label="$t('pages.register.confirm_password')"
+      is-required
+      type="text"
+      data-qa="confirm password box"
+      :error="errors.first('confirm_password')" />
+
+    <div class="field">
+      <div class="control">
+        <button-default
+          :text="$t('pages.reset_password.button')"
+          :class="{ 'is-loading' : isLoading }"
+          is-flip
+          data-qa="reset password button"
+          type="submit" />
+      </div>
+    </div>
+  </form>
+</template>
+
+<script>
+  import Vue from 'vue'
+  import VeeValidate, { Validator } from 'vee-validate'
+  import CustomInput from '~/components/CustomInput'
+
+  Vue.use(VeeValidate)
+
+  function validatorLocalize (locale, dictionary) {
+    Validator.localize(locale, dictionary)
+  }
+
+  export default {
+    name: 'RegisterForm',
+
+    components: {
+      CustomInput
+    },
+
+    data () {
+      return {
+        form: {
+          first_name: null,
+          last_name: null,
+          email: null,
+          password: null,
+          password_confirm: null
+        },
+        isLoading: false
+      }
+    },
+
+    mounted () {
+      const dictionary = {
+        custom: {
+          first_name: {
+            required: this.$t('form_errors.first_name.required')
+          },
+          last_name: {
+            required: this.$t('form_errors.last_name.required')
+          },
+          password: {
+            required: this.$t('form_errors.password.required')
+          },
+          confirm_password: {
+            required: this.$t('form_errors.confirm_password.required')
+          }
+        }
+      }
+
+      validatorLocalize(this.$i18n.locale, dictionary)
+    },
+
+    methods: {
+      async register () {
+        // let response
+
+        this.isLoading = true
+
+        const validate = await this.$validator.validateAll()
+
+        if (!validate) {}
+      }
+    }
+  }
+</script>

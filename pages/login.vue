@@ -4,7 +4,7 @@
     data-qa="login page">
     <div class="banner" />
 
-    <section id="register" class="section">
+    <section class="section">
       <div class="container">
         <div class="columns">
           <div class="column">

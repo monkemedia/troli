@@ -4,25 +4,19 @@
     data-qa="register">
     <div class="banner" />
 
-    <section id="register" class="section">
+    <section class="section">
       <div class="container">
-        <div class="columns">
-          <div class="column is-6">
-            <form>
-              <div class="field">
-                <label class="label">Name</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="Text input">
-                </div>
-              </div>
-              <div class="field">
-                <div class="control">
-                  <button class="button is-large is-black">
-                    register
-                  </button>
-                </div>
-              </div>
-            </form>
+        <div class="columns is-centered">
+          <div class="column is-5">
+            <h1 class="title">
+              {{ $t('pages.register.title') }}
+            </h1>
+            <hr class="mb-0">
+          </div>
+        </div>
+        <div class="columns is-centered">
+          <div class="column is-5">
+            <register-form data-qa="register form" />
           </div>
         </div>
       </div>
@@ -31,8 +25,14 @@
 </template>
 
 <script>
+  import RegisterForm from '~/components/RegisterForm'
+
   export default {
-    name: 'Register'
+    name: 'Register',
+
+    components: {
+      RegisterForm
+    }
   }
 </script>
 
