@@ -70,7 +70,8 @@
             "required": "Whoops! Password is required'"
         },
         "confirm_password": {
-            "required": "Whoops! Confirm password is required"
+            "required": "Whoops! Confirm password is required",
+            "confirmed": "Whoops! Passwords do not match"
         },
         "first_name": {
             "required": "Whoops! First name is required"

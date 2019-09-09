@@ -56,7 +56,7 @@
     <custom-input
       id="confirm_password"
       v-model="form.confirm_password"
-      v-validate="'required'"
+      v-validate="'required|confirmed:password'"
       :label="$t('pages.register.confirm_password')"
       is-required
       type="password"
@@ -124,7 +124,8 @@
             required: this.$t('form_errors.password.required')
           },
           confirm_password: {
-            required: this.$t('form_errors.confirm_password.required')
+            required: this.$t('form_errors.confirm_password.required'),
+            confirmed: this.$t('form_errors.confirm_password.confirmed')
           }
         }
       }
