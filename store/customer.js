@@ -132,13 +132,12 @@ const actions = {
     dispatch('setCustomerDetails', customerDetails)
   },
 
-  // register ({ dispatch }, data) {
-  //   // If vendor equals true, we create a shop for them
-  //   return dispatch('shop/createShop', data, { root: true })
-  //     .then((shopId) => {
-  //       return api.auth.register({ ...data, shop_id: shopId.data.shop._id })
-  //     })
-  // },
+  async register ({ dispatch }, data) {
+    console.log('data', data)
+    const registerCustomer = await this.$axios.$post('/api/v1/register', data)
+
+    console.log('REGISTERED', registerCustomer)
+  },
 
   logout ({ dispatch, commit }, req) {
     commit('CLEAR_TOKEN')

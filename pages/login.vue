@@ -28,7 +28,7 @@
                 {{ $t('pages.login.new_customer.paragraph') }}
               </p>
               <link-default
-                :to="localePath('register')"
+                to="register"
                 :text="$t('pages.login.new_customer.button')"
                 is-flip
                 data-qa="create account now button" />

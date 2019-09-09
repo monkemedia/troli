@@ -1,5 +1,9 @@
 <template>
-  <form @submit.prevent="submitPassword">
+  <form
+    data-qa="register form"
+    role="form"
+    aria-label="register form"
+    @submit.prevent="registerCustomer">
     <alert-notification
       v-if="alert"
       :alert="alert"
@@ -35,7 +39,7 @@
       v-validate="'required'"
       :label="$t('pages.register.email')"
       is-required
-      type="text"
+      type="email"
       data-qa="email box"
       :error="errors.first('email')" />
 
@@ -45,7 +49,7 @@
       v-validate="'required'"
       :label="$t('pages.register.password')"
       is-required
-      type="text"
+      type="password"
       data-qa="password box"
       :error="errors.first('password')" />
 
@@ -55,14 +59,14 @@
       v-validate="'required'"
       :label="$t('pages.register.confirm_password')"
       is-required
-      type="text"
+      type="password"
       data-qa="confirm password box"
       :error="errors.first('confirm_password')" />
 
     <div class="field">
       <div class="control">
         <button-default
-          :text="$t('pages.reset_password.button')"
+          :text="$t('pages.register.button')"
           :class="{ 'is-loading' : isLoading }"
           is-flip
           data-qa="reset password button"
@@ -75,7 +79,9 @@
 <script>
   import Vue from 'vue'
   import VeeValidate, { Validator } from 'vee-validate'
+  import { mapActions } from 'vuex'
   import CustomInput from '~/components/CustomInput'
+  import AlertNotification from '~/components/AlertNotification'
 
   Vue.use(VeeValidate)
 
@@ -87,7 +93,8 @@
     name: 'RegisterForm',
 
     components: {
-      CustomInput
+      CustomInput,
+      AlertNotification
     },
 
     data () {
@@ -97,9 +104,10 @@
           last_name: null,
           email: null,
           password: null,
-          password_confirm: null
+          confirm_password: null
         },
-        isLoading: false
+        isLoading: false,
+        alert: null
       }
     },
 
@@ -125,14 +133,32 @@
     },
 
     methods: {
-      async register () {
+      ...mapActions({
+        registerForm: 'customer/register'
+      }),
+
+      async registerCustomer () {
         // let response
 
         this.isLoading = true
 
         const validate = await this.$validator.validateAll()
 
-        if (!validate) {}
+        if (!validate) {
+          this.$scrollTo('.is-danger', 0, { offset: -10 })
+          this.isLoading = false
+          return
+        }
+
+        try {
+          await this.registerForm(this.form)
+          this.isLoading = false
+          this.$router.push(this.localePath({ name: 'home' }))
+        } catch (err) {
+          this.alert = err.response.data
+          this.isLoading = false
+          return err
+        }
       }
     }
   }
