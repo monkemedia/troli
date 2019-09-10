@@ -75,6 +75,7 @@
     "vue-jest": "^4.0.0-0",
     "vue-scrollto": "^2.15.0",
     "vue-svg-loader": "^0.12.0",
-    "vuex-mock-store": "0.0.7"
+    "vuex-mock-store": "0.0.7",
+    "zxcvbn": "^4.4.2"
   }
 }

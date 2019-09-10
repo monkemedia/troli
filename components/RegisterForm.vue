@@ -46,8 +46,10 @@
     <custom-input
       id="password"
       v-model="form.password"
-      v-validate="'required'"
+      v-validate="'required|min:8'"
+      v-password-strength
       :label="$t('pages.register.password')"
+      :help-text="$t('form_help_text.min')"
       is-required
       type="password"
       data-qa="password box"
@@ -80,6 +82,7 @@
   import Vue from 'vue'
   import VeeValidate, { Validator } from 'vee-validate'
   import { mapActions } from 'vuex'
+  import passwordStrength from '~/directives/password-strength.js'
   import CustomInput from '~/components/CustomInput'
   import AlertNotification from '~/components/AlertNotification'
 
@@ -95,6 +98,10 @@
     components: {
       CustomInput,
       AlertNotification
+    },
+
+    directives: {
+      passwordStrength
     },
 
     data () {
@@ -121,7 +128,8 @@
             required: this.$t('form_errors.last_name.required')
           },
           password: {
-            required: this.$t('form_errors.password.required')
+            required: this.$t('form_errors.password.required'),
+            min: this.$t('form_errors.password.min')
           },
           confirm_password: {
             required: this.$t('form_errors.confirm_password.required'),

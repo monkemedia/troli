@@ -24,11 +24,10 @@ $form-font-size: rem(14px);
   }
 }
 
-.control {
-  .help {
-    font-size: rem(11px) !important;
-    text-transform: uppercase;
-    letter-spacing: rem(.3px);
-    color: $danger !important;
-  }
+.help {
+  font-size: rem(11px) !important;
+  text-transform: uppercase;
+  letter-spacing: rem(.3px);
+  color: $grey;
+  margin-bottom: 0 !important;
 }

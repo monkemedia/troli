@@ -61,13 +61,17 @@
             }
         }
     },
+    "form_help_text": {
+        "min": "Must be 8 or more characters"
+    },
     "form_errors": {
         "email": {
             "required": "Whoops! Email is required",
             "email": "Whoops! Wrong email format"
         },
         "password": {
-            "required": "Whoops! Password is required'"
+            "required": "Whoops! Password is required'",
+            "min": "Whoops! Password must be at least 8 characters long"
         },
         "confirm_password": {
             "required": "Whoops! Confirm password is required",
