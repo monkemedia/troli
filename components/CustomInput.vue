@@ -17,6 +17,12 @@
         :data-qa="dataQa"
         @input="onInput">
       <p
+        v-if="helpText && !error"
+        class="help"
+        data-qa="help text">
+        {{ helpText }}
+      </p>
+      <p
         v-if="error"
         role="alert"
         aria-invalid="true"
@@ -57,6 +63,12 @@
       label: {
         type: String,
         required: true
+      },
+
+      helpText: {
+        type: String,
+        required: false,
+        default: () => null
       },
 
       id: {
