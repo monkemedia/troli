@@ -9,9 +9,15 @@ export default {
     }
 
     function updateDomHandler (e) {
+      const strengths = ['Weak', 'Ok', 'Good', 'Very good', 'Excellent']
       const progressBar = document.querySelector('.progress')
+      const strengthsText = document.querySelector('.strength')
 
+      if (!progressBar) {
+        return
+      }
       progressBar.value = passwordStrengthHandler(e)
+      strengthsText.innerHTML = strengths[passwordStrengthHandler(e)]
     }
 
     function init () {
@@ -19,11 +25,10 @@ export default {
       const progress = document.createElement('progress')
       const text = document.createElement('p')
 
-      text.innerHTML = 'Password strength'
-
       div.setAttribute('class', 'password-strength')
-      progress.setAttribute('class', 'progress is-small')
+      progress.setAttribute('class', 'progress')
       progress.setAttribute('max', 4)
+      text.setAttribute('class', 'strength')
 
       div.append(text)
       div.append(progress)
