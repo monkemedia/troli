@@ -1,8 +1,8 @@
 const { Router } = require('express')
-const moltin = require('./moltin.js')
+const moltinServices = require('./moltinServices.js')
 const forgottenPassword = require('./forgottenPassword.js')
 const router = Router()
 
-router.use(moltin, forgottenPassword)
+router.use(moltinServices, forgottenPassword)
 
 module.exports = router
