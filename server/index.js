@@ -5,7 +5,7 @@ const { Nuxt, Builder } = require('nuxt')
 const app = express()
 const port = process.env.PORT || 3000
 const config = require('../nuxt.config.js')
-const api = require('./api')
+const services = require('./services')
 
 app.set('port', port)
 
@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 // Import API Routes
-app.use('/api/v1/', api)
+app.use('/api/v1/', services)
 
 // Give nuxt middleware to express
 app.use(nuxt.render)

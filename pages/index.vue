@@ -9,6 +9,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import Hero from '~/components/Hero'
 
   export default {
@@ -51,6 +52,12 @@
           }
         ]
       }
+    },
+
+    async mounted () {
+      const test = await axios.get('/api/v1/products')
+
+      console.log('TESTees', test)
     }
   }
 </script>
