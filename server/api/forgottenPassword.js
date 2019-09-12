@@ -1,9 +1,9 @@
 require('dotenv').config()
+const crypto = require('crypto')
 const MoltinGateway = require('@moltin/sdk').gateway
-const postmark = require('postmark')
-const postmarkClient = new postmark.ServerClient(process.env.POSTMARK_ID)
 const { Router } = require('express')
 const errorHandler = require('../utils/errorHandler')
+const emailTemplate = require('../utils/emailTemplate')
 
 const router = Router()
 
@@ -12,14 +12,12 @@ const Moltin = MoltinGateway({
   client_secret: process.env.CLIENT_SECRET
 })
 
-const sendEmail = async (data) => {
-  const textBodyUrl = process.env.NODE_ENV === 'dev' ? `http://localhost:'${process.env.PORT}/forgotten-password/${data.token}` : `http://${process.env.WEB_ADDRESS}/forgotten-password/${data.token}`
-  await postmarkClient.sendEmail({
-    'From': process.env.EMAIL_ADDRESS,
-    'To': data.email,
-    'Subject': 'Test',
-    'TextBody': `Visit ${textBodyUrl}`
-  })
+const generateResetToken = () => {
+  return crypto.randomBytes(20).toString('hex')
+}
+
+const generateExpiry = () => {
+  return new Date().getTime() + 15 * 60 * 1000
 }
 
 router.post('/forgotten-password', async (req, res) => {
@@ -50,11 +48,11 @@ router.post('/forgotten-password', async (req, res) => {
 
     const customer = filteredCustomer.data[0]
     const updateCustomer = await Moltin.Customers.Update(customer.id, {
-      reset_token: customer.reset_token,
-      reset_token_expiry: customer.reset_token_expiry
+      reset_token: generateResetToken(),
+      reset_token_expiry: generateExpiry()
     })
 
-    sendEmail({
+    emailTemplate.forgottenPasswordEmail({
       email: updateCustomer.data.email,
       token: updateCustomer.data.reset_token
     })
