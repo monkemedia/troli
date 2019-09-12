@@ -1,24 +1,10 @@
 require('dotenv').config()
-const crypto = require('crypto')
-const MoltinGateway = require('@moltin/sdk').gateway
 const { Router } = require('express')
+const Moltin = require('../utils/moltinGateway')
 const errorHandler = require('../utils/errorHandler')
+const tokenGen = require('../utils/tokenGenerator')
 const emailTemplate = require('../utils/emailTemplate')
-
 const router = Router()
-
-const Moltin = MoltinGateway({
-  client_id: process.env.CLIENT_ID,
-  client_secret: process.env.CLIENT_SECRET
-})
-
-const generateResetToken = () => {
-  return crypto.randomBytes(20).toString('hex')
-}
-
-const generateExpiry = () => {
-  return new Date().getTime() + 15 * 60 * 1000
-}
 
 router.post('/forgotten-password', async (req, res) => {
   const email = req.body.email
@@ -48,8 +34,8 @@ router.post('/forgotten-password', async (req, res) => {
 
     const customer = filteredCustomer.data[0]
     const updateCustomer = await Moltin.Customers.Update(customer.id, {
-      reset_token: generateResetToken(),
-      reset_token_expiry: generateExpiry()
+      reset_token: tokenGen.generateToken(),
+      reset_token_expiry: tokenGen.generateExpiryToken()
     })
 
     emailTemplate.forgottenPasswordEmail({
