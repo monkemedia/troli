@@ -35,7 +35,7 @@
           })
 
           this.$store.commit('confirmAccount/SET_STATUS', 'success')
-          this.$store.commit('confirmAccount/SET_MESSAGE', `Thank you for registering with ${process.env.COMPANY_NAME}`)
+          this.$store.commit('confirmAccount/SET_MESSAGE', this.$t('pages.confirm_account.thank_you'))
 
           this.$router.push(this.localePath({
             name: 'login'

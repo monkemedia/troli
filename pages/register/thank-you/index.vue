@@ -22,6 +22,7 @@
               </span>
               <!-- eslint-disable vue/no-v-html -->
               <p v-html="message" />
+              <!-- eslint-enable vue/no-v-html -->
             </div>
           </div>
         </div>

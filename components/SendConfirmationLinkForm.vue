@@ -97,7 +97,7 @@
           this.alert = [
             {
               status: 200,
-              detail: this.$t('pages.forgotten_password.success_message')
+              detail: this.$t('pages.confirm_account.check_email')
             }
           ]
           return response
