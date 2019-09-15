@@ -133,10 +133,7 @@ const actions = {
   },
 
   async register ({ dispatch }, data) {
-    console.log('data', data)
-    const registerCustomer = await this.$axios.$post('/api/v1/register', data)
-
-    console.log('REGISTERED', registerCustomer)
+    await this.$axios.$post('/api/v1/register', data)
   },
 
   logout ({ dispatch, commit }, req) {

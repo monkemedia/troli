@@ -59,6 +59,13 @@
                 "button": "Go to login page"
 
             }
+        },
+        "confirm_account": {
+            "loading_title": "Confirming account",
+            "title": "Send confirmation link",
+            "paragraph": "Please enter your email below and we will send you the confirmation link.",
+            "label": "Email address",
+            "button": "Send confirmation link"
         }
     },
     "form_help_text": {

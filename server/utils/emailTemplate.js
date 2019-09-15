@@ -13,13 +13,13 @@ module.exports = {
     })
   },
 
-  confirmEmail: async (data) => {
-    const textBodyUrl = process.env.NODE_ENV === 'dev' ? `http://localhost:'${process.env.PORT}/confirm-email/${data.token}` : `http://${process.env.WEB_ADDRESS}/confirm-email/${data.token}`
+  confirmAccount: async (data) => {
+    const textBodyUrl = process.env.NODE_ENV === 'dev' ? `http://localhost:'${process.env.PORT}/confirm-account/${data.token}` : `http://${process.env.WEB_ADDRESS}/confirm-account/${data.token}`
     await postmarkClient.sendEmail({
       'From': process.env.EMAIL_ADDRESS,
       'To': data.email,
       'Subject': 'Confirm email address',
-      'TextBody': `Visit ${textBodyUrl}`
+      'TextBody': `Richard Roberts, You must confirm your ${data.email} email before you can sign in (link is only valid once): ${textBodyUrl}`
     })
   }
 }

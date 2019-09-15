@@ -23,7 +23,8 @@ module.exports = {
   },
   env: {
     CLIENT_ID: process.env.CLIENT_ID,
-    CLIENT_SECRET: process.env.CLIENT_SECRET
+    CLIENT_SECRET: process.env.CLIENT_SECRET,
+    COMPANY_NAME: process.env.COMPANY_NAME
   },
 
   serverMiddleware: ['~server/index.js'],

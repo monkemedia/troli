@@ -28,6 +28,7 @@ export default {
       div.setAttribute('class', 'password-strength')
       progress.setAttribute('class', 'progress')
       progress.setAttribute('max', 4)
+      progress.setAttribute('value', 0)
       text.setAttribute('class', 'strength')
 
       div.append(text)

@@ -1,8 +1,12 @@
 <template>
   <div
-    id="login"
+    id="loginPage"
     data-qa="login page">
     <div class="banner" />
+
+    <notification-bar
+      v-if="hasRegistered"
+      :notification="hasRegistered" />
 
     <section class="section">
       <div class="container">
@@ -41,13 +45,30 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+  import NotificationBar from '~/components/NotificationBar'
   import LoginForm from '~/components/LoginForm'
 
   export default {
     name: 'Login',
 
     components: {
+      NotificationBar,
       LoginForm
+    },
+
+    computed: {
+      ...mapGetters({
+        status: 'confirmAccount/getStatus',
+        message: 'confirmAccount/getMessage'
+      }),
+
+      hasRegistered () {
+        return this.status ? {
+          status: this.status,
+          message: this.message
+        } : null
+      }
     }
   }
 </script>

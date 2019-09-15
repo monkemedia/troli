@@ -10,7 +10,7 @@ p {
     text-decoration: underline;
 
     &:hover {
-      text-decoration: none;
+      text-decoration: none !important;
     }
   }
 }
@@ -19,7 +19,7 @@ p {
   text-decoration: underline;
 
   &:hover {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 }
 

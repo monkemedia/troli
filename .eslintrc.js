@@ -16,7 +16,7 @@ module.exports = {
   rules: {
     'space-before-function-paren': 'error',
     'semi': ['error', 'never'],
-    'quotes': ['error', 'single'],
+    'quotes': ['error', 'single', { 'allowTemplateLiterals': true } ],
     'vue/component-name-in-template-casing': ['error', 'kebab-case', {
       'registeredComponentsOnly': true,
       'ignores': []

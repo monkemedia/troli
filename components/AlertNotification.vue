@@ -6,15 +6,20 @@
     :class="{
       'is-danger' : notificationType === 'error',
       'is-success' : notificationType === 'success'}">
-    <span class="icon is-large">
+    <span class="icon">
       <i
         v-if="notificationType === 'error'"
-        class="fas fa-2x fa-exclamation-circle" />
+        class="fas fa-exclamation" />
       <i
         v-else
-        class="fas fa-2x fa-check-circle" />
+        class="fas fa-check" />
     </span>
-    <ul>
+    <ul v-if="accountNotConfirmed">
+      <!-- eslint-disable vue/no-v-html -->
+      <li v-html="accountNotConfirmedMessage" />
+      <!-- eslint-enable vue/no-v-html -->
+    </ul>
+    <ul v-else>
       <li
         v-for="(a, index) in alert"
         :key="index">
@@ -25,6 +30,8 @@
 </template>
 
 <script>
+  import _template from 'lodash.template'
+
   export default {
     name: 'AlertNotification',
 
@@ -41,6 +48,18 @@
           return 'success'
         }
         return 'error'
+      },
+
+      accountNotConfirmed () {
+        if (this.alert[0].detail === 'Account not confirmed.') {
+          return true
+        }
+        return false
+      },
+
+      accountNotConfirmedMessage () {
+        const compiled = _template(this.$t('alert_notification.confirm_email'))
+        return compiled({ clickhere: `<a href="/confirm-account" class="is-link">${this.$t('alert_notification.click_here')}</a>` })
       }
     }
   }
@@ -52,5 +71,10 @@
   .notification {
     font-size: rem(14px);
     align-items: center;
+    display: flex;
+
+    .icon {
+      margin-right: rem(8px);
+    }
   }
 </style>

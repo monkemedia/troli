@@ -1,0 +1,15 @@
+.notification {
+  &.is-success {
+    background: $success-light;
+    color: $success-dark;
+  }
+
+  &.is-danger {
+    background: $danger-light;
+    color: $danger-dark;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -1,5 +1,7 @@
 <template>
-  <div id="resetPasswordPage">
+  <div
+    id="resendConfirmLinkPage"
+    data-qa="resend confirmation link page">
     <div class="banner" />
 
     <section class="section">
@@ -7,14 +9,17 @@
         <div class="columns">
           <div class="column">
             <h1 class="title">
-              {{ $t('pages.reset_password.title') }}
+              {{ $t('pages.confirm_account.title') }}
             </h1>
             <hr class="mb-0">
           </div>
         </div>
         <div class="columns is-variable is-8">
           <div class="column is-5">
-            <submit-password-form data-qa="submit password form" />
+            <p>
+              {{ $t('pages.confirm_account.paragraph') }}
+            </p>
+            <send-confirmation-link-form data-qa="confirmation link form" />
           </div>
         </div>
       </div>
@@ -23,13 +28,13 @@
 </template>
 
 <script>
-  import SubmitPasswordForm from '~/components/SubmitPasswordForm'
+  import SendConfirmationLinkForm from '~/components/SendConfirmationLinkForm'
 
   export default {
     name: 'ForgottenPassword',
 
     components: {
-      SubmitPasswordForm
+      SendConfirmationLinkForm
     }
   }
 </script>

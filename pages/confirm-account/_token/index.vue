@@ -1,0 +1,70 @@
+<template>
+  <div
+    id="confirmAccountPage"
+    data-qa="confirm account page">
+    <div class="pageloader is-active is-secondary">
+      <span class="title">
+        {{ $t('pages.confirm_account.loading_title') }}...
+      </span>
+    </div>
+  </div>
+</template>
+
+<script>
+  import axios from 'axios'
+
+  export default {
+    name: 'ConfirmAccount',
+
+    data () {
+      return {
+        token: null
+      }
+    },
+
+    mounted () {
+      this.token = this.$route.params.token
+      this.confirmAccount()
+    },
+
+    methods: {
+      async confirmAccount () {
+        try {
+          await axios.post('/api/v1/confirm-account', {
+            token: this.token
+          })
+
+          this.$store.commit('confirmAccount/SET_STATUS', 'success')
+          this.$store.commit('confirmAccount/SET_MESSAGE', `Thank you for registering with ${process.env.COMPANY_NAME}`)
+
+          this.$router.push(this.localePath({
+            name: 'login'
+          }))
+        } catch (err) {
+          this.$store.commit('confirmAccount/SET_STATUS', 'error')
+          this.$store.commit('confirmAccount/SET_MESSAGE', err.response.data[0].detail)
+
+          this.$router.push(this.localePath({
+            name: 'login'
+          }))
+        }
+      }
+    }
+
+  }
+</script>
+
+<style lang="scss" scoped>
+  @import '~sass-rem';
+  @import '~bulma-pageloader';
+  @import '~assets/scss/utilities/variables';
+
+  .pageloader {
+    background: $black;
+  }
+
+  .title {
+    font-size: rem(14px) !important;
+    text-transform: none;
+  }
+</style>

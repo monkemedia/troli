@@ -6,6 +6,10 @@ const emailTemplate = require('../utils/emailTemplate')
 const tokenGen = require('../utils/tokenGenerator')
 const router = Router()
 
+function getCustomer (customerId) {
+  return Moltin.Customers.Get(customerId)
+}
+
 /* Sign user in. */
 router.post('/sign-in', async (req, res) => {
   const email = req.body.email
@@ -49,18 +53,20 @@ router.post('/sign-in', async (req, res) => {
   }
 
   try {
-    const response = await Moltin.Customers.Token(email, password)
-    if (!response.data.email_confirmed) {
+    const customerCredentials = await Moltin.Customers.Token(email, password)
+    const customerDetails = await getCustomer(customerCredentials.data.customer_id)
+
+    if (!customerDetails.data.account_confirmed) {
       return errorHandler(res, {
         errors: [
           {
             status: 401,
-            detail: 'You can sign in once you have confirmed your email address.'
+            detail: 'Account not confirmed.'
           }
         ]
       })
     }
-    return res.status(200).send(response.data)
+    return res.status(200).send(customerCredentials.data)
   } catch (err) {
     return errorHandler(res, err)
   }
@@ -160,13 +166,13 @@ router.post('/register', async (req, res) => {
       last_name: lastName,
       email,
       password,
-      confirm_email_token: token,
-      confirm_email_expiry: expiryToken
+      confirm_account_token: token,
+      confirm_account_expiry: expiryToken
     })
 
-    await emailTemplate.confirmEmail({
-      email: response.data.email,
-      token: response.data.confirm_email_token
+    await emailTemplate.confirmAccount({
+      email,
+      token
     })
     return res.status(200).send(response.data)
   } catch (err) {
@@ -176,7 +182,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/get-customer', async (req, res) => {
   try {
-    const response = await Moltin.Customers.Get(req.body.customer_id)
+    const response = await getCustomer(req.body.customer_id)
     return res.status(200).send(response.data)
   } catch (err) {
     return errorHandler(res, err)
