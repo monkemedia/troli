@@ -48,12 +48,6 @@
     },
 
     props: {
-      // value: {
-      //   type: String,
-      //   required: false,
-      //   default: () => ''
-      // },
-
       hideLabel: {
         type: Boolean,
         required: false,

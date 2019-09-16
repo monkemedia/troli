@@ -1,8 +1,15 @@
 import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
+import { Store } from 'vuex-mock-store'
 import Login from '@/pages/login.vue'
 import LinkDefault from '@/components/LinkDefault.vue'
 
 const localVue = createLocalVue()
+const $store = new Store({
+  getters: {
+    'confirmAccount/getStatus': 'success',
+    'confirmAccount/getMessage': 'This is a message'
+  }
+})
 const $router = []
 
 localVue.component('link-default', LinkDefault)
@@ -15,6 +22,7 @@ const instance = () => shallowMount(Login, {
   },
   mocks: {
     $t: () => {},
+    $store,
     $router,
     localePath: code => window.location.href + code
   }

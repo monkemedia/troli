@@ -1,5 +1,5 @@
 import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
-import Register from '@/pages/register.vue'
+import Register from '@/pages/register/index.vue'
 
 const localVue = createLocalVue()
 const $router = []
@@ -16,7 +16,7 @@ const instance = () => shallowMount(Register, {
   }
 })
 
-describe('pages/Register', () => {
+describe('pages/register/index', () => {
   it('contains login form component', () => {
     const wrapper = instance()
 

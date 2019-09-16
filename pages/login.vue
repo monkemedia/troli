@@ -5,7 +5,7 @@
     <div class="banner" />
 
     <notification-bar
-      v-if="hasRegistered"
+      v-if="status"
       :notification="hasRegistered" />
 
     <section class="section">
@@ -64,10 +64,10 @@
       }),
 
       hasRegistered () {
-        return this.status ? {
+        return {
           status: this.status,
           message: this.message
-        } : null
+        }
       }
     }
   }

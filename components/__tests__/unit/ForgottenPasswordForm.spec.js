@@ -91,6 +91,17 @@ describe('components/ForgottenPasswordForm', () => {
     expect(wrapper.find('[data-qa="alert notification"]').exists()).toBe(true)
   })
 
+  it('hides and spinner and called scrollTo method when validation fails', async () => {
+    const wrapper = instance()
+
+    wrapper.vm.submitEmail()
+
+    await flushPromises()
+
+    expect($scrollTo).toBeCalled()
+    expect(wrapper.vm.isLoading).toBe(false)
+  })
+
   it('calls `/api/v1/forgotten-password` endpoint when form is submitted', async () => {
     mock
       .onPost('/api/v1/forgotten-password')

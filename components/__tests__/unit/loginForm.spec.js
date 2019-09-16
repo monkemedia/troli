@@ -8,7 +8,7 @@ import ButtonDefault from '@/components/ButtonDefault.vue'
 import englishLang from '@/lang/en-GB.json'
 
 const localVue = createLocalVue()
-const store = new Store()
+const $store = new Store()
 const $router = []
 const $scrollTo = jest.fn()
 
@@ -31,7 +31,7 @@ const instance = () => shallowMount(LoginForm, {
     ButtonDefault: true
   },
   mocks: {
-    $store: store,
+    $store,
     $router,
     localePath: code => window.location.href + code
   },
@@ -57,7 +57,7 @@ describe('components/LoginForm', () => {
 
     await flushPromises()
 
-    expect(store.dispatch).toHaveBeenCalledWith('customer/login', { 'email': 'test@test.com', 'password': '1111qqqq' })
+    expect($store.dispatch).toHaveBeenCalledWith('customer/login', { 'email': 'test@test.com', 'password': '1111qqqq' })
   })
 
   it('shows the loading spinner when set to true', () => {
@@ -99,7 +99,7 @@ describe('components/LoginForm', () => {
 
   it('errors', async () => {
     /* eslint prefer-promise-reject-errors: */
-    store.dispatch.mockImplementationOnce(() => Promise.reject({
+    $store.dispatch.mockImplementationOnce(() => Promise.reject({
       response: {
         data: [
           {

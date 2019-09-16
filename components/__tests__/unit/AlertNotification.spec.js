@@ -15,6 +15,9 @@ const instance = () => shallowMount(AlertNotification, {
         message: 'Message 2'
       }
     ]
+  },
+  mocks: {
+    $t: () => {}
   }
 })
 
@@ -42,5 +45,21 @@ describe('components/AlertNotification', () => {
     const wrapper = instance()
 
     expect(wrapper.vm.notificationType).toEqual('error')
+  })
+
+  it('hide and show account not confirmed alert', () => {
+    const wrapper = instance()
+
+    expect(wrapper.vm.accountNotConfirmed).toBe(false)
+
+    wrapper.setProps({
+      alert: [
+        {
+          detail: 'Account not confirmed.'
+        }
+      ]
+    })
+
+    expect(wrapper.vm.accountNotConfirmed).toBe(true)
   })
 })
