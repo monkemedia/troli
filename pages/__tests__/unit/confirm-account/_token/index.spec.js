@@ -62,7 +62,7 @@ describe('pages/confirm-account/_token', () => {
     expect(res.status).toBe(200)
   })
 
-  it('commits mutations when user submits email address', () => {
+  it('commits successful mutations when user submits email address', () => {
     mock
       .onPost('/api/v1/confirm-account')
       .reply(200, { status: 200 })
@@ -83,5 +83,18 @@ describe('pages/confirm-account/_token', () => {
     wrapper.vm.confirmAccount()
 
     expect(wrapper.vm.$route.name).toBe('login')
+  })
+
+  it('commits error mutations when usomething goes wrong', () => {
+    mock
+      .onPost('/api/v1/confirm-account')
+      .reply(500, [{
+        detail: 'This is a error'
+      }])
+
+    const wrapper = instance()
+    wrapper.vm.confirmAccount()
+
+    expect($store.commit).toHaveBeenCalledWith('confirmAccount/SET_STATUS', 'error')
   })
 })
