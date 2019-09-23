@@ -30,7 +30,7 @@
     methods: {
       async confirmAccount () {
         try {
-          await axios.post('/api/v1/confirm-account', {
+          const response = await axios.post('/api/v1/confirm-account', {
             token: this.token
           })
 
@@ -40,13 +40,14 @@
           this.$router.push(this.localePath({
             name: 'login'
           }))
+          return response
         } catch (err) {
           this.$store.commit('confirmAccount/SET_STATUS', 'error')
           this.$store.commit('confirmAccount/SET_MESSAGE', err.response.data[0].detail)
 
-          this.$router.push(this.localePath({
-            name: 'login'
-          }))
+          this.$router.push({ name: 'login' })
+
+          return err
         }
       }
     }

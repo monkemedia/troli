@@ -4,17 +4,12 @@ import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import flushPromises from 'flush-promises'
-import SubmitPasswordForm from '@/components/SubmitPasswordForm'
+import SendConfirmationLinkForm from '@/components/SendConfirmationLinkForm'
 import ButtonDefault from '@/components/ButtonDefault.vue'
 import englishLang from '@/lang/en-GB.json'
 
 const mock = new MockAdapter(axios)
 const $scrollTo = jest.fn()
-const $route = {
-  params: {
-    token: '123456'
-  }
-}
 const localVue = createLocalVue()
 
 Vue.use(VueI18n)
@@ -28,7 +23,7 @@ const i18n = new VueI18n({
 
 localVue.component('button-default', ButtonDefault)
 
-const instance = () => shallowMount(SubmitPasswordForm, {
+const instance = () => shallowMount(SendConfirmationLinkForm, {
   localVue,
   i18n,
   attachToDocument: true,
@@ -36,16 +31,13 @@ const instance = () => shallowMount(SubmitPasswordForm, {
     NuxtLink: RouterLinkStub,
     ButtonDefault: true
   },
-  mocks: {
-    $route
-  },
   methods: {
     $scrollTo
   },
   sync: false
 })
 
-describe('components/SubmitPasswordForm', () => {
+describe('components/SendConfirmationLinkForm', () => {
   it('shows load spinner when `isLoading` is set to true', () => {
     const wrapper = instance()
 
@@ -66,16 +58,21 @@ describe('components/SubmitPasswordForm', () => {
     expect(wrapper.vm.isLoading).toBe(false)
   })
 
-  it('shows success message when `success` is set to true', async () => {
+  it('shows success message when alert has a status of 200', async () => {
     const wrapper = instance()
 
     wrapper.setData({
-      success: true
+      alert: [
+        {
+          status: 200,
+          detail: 'This is successful.'
+        }
+      ]
     })
 
     await flushPromises()
 
-    expect(wrapper.find('[data-qa="success message"]').exists()).toBe(true)
+    expect(wrapper.find('[data-qa="alert notification"]').exists()).toBe(true)
   })
 
   it('shows error message when alert has a status of 401', async () => {
@@ -104,27 +101,26 @@ describe('components/SubmitPasswordForm', () => {
       }
     })
 
-    await wrapper.vm.submitPassword()
+    await wrapper.vm.submitEmail()
 
     expect($scrollTo).toBeCalled()
     expect(wrapper.vm.isLoading).toBe(false)
   })
 
-  it('calls `/api/v1/forgotten-password/update-password` endpoint when form is submitted', async () => {
+  it('calls `/api/v1/resend-confirmation-link` endpoint when form is submitted', async () => {
     mock
-      .onPost('/api/v1/forgotten-password/update-password')
+      .onPost('/api/v1/resend-confirmation-link')
       .reply(200, { status: 200 })
 
     const wrapper = instance()
 
     wrapper.setData({
       form: {
-        password: 'password',
-        confirm_password: 'password'
+        email: 'test@test.com'
       }
     })
 
-    const res = await wrapper.vm.submitPassword()
+    const res = await wrapper.vm.submitEmail()
 
     expect(res.status).toBe(200)
     expect(wrapper.vm.isLoading).toBe(false)
@@ -133,7 +129,7 @@ describe('components/SubmitPasswordForm', () => {
 
   it('response with alert', async () => {
     mock
-      .onPost('/api/v1/forgotten-password/update-password')
+      .onPost('/api/v1/resend-confirmation-link')
       .reply(500, [{
         details: 'This is a error'
       }])
@@ -142,12 +138,11 @@ describe('components/SubmitPasswordForm', () => {
 
     wrapper.setData({
       form: {
-        password: 'password',
-        confirm_password: 'password'
+        email: 'test@test.com'
       }
     })
 
-    await wrapper.vm.submitPassword()
+    await wrapper.vm.submitEmail()
 
     expect(wrapper.vm.alert.length).toBe(1)
     expect(wrapper.vm.isLoading).toBe(false)

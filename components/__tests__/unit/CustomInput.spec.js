@@ -7,7 +7,11 @@ const localVue = createLocalVue()
 const instance = () => shallowMount(CustomInput, {
   localVue,
   mocks: {
-    localePath: code => window.location.href + code
+    localePath: code => window.location.href + code,
+    $_veeValidate: {
+      name: jest.fn(),
+      value: jest.fn()
+    }
   },
   stubs: {
     NuxtLink: RouterLinkStub

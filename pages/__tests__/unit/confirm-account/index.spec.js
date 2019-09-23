@@ -1,25 +1,23 @@
 import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
-import Register from '@/pages/register/index.vue'
+import ConfirmAccount from '@/pages/confirm-account/index.vue'
 
 const localVue = createLocalVue()
-const $router = []
 
-const instance = () => shallowMount(Register, {
+const instance = () => shallowMount(ConfirmAccount, {
   localVue,
   stubs: {
     NuxtLink: RouterLinkStub
   },
   mocks: {
     $t: () => {},
-    $router,
     localePath: code => window.location.href + code
   }
 })
 
-describe('pages/register', () => {
-  it('contains login form component', () => {
+describe('pages/confirm-account', () => {
+  it('contains confirmation link form component', () => {
     const wrapper = instance()
 
-    expect(wrapper.find('[data-qa="register form"]').exists()).toBe(true)
+    expect(wrapper.find('[data-qa="confirmation link form"]').exists()).toBe(true)
   })
 })

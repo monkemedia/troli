@@ -1,5 +1,5 @@
 import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
-import ForgottenPasswordToken from '@/pages/forgotten-password/_token/index.vue'
+import ForgottenPasswordToken from '@/pages/forgotten-password/_token'
 
 const localVue = createLocalVue()
 
@@ -14,7 +14,7 @@ const instance = () => shallowMount(ForgottenPasswordToken, {
   }
 })
 
-describe('pages/forgotten-password/_token/index', () => {
+describe('pages/forgotten-password/_token', () => {
   it('contains submit password form component', () => {
     const wrapper = instance()
 

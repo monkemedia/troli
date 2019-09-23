@@ -14,7 +14,7 @@ const instance = () => shallowMount(ForgottenPassword, {
   }
 })
 
-describe('pages/ForgottenPassword', () => {
+describe('pages/forgotten-password', () => {
   it('contains forgotten password form component', () => {
     const wrapper = instance()
 
