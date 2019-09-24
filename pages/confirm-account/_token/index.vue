@@ -2,7 +2,7 @@
   <div
     id="confirmAccountPage"
     data-qa="confirm account page">
-    <div class="pageloader is-active is-secondary">
+    <div class="pageloader is-active is-secondary" data-qa="confirm account page loader">
       <span class="title">
         {{ $t('pages.confirm_account.loading_title') }}...
       </span>

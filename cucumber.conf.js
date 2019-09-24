@@ -5,7 +5,7 @@ const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 const host = process.env.HOST || 'localhost'
-const port = process.env.PORT || 1339
+const port = process.env.PORT || 1340
 const maxWaitTime = 90
 
 setDefaultTimeout(60000)

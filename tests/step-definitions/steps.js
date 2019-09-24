@@ -15,11 +15,15 @@ function dataQa (qa) {
 }
 
 function pageUrl (pageName) {
-  return pages[pageName.toLowerCase()]
+  return pageName.startsWith('/') ? `${url}${pageName}` : pages[pageName.toLowerCase()]
 }
 
-Given('I visit/the/see the/a {string}', async (pageName) => {
+Given('I visit/the/see (the/a/be ){string}', async (pageName) => {
   await client.url(pageUrl(pageName)).waitForElementVisible('body', 1000)
+})
+
+Then('I should be on {string}', async (pageName) => {
+  await client.assert.urlContains(pageUrl(pageName))
 })
 
 Then('I see {string} in the {string}', async (qa, qa2) => {

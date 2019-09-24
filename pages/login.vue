@@ -6,7 +6,8 @@
 
     <notification-bar
       v-if="status"
-      :notification="hasRegistered" />
+      :notification="hasRegistered"
+      data-qa="alert notification" />
 
     <section class="section">
       <div class="container">

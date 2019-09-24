@@ -6,7 +6,7 @@ module.exports = {
   test_settings: {
     default: {
       globals: {
-        url: 'http://localhost:1339',
+        url: 'http://localhost:1340',
         email: process.env.E2E_EMAIL,
         password: process.env.E2E_PASSWORD
       },
