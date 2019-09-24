@@ -12,8 +12,7 @@ function getCustomer (customerId) {
 
 /* Sign user in. */
 router.post('/sign-in', async (req, res) => {
-  const email = req.body.email
-  const password = req.body.password
+  const { email, password } = req.body
 
   if (!email && !password) {
     return errorHandler(res, {
@@ -76,8 +75,7 @@ router.post('/sign-in', async (req, res) => {
 router.post('/register', async (req, res) => {
   const firstName = req.body.first_name
   const lastName = req.body.last_name
-  const email = req.body.email
-  const password = req.body.password
+  const { email, password } = req.body
   const confirmPassword = req.body.confirm_password
 
   if (!firstName) {
@@ -159,7 +157,7 @@ router.post('/register', async (req, res) => {
 
   // e2e testing only
   if (email === 'test@test.com') {
-    setTimeout(() => {
+    return setTimeout(() => {
       return res.status(200).send()
     }, 1500)
   }

@@ -4,18 +4,17 @@ const Moltin = require('../utils/moltinGateway')
 const errorHandler = require('../utils/errorHandler')
 const tokenGen = require('../utils/tokenGenerator')
 const emailTemplate = require('../utils/emailTemplate')
-
 const router = Router()
 
 router.post('/confirm-account', async (req, res) => {
   const currentTime = new Date().getTime()
-  const token = req.body.token
+  const { token } = req.body
 
   // For E2E tests only
   if (token === '123') {
-    setTimeout(() => {
+    return setTimeout(() => {
       return res.status(200).send()
-    })
+    }, 1500)
   }
 
   // Find customer using reset token
@@ -24,7 +23,8 @@ router.post('/confirm-account', async (req, res) => {
       confirm_account_token: token
     }
   }).All()
-  const customerId = findCustomer.data[0].id
+
+  const customerId = findCustomer.data.length > 0 ? findCustomer.data[0].id : false
 
   if (!customerId) {
     return errorHandler(res, {
@@ -77,14 +77,23 @@ router.post('/confirm-account', async (req, res) => {
 })
 
 router.post('/resend-confirmation-link', async (req, res) => {
-  const email = req.body.email
+  const { email } = req.body
+
+  // For E2E tests only
+  if (email === 'test@test.com') {
+    return setTimeout(() => {
+      return res.status(200).send()
+    }, 1500)
+  }
+
   // Find customer using reset token
   const findCustomer = await Moltin.Customers.Filter({
     eq: {
       email
     }
   }).All()
-  const customerId = findCustomer.data[0] ? findCustomer.data[0].id : false
+
+  const customerId = findCustomer.data.length > 0 ? findCustomer.data[0].id : false
 
   if (!customerId) {
     // We don't want to tell customer whether email exists or not,

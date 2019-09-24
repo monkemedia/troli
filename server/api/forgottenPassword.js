@@ -7,7 +7,7 @@ const emailTemplate = require('../utils/emailTemplate')
 const router = Router()
 
 router.post('/forgotten-password', async (req, res) => {
-  const email = req.body.email
+  const { email } = req.body
 
   if (!email) {
     return errorHandler(res, {
@@ -51,7 +51,7 @@ router.post('/forgotten-password', async (req, res) => {
 
 router.post('/forgotten-password/update-password', async (req, res) => {
   const currentTime = new Date().getTime()
-  const token = req.body.token
+  const { token } = req.body
   // Find customer using reset token
   const findCustomer = await Moltin.Customers.Filter({
     eq: {
@@ -74,7 +74,7 @@ router.post('/forgotten-password/update-password', async (req, res) => {
   const customer = await Moltin.Customers.Get(customerId)
   const storedExpiry = customer.data.reset_token_expiry
   const storedToken = customer.data.reset_token
-  const password = req.body.password
+  const { password } = req.body
   const confirmPassword = req.body.confirm_password
 
   // Validate passwords
