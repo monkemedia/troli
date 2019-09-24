@@ -157,6 +157,13 @@ router.post('/register', async (req, res) => {
     })
   }
 
+  // e2e testing only
+  if (email === 'test@test.com') {
+    setTimeout(() => {
+      return res.status(200).send()
+    }, 1500)
+  }
+
   try {
     const token = tokenGen.generateToken()
     const expiryToken = tokenGen.generateExpiryToken()

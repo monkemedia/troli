@@ -1,7 +1,7 @@
 <template>
   <div
     id="registerPage"
-    data-qa="register">
+    data-qa="register page">
     <div class="banner" />
 
     <section class="section">

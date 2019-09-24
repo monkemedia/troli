@@ -71,7 +71,7 @@
           :text="$t('pages.register.button')"
           :class="{ 'is-loading' : isLoading }"
           is-flip
-          data-qa="reset password button"
+          data-qa="create account button"
           type="submit" />
       </div>
     </div>

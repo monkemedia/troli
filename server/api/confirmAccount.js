@@ -13,7 +13,9 @@ router.post('/confirm-account', async (req, res) => {
 
   // For E2E tests only
   if (token === '123') {
-    return res.status(200).send()
+    setTimeout(() => {
+      return res.status(200).send()
+    })
   }
 
   // Find customer using reset token

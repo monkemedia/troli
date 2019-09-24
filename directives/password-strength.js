@@ -17,7 +17,7 @@ export default {
         return
       }
       progressBar.value = passwordStrengthHandler(e)
-      strengthsText.innerHTML = strengths[passwordStrengthHandler(e)]
+      strengthsText.innerHTML = strengths[passwordStrengthHandler(e) || 0]
     }
 
     function init () {

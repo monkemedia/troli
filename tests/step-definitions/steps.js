@@ -7,7 +7,9 @@ const pages = {
   'login page': `${url}/login`,
   'forgotten password page': `${url}/forgotten-password`,
   'reset password page': `${url}/forgotten-password/12345`,
-  'confirm account page': `${url}/confirm-account`
+  'confirm account page': `${url}/confirm-account`,
+  'register page': `${url}/register`,
+  'register thank you page': `${url}/register/thank-you`
 }
 
 function dataQa (qa) {
