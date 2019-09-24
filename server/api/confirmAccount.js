@@ -76,7 +76,7 @@ router.post('/resend-confirmation-link', async (req, res) => {
       email
     }
   }).All()
-  const customerId = findCustomer.data[0].id
+  const customerId = findCustomer.data[0] ? findCustomer.data[0].id : false
 
   if (!customerId) {
     // We don't want to tell customer whether email exists or not,
