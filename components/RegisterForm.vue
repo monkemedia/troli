@@ -147,8 +147,6 @@
       }),
 
       async registerCustomer () {
-        // let response
-
         this.isLoading = true
 
         const validate = await this.$validator.validateAll()

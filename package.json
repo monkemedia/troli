@@ -12,7 +12,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "jest --verbose",
-    "test:e2e": "concurrently 'NODE_ENV=test PORT=3001 nodemon server/index.js server' 'npm run start:test'",
+    "test:e2e": "npm run start:test",
     "build:test": "NODE_ENV=test PORT=1339 nuxt build",
     "start:test": "NODE_ENV=test PORT=1339 nodemon server/index.js --watch server",
     "test:chrome": "cucumber-js tests/features/ --require cucumber.conf.js --require 'tests/step-definitions/' --format node_modules/cucumber-pretty",

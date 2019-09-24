@@ -71,7 +71,7 @@
             "paragraph": "Please enter your email below and we will send you the confirmation link.",
             "label": "Email address",
             "button": "Send confirmation link",
-            "thank_you": "Thank you for registering with Demo site. Please sign in below.",
+            "thank_you": "Thank you for registering with us. Please sign in below.",
             "check_email": "Please check your email and click on the provided link to confirm your account."
         }
     },

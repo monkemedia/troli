@@ -6,7 +6,8 @@ const pages = {
   'homepage': `${url}/`,
   'login page': `${url}/login`,
   'forgotten password page': `${url}/forgotten-password`,
-  'reset password page': `${url}/forgotten-password/12345`
+  'reset password page': `${url}/forgotten-password/12345`,
+  'confirm account page': `${url}/confirm-account`
 }
 
 function dataQa (qa) {
@@ -18,10 +19,6 @@ function pageUrl (pageName) {
 }
 
 Given('I visit/the/see the/a {string}', async (pageName) => {
-  await client.url(pageUrl(pageName)).waitForElementVisible('body', 1000)
-})
-
-Then('I visit/see the/a {string} page', async (pageName) => {
   await client.url(pageUrl(pageName)).waitForElementVisible('body', 1000)
 })
 

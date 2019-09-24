@@ -102,6 +102,7 @@
           ]
           return response
         } catch (err) {
+          console.log('ERROR', err.response)
           this.alert = err.response.data
           this.isLoading = false
         }

@@ -33,10 +33,10 @@ Feature: Login page
     Given I visit the "Login page"
     When I click the "forgotten password link"
     And I wait 2 seconds
-    Then I visit the "forgotten password" page
+    Then I visit the "forgotten password page"
 
   Scenario: I am a new customer
     Given I visit the "Login page"
     When I click the "create account now button"
     And I wait 2 seconds
-    Then I visit the "register" page
+    Then I visit the "register page"
