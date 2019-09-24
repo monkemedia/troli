@@ -57,9 +57,13 @@
         return false
       },
 
+      getLocale () {
+        return this.$i18n.locale === 'en' ? '/' : `/${this.$i18n.locale}/`
+      },
+
       accountNotConfirmedMessage () {
         const compiled = _template(this.$t('alert_notification.confirm_email'))
-        return compiled({ clickhere: `<a href="/confirm-account" class="is-link">${this.$t('alert_notification.click_here')}</a>` })
+        return compiled({ clickhere: `<a href="${this.getLocale}confirm-account" class="is-link">${this.$t('alert_notification.click_here')}</a>` })
       }
     }
   }

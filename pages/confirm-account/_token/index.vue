@@ -45,7 +45,9 @@
           this.$store.commit('confirmAccount/SET_STATUS', 'error')
           this.$store.commit('confirmAccount/SET_MESSAGE', err.response.data[0].detail)
 
-          this.$router.push({ name: 'login' })
+          this.$router.push(this.localePath({
+            name: 'login'
+          }))
 
           return err
         }

@@ -16,9 +16,9 @@
             class="fas fa-exclamation" />
         </span>
         {{ notification.message }}
-        <span v-if="isError && notification.message === 'Token has expired.'">
-          {{ message }} {{ confirmLinkMessage }}
-        </span>
+        <!-- eslint-disable vue/no-v-html -->
+        <span v-if="isError && notification.message === 'Token has expired.'" v-html="confirmLinkMessage" />
+        <!-- eslint-enable vue/no-v-html -->
       </p>
     </div>
   </div>
@@ -46,9 +46,13 @@
         return this.notification.status === 'error'
       },
 
+      getLocale () {
+        return this.$i18n.locale === 'en' ? '/' : `/${this.$i18n.locale}/`
+      },
+
       confirmLinkMessage () {
         const compiled = _template(this.$t('notification_bar.confirmation_link'))
-        return compiled({ clickhere: `<a href="/confirm-account" class="is-link">${this.$t('notification_bar.click_here')}</a>` })
+        return compiled({ clickhere: `<a href="${this.getLocale}confirm-account" class="is-link">${this.$t('notification_bar.click_here')}</a>` })
       }
     }
   }
