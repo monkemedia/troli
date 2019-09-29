@@ -1,7 +1,7 @@
 {
-  "name": "shop-template",
+  "name": "troli",
   "version": "1.0.0",
-  "description": "A template for building a ecommerce website using the Moltin API",
+  "description": "A template for building a ecommerce website",
   "author": "monkemedia",
   "private": true,
   "scripts": {

@@ -1,6 +1,6 @@
-# shop-template
+# Troli
 
-> A template for building a ecommerce website using the Molt
+> A template for building a ecommerce website.
 
 ## Build Setup
 
