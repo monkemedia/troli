@@ -1,4 +1,4 @@
-require('dotenv').config()
+if (process.env.NODE_ENV !== 'production') { require('dotenv').config() }
 
 module.exports = {
   mode: 'universal',
@@ -6,7 +6,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: 'Shop template', // process.env.npm_package_name || '',
+    title: 'Trolify Demo Site', // process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -54,7 +54,7 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~plugins/moltin.js',
+    '~plugins/api-services.js',
     {
       src: '~plugins/vee-validate.js',
       ssr: true
