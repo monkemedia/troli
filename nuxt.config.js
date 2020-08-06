@@ -26,8 +26,6 @@ module.exports = {
     CLIENT_SECRET: process.env.CLIENT_SECRET,
     COMPANY_NAME: process.env.COMPANY_NAME
   },
-
-  serverMiddleware: ['~server/index.js'],
   /*
    ** Customize the progress-bar color
    */
@@ -75,6 +73,7 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    'cookie-universal-nuxt',
     ['nuxt-i18n', {
       detectBrowserLanguage: {
         useCookie: true,
